@@ -44,7 +44,10 @@ public class SplashActivity extends ActionBarActivity {
 
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> e499f6f616088c59cb5c1d82ba1860904afd5416
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
