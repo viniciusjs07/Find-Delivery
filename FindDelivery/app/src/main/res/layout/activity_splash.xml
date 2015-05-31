@@ -10,7 +10,7 @@
    <ImageView
        android:background="@mipmap/logotipo"
        android:layout_width="500px"
-       android:layout_height="500px"
+       android:layout_height="400px"
        android:layout_centerVertical="true"
        android:layout_centerHorizontal="true"/>
 
