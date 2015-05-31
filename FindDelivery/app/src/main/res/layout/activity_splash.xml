@@ -9,6 +9,7 @@
 
    <ImageView
        android:background="@mipmap/logotipo"
+
        android:layout_width="320px"
        android:layout_height="160px"
        android:layout_marginTop="143dp"
@@ -22,6 +23,5 @@
         android:layout_height="180px"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>
