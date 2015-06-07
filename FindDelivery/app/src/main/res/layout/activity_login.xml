@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="finddelivery.es.projeto.finddelivery.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:id="@+id/loginTextView"
+        android:layout_alignBottom="@+id/loginEditText"
+        android:layout_alignLeft="@+id/loginEditText"
+        android:layout_alignStart="@+id/loginEditText"
+        android:layout_marginLeft="85dp"
+        android:layout_marginBottom="42dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/loginEditText"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Senha"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:id="@+id/senhaTextView"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/senhaEditText"
+        android:layout_alignStart="@+id/senhaEditText"
+        android:layout_marginLeft="85dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/senhaEditText"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Entrar"
+        android:id="@+id/btnEntrar"
+        android:layout_marginBottom="110dp"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Cadastre-se"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCadratrese"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnEntrar"
+        android:layout_alignStart="@+id/btnEntrar"
+        android:layout_marginBottom="44dp" />
+
+</RelativeLayout>

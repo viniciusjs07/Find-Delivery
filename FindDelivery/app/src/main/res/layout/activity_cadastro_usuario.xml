@@ -6,57 +6,124 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="finddelivery.es.projeto.finddelivery.CadastroUsuarioActivity">
 
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:id="@+id/btnCadastrar"
+        android:layout_marginBottom="55dp"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Cancelar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCancelar"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnCadastrar"
+        android:layout_alignStart="@+id/btnCadastrar"
+        android:layout_marginBottom="0dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_marginLeft="75dp"
+        android:id="@+id/nomeTextView"
+        android:layout_marginTop="175dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/btnCadastrar"
+        android:layout_alignStart="@+id/btnCadastrar" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/loginText"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="300dp"
-        android:layout_marginLeft="60dp"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="false" />
+        android:id="@+id/nomeEditText"
+        android:layout_below="@+id/nomeTextView"
+        android:layout_alignLeft="@+id/btnCadastrar"
+        android:layout_alignStart="@+id/btnCadastrar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_marginLeft="75dp"
+        android:id="@+id/loginTextView"
+        android:layout_below="@+id/nomeEditText"
+        android:layout_alignLeft="@+id/btnCadastrar"
+        android:layout_alignStart="@+id/btnCadastrar" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginEditText"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/loginTextView"
+        android:layout_alignLeft="@+id/nomeEditText"
+        android:layout_alignStart="@+id/nomeEditText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Senha"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_marginLeft="90dp"
+        android:id="@+id/senhaTextView"
+        android:layout_below="@+id/loginEditText"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/senhaText"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/senhaEditText"
+        android:layout_below="@+id/senhaTextView"
+        android:layout_alignLeft="@+id/loginEditText"
+        android:layout_alignStart="@+id/loginEditText" />
 
-    <Button
-        android:layout_width="200"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:id="@+id/btnEntrar"
-        android:layout_marginBottom="110dp"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
+        android:text="Confirmar senha"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/confirmarSenhaTextView"
+        android:layout_below="@+id/senhaEditText"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:text="Cadastre-se"
-        android:layout_width="200"
+    <EditText
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCancelar"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnEntrar"
-        android:layout_alignStart="@+id/btnEntrar"
-        android:layout_marginBottom="44dp" />
-
-
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirmarSenhaEditText"
+        android:layout_below="@+id/confirmarSenhaTextView"
+        android:layout_alignLeft="@+id/btnCadastrar"
+        android:layout_alignStart="@+id/btnCadastrar" />
 
 </RelativeLayout>
