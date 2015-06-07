@@ -15,7 +15,9 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
         android:textIsSelectable="false" />
 
     <EditText
@@ -24,8 +26,37 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/senhaText"
-        android:layout_below="@+id/loginText"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="200"
+        android:layout_height="wrap_content"
+        android:text="Entrar"
+        android:id="@+id/btnEntrar"
+        android:layout_marginBottom="110dp"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Cadastre-se"
+        android:layout_width="200"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCancelar"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnEntrar"
+        android:layout_alignStart="@+id/btnEntrar"
+        android:layout_marginBottom="44dp" />
+
+
 
 </RelativeLayout>
