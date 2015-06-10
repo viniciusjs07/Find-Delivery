@@ -4,8 +4,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
-    <string name="title_activity_user_profile">UserProfileActivity</string>
-    <string name="title_activity_perfil_edit">PerfilEditActivity</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_cadastro_usuario">Cadastre-se</string>
+    <string name="title_activity_user_profile">Meus dados</string>
+    <string name="title_activity_perfil_edit">Edite seu perfil</string>
+    <string name="title_activity_login">Faça seu login</string>
+    <string name="name">Nome</string>
+    <string name="login">Login</string>
 </resources>

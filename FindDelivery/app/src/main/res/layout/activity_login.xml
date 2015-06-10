@@ -32,7 +32,8 @@
         android:layout_marginTop="200dp"
         android:layout_marginLeft="60dp"
         android:layout_centerHorizontal="true"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:editable="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,5 +88,13 @@
         android:layout_alignLeft="@+id/btnEntrar"
         android:layout_alignStart="@+id/btnEntrar"
         android:layout_marginBottom="44dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/senhaTextView"
+        android:layout_alignEnd="@+id/senhaTextView" />
 
 </RelativeLayout>
