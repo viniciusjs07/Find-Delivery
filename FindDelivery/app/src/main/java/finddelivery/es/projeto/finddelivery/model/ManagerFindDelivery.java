@@ -42,8 +42,12 @@ public class ManagerFindDelivery {
       }
 
 
-    //falta criar o metodo logar
+    //not implemented method
+    public void login(String login,String password){
 
+
+
+    }
      public void removeAccount(User user){
 
         for(User newUser: listUser) {
