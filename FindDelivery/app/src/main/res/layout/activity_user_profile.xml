@@ -21,10 +21,10 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:text="Cancelar"
+        android:text="Excluir"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCancelar"
+        android:id="@+id/btnExcluirConta"
         android:background="@color/orange"
         android:textColor="@color/white"
         android:textSize="24dp"

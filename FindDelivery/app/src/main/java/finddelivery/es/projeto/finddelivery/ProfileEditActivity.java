@@ -3,42 +3,44 @@ package finddelivery.es.projeto.finddelivery;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.*;
 import android.view.MenuItem;
+import android.view.*;
 import android.widget.Button;
 
 
-public class UserProfileActivity extends ActionBarActivity {
+public class ProfileEditActivity extends ActionBarActivity {
 
-    Button btnAlterarDados;
-    Button btnExcluirConta;
+    Button btnCancelar;
+    Button btnSalvarAteracaoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_perfil_edit);
 
-        btnAlterarDados = (Button) findViewById(R.id.btnAlterarDados);
-        btnExcluirConta = (Button) findViewById(R.id.btnExcluirConta);
+        btnCancelar = (Button) findViewById(R.id.btnCancelar);
+        btnSalvarAteracaoes = (Button) findViewById(R.id.btnSalvarAlteracoes);
 
-        btnAlterarDados.setOnClickListener(new View.OnClickListener() {
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showProfileEdite();
+                //Show notification (Perguntar se realmente deseja cancelar)
+                showUserProfile();
             }
         });
 
-
-        btnExcluirConta.setOnClickListener(new View.OnClickListener() {
+        btnSalvarAteracaoes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showLogin();
+                //Show notification (Que os dados foram alterados)
+                showUserProfile();
             }
         });
+
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_profile, menu);
+        getMenuInflater().inflate(R.menu.menu_perfil_edit, menu);
         return true;
     }
 
@@ -57,15 +59,7 @@ public class UserProfileActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showProfileEdite() {
-        setContentView(R.layout.activity_perfil_edit);
-    }
-
     public void showUserProfile() {
         setContentView(R.layout.activity_user_profile);
-    }
-
-    public void showLogin() {
-        setContentView(R.layout.activity_login);
     }
 }
