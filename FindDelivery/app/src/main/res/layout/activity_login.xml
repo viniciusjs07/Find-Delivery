@@ -15,9 +15,9 @@
         android:hint="@string/login"
         android:textIsSelectable="false"
         android:editable="false"
-        android:layout_above="@+id/senhaEditText"
-        android:layout_alignLeft="@+id/senhaEditText"
-        android:layout_alignStart="@+id/senhaEditText"
+        android:layout_above="@+id/passwordEditText"
+        android:layout_alignLeft="@+id/passwordEditText"
+        android:layout_alignStart="@+id/passwordEditText"
         android:layout_marginBottom="40dp" />
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/senhaEditText"
+        android:id="@+id/passwordEditText"
         android:hint="@string/password"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -34,7 +34,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Entrar"
-        android:id="@+id/btnEntrar"
+        android:id="@+id/btnEnter"
         android:layout_marginBottom="110dp"
         android:background="@color/orange"
         android:textColor="@color/white"
@@ -48,15 +48,15 @@
         android:text="Cadastre-se"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCadratrese"
+        android:id="@+id/btnSingUp"
         android:background="@color/orange"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:fontFamily="Arial"
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnEntrar"
-        android:layout_alignStart="@+id/btnEntrar"
+        android:layout_alignLeft="@+id/btnEnter"
+        android:layout_alignStart="@+id/btnEnter"
         android:layout_marginBottom="44dp" />
 
 </RelativeLayout>

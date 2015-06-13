@@ -4,13 +4,71 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="finddelivery.es.projeto.finddelivery.UserCadastreActivity">
+    tools:context="finddelivery.es.projeto.finddelivery.UserCadastreActivity"
+    >
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/cadastrePhotoImageView"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/cadastreNameEditText"
+        android:layout_alignStart="@+id/cadastreNameEditText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/cadastreNameEditText"
+        android:hint="@string/name"
+        android:layout_alignLeft="@+id/btnRegister"
+        android:layout_alignStart="@+id/btnRegister"
+        android:layout_marginTop="200dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cadastreLoginEditText"
+        android:hint="@string/login"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignLeft="@+id/cadastreNameEditText"
+        android:layout_alignStart="@+id/cadastreNameEditText"
+        android:layout_below="@+id/cadastreNameEditText"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:ems="10"
+        android:id="@+id/cadastrePasswordEditText"
+        android:layout_alignLeft="@+id/cadastreLoginEditText"
+        android:layout_alignStart="@+id/cadastreLoginEditText"
+        android:layout_below="@+id/cadastreLoginEditText"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/password_confirm"
+        android:ems="10"
+        android:id="@+id/cadastrePasswordConfirmEditText"
+        android:layout_alignLeft="@+id/btnRegister"
+        android:layout_alignStart="@+id/btnRegister"
+        android:layout_below="@+id/cadastrePasswordEditText"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar"
-        android:id="@+id/btnCadastrar"
+        android:id="@+id/btnRegister"
         android:layout_marginBottom="55dp"
         android:background="@color/orange"
         android:textColor="@color/white"
@@ -24,107 +82,15 @@
         android:text="Cancelar"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnCancelar"
+        android:id="@+id/btnCancel"
         android:background="@color/orange"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:fontFamily="Arial"
         android:textStyle="bold"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnCadastrar"
-        android:layout_alignStart="@+id/btnCadastrar"
+        android:layout_alignLeft="@+id/btnRegister"
+        android:layout_alignStart="@+id/btnRegister"
         android:layout_marginBottom="0dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome"
-        android:textSize="20dp"
-        android:fontFamily="Arial"
-        android:textStyle="bold"
-        android:layout_marginLeft="75dp"
-        android:id="@+id/nomeTextView"
-        android:layout_marginTop="175dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/btnCadastrar"
-        android:layout_alignStart="@+id/btnCadastrar" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/nomeEditText"
-        android:hint="@string/name"
-        android:layout_below="@+id/nomeTextView"
-        android:layout_alignLeft="@+id/btnCadastrar"
-        android:layout_alignStart="@+id/btnCadastrar" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="20dp"
-        android:fontFamily="Arial"
-        android:textStyle="bold"
-        android:layout_marginLeft="75dp"
-        android:id="@+id/loginTextView"
-        android:layout_below="@+id/nomeEditText"
-        android:layout_alignLeft="@+id/btnCadastrar"
-        android:layout_alignStart="@+id/btnCadastrar" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/loginEditText"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/loginTextView"
-        android:layout_alignLeft="@+id/nomeEditText"
-        android:layout_alignStart="@+id/nomeEditText" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha"
-        android:textSize="20dp"
-        android:fontFamily="Arial"
-        android:textStyle="bold"
-        android:layout_marginLeft="90dp"
-        android:id="@+id/senhaTextView"
-        android:layout_below="@+id/loginEditText"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/senhaEditText"
-        android:layout_below="@+id/senhaTextView"
-        android:layout_alignLeft="@+id/loginEditText"
-        android:layout_alignStart="@+id/loginEditText" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirmar senha"
-        android:textSize="20dp"
-        android:fontFamily="Arial"
-        android:textStyle="bold"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/confirmarSenhaTextView"
-        android:layout_below="@+id/senhaEditText"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/confirmarSenhaEditText"
-        android:layout_below="@+id/confirmarSenhaTextView"
-        android:layout_alignLeft="@+id/btnCadastrar"
-        android:layout_alignStart="@+id/btnCadastrar" />
 
 </RelativeLayout>

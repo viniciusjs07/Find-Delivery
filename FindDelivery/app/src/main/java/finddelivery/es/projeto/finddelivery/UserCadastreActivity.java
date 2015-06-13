@@ -4,15 +4,42 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.*;
+import android.view.*;
+import android.content.*;
 
+public class UserCadastreActivity extends ActionBarActivity implements View.OnClickListener{
 
-public class UserCadastreActivity extends ActionBarActivity {
+    private ImageView cadastrePhotoImageView;
+    private EditText cadastreNameEditText;
+    private EditText cadastreLoginEditText;
+    private EditText cadastrePasswordEditText;
+    private EditText cadastrePasswordConfirmEditText;
+    private Button btnRegister;
+    private Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
+
+        cadastrePhotoImageView = (ImageView)findViewById(R.id.cadastrePhotoImageView);
+        cadastreNameEditText = (EditText)findViewById(R.id.cadastreNameEditText);
+        cadastreLoginEditText = (EditText)findViewById(R.id.cadastreLoginEditText);
+        cadastrePasswordEditText = (EditText)findViewById(R.id.cadastrePasswordEditText);
+        cadastrePasswordConfirmEditText = (EditText)findViewById(R.id.cadastrePasswordConfirmEditText);
+        btnRegister = (Button)findViewById(R.id.btnRegister);
+        btnCancel = (Button)findViewById(R.id.btnCancel);
+
+        btnCancel.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View v){
+        Intent it = new Intent(this, LoginActivity.class);
+        startActivity(it);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

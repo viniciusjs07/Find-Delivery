@@ -4,14 +4,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.*;
+import android.view.*;
+import android.content.*;
 
+public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
 
-public class LoginActivity extends ActionBarActivity {
+    private EditText loginEditText;
+    private EditText passwordEditText;
+    private Button btnEnter;
+    private Button btnSingUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loginEditText = (EditText)findViewById(R.id.loginEditText);
+        passwordEditText = (EditText)findViewById(R.id.passwordEditText);
+        btnEnter = (Button)findViewById(R.id.btnEnter);
+        btnSingUp = (Button)findViewById(R.id.btnSingUp);
+
+        btnSingUp.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent it = new Intent(this, UserCadastreActivity.class);
+        startActivity(it);
     }
 
     @Override
@@ -35,4 +55,5 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

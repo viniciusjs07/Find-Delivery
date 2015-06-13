@@ -38,6 +38,11 @@
             android:label="@string/title_activity_login" >
         </activity>
 
+        <activity
+            android:name=".UserCadastreActivity"
+            android:label="@string/title_activity_user_cadastre">
+        </activity>
+
     </application>
 
 </manifest>
