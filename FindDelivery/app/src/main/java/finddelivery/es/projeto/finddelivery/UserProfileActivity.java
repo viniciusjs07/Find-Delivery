@@ -5,23 +5,31 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
-import android.app.Dialog;
 import android.app.AlertDialog;
 
 
 public class UserProfileActivity extends ActionBarActivity  {
 
+    private AlertDialog alertDeleteAccount;
     private Button btnAlterarDados;
     private Button btnExcluirConta;
-    private AlertDialog alertDeleteAccount;
+    private ImageView imageViewUserProfile;
+    private EditText editTextNameUser;
+    private EditText editTextLoginUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
+        imageViewUserProfile = (ImageView) findViewById((R.id.imageViewUserProfile));
+        editTextNameUser = (EditText) findViewById(R.id.editTextNameUser);
+        editTextLoginUser = (EditText) findViewById(R.id.editTextLoginUser);
         btnAlterarDados = (Button) findViewById(R.id.btnAlterarDados);
         btnExcluirConta = (Button) findViewById(R.id.btnExcluirConta);
+
 
         btnAlterarDados.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

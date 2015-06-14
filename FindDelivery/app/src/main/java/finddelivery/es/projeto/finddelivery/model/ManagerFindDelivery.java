@@ -49,7 +49,6 @@ public class ManagerFindDelivery {
     }
 
      public void removeAccount(User user){
-
         for(User newUser: listUser) {
             if(newUser.equals(user)) {
                 listUser.remove(user);

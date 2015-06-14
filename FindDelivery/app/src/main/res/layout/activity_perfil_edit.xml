@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewUserProfile2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
@@ -21,11 +21,42 @@
         android:inputType="textPersonName"
         android:hint="@string/name"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_below="@+id/imageView2"
+        android:id="@+id/editTextNameUser2"
+        android:layout_below="@+id/imageViewUserProfile2"
         android:layout_alignRight="@+id/btnSalvarAlteracoes"
         android:layout_alignEnd="@+id/btnSalvarAlteracoes"
         android:layout_marginTop="39dp" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextPassword"
+        android:layout_above="@+id/editTextNewPassword"
+        android:layout_alignLeft="@+id/editTextNameUser2"
+        android:layout_alignStart="@+id/editTextNameUser2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextNewPassword"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/editTextNameUser2"
+        android:layout_alignEnd="@+id/editTextNameUser2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextNewPassword2"
+        android:layout_below="@+id/editTextNewPassword"
+        android:layout_alignLeft="@+id/editTextNewPassword"
+        android:layout_alignStart="@+id/editTextNewPassword" />
 
     <Button
         android:layout_width="200dp"
@@ -52,35 +83,6 @@
         android:layout_alignStart="@+id/btnSalvarAlteracoes"
         android:layout_marginBottom="0dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextPassword"
-        android:layout_above="@+id/editTextNewPassword"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextNewPassword"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextNewPassword2"
-        android:layout_below="@+id/editTextNewPassword"
-        android:layout_alignLeft="@+id/editTextNewPassword"
-        android:layout_alignStart="@+id/editTextNewPassword" />
 
 
 </RelativeLayout>

@@ -12,11 +12,17 @@ public class User implements Serializable{
     private String photoUrl;
     private String password;
 
-    public User(String name,String login)throws EmptyFieldException, ExceededCharacterException{
+    public User(String name,String login,String password)throws EmptyFieldException, ExceededCharacterException{
         this.name = name;
         this.login = login;
+        this.password = password;
+    }
 
-
+    public User(String name,String login,String password, String photoUrl){
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.photoUrl = photoUrl;
     }
 
     public String getName(){

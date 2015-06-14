@@ -12,6 +12,11 @@ public class ProfileEditActivity extends ActionBarActivity  {
 
     private Button btnCancelar;
     private Button btnSalvarAteracaoes;
+    private ImageView imageViewUserProfile2;
+    private EditText editTextNameUser2;
+    private EditText editTextPassword;
+    private EditText editTextNewPassword;
+    private EditText getEditTextNewPassword2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
