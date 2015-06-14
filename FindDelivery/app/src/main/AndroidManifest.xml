@@ -25,22 +25,22 @@
 
         <activity
             android:name=".UserProfileActivity"
-            android:label="@string/title_activity_user_profile" >
+            android:label="Meus dados" >
         </activity>
 
         <activity
             android:name=".ProfileEditActivity"
-            android:label="@string/title_activity_perfil_edit" >
+            android:label="Edite seu perfil" >
         </activity>
 
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="Faça seu login" >
         </activity>
 
         <activity
             android:name=".UserCadastreActivity"
-            android:label="@string/title_activity_user_cadastre">
+            android:label="Cadastre-se">
         </activity>
 
     </application>

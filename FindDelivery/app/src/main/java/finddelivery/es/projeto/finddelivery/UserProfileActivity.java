@@ -1,17 +1,19 @@
 package finddelivery.es.projeto.finddelivery;
 
+import android.content.*;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.*;
-import android.view.MenuItem;
-import android.widget.Button;
+import android.widget.*;
+import android.app.Dialog;
+import android.app.AlertDialog;
 
 
-public class UserProfileActivity extends ActionBarActivity {
+public class UserProfileActivity extends ActionBarActivity  {
 
-    Button btnAlterarDados;
-    Button btnExcluirConta;
+    private Button btnAlterarDados;
+    private Button btnExcluirConta;
+    private AlertDialog alertDeleteAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +25,41 @@ public class UserProfileActivity extends ActionBarActivity {
 
         btnAlterarDados.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showProfileEdite();
+
+                Intent it = new Intent();
+                it.setClass(UserProfileActivity.this,
+                        ProfileEditActivity.class);
+                startActivity(it);
+                finish();
             }
         });
 
 
         btnExcluirConta.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showLogin();
+                AlertDialog.Builder deleteAccount = new AlertDialog.Builder(UserProfileActivity.this);
+                deleteAccount.setMessage(R.string.dialog_deleteAccount)
+                        .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Toast.makeText(getApplicationContext(), R.string.dialog_accountDeleted, Toast.LENGTH_SHORT).show();
+                                Intent it = new Intent();
+                                it.setClass(UserProfileActivity.this, LoginActivity.class);
+                                startActivity(it);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+
+                alertDeleteAccount = deleteAccount.create();
+                alertDeleteAccount.show();
+
             }
         });
+
     }
 
     @Override
@@ -57,15 +84,7 @@ public class UserProfileActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void showProfileEdite() {
-        setContentView(R.layout.activity_perfil_edit);
-    }
 
-    public void showUserProfile() {
-        setContentView(R.layout.activity_user_profile);
-    }
 
-    public void showLogin() {
-        setContentView(R.layout.activity_login);
-    }
+
 }

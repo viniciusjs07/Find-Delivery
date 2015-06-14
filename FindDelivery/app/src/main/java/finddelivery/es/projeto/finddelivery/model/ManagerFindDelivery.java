@@ -46,8 +46,8 @@ public class ManagerFindDelivery {
     public void login(String login,String password){
 
 
-
     }
+
      public void removeAccount(User user){
 
         for(User newUser: listUser) {

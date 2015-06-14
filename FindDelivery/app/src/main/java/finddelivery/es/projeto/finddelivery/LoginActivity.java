@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
 import android.view.*;
-import android.content.*;
+import android.content.Intent;
 
-public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
+public class LoginActivity extends ActionBarActivity {
 
     private EditText loginEditText;
     private EditText passwordEditText;
@@ -25,14 +25,20 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         btnEnter = (Button)findViewById(R.id.btnEnter);
         btnSingUp = (Button)findViewById(R.id.btnSingUp);
 
-        btnSingUp.setOnClickListener(this);
+        btnSingUp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(LoginActivity.this,
+                        UserCadastreActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
+
+
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent it = new Intent(this, UserCadastreActivity.class);
-        startActivity(it);
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

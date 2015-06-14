@@ -2,16 +2,16 @@ package finddelivery.es.projeto.finddelivery;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.*;
-import android.widget.Button;
+import android.widget.*;
+import android.content.*;
+import android.app.Dialog;
+import android.app.AlertDialog;
 
+public class ProfileEditActivity extends ActionBarActivity  {
 
-public class ProfileEditActivity extends ActionBarActivity {
-
-    Button btnCancelar;
-    Button btnSalvarAteracaoes;
+    private Button btnCancelar;
+    private Button btnSalvarAteracaoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +21,27 @@ public class ProfileEditActivity extends ActionBarActivity {
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnSalvarAteracaoes = (Button) findViewById(R.id.btnSalvarAlteracoes);
 
-
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Show notification (Perguntar se realmente deseja cancelar)
-                showUserProfile();
+                Intent it = new Intent();
+                it.setClass(ProfileEditActivity.this,
+                        UserProfileActivity.class);
+                startActivity(it);
+                finish();
             }
         });
 
         btnSalvarAteracaoes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Show notification (Que os dados foram alterados)
-                showUserProfile();
+                Toast.makeText(getApplicationContext(), R.string.dialog_changesSaved, Toast.LENGTH_SHORT).show();
+                Intent it = new Intent();
+                it.setClass(ProfileEditActivity.this, UserProfileActivity.class);
+                startActivity(it);
+                finish();
             }
         });
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

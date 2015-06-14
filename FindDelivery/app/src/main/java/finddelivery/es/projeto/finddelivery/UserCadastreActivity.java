@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
 import android.view.*;
-import android.content.*;
+import android.content.Intent;
 
-public class UserCadastreActivity extends ActionBarActivity implements View.OnClickListener{
+public class UserCadastreActivity extends ActionBarActivity {
 
     private ImageView cadastrePhotoImageView;
     private EditText cadastreNameEditText;
@@ -31,13 +31,25 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         btnRegister = (Button)findViewById(R.id.btnRegister);
         btnCancel = (Button)findViewById(R.id.btnCancel);
 
-        btnCancel.setOnClickListener(this);
-    }
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(UserCadastreActivity.this, LoginActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
-    @Override
-    public void onClick(View v){
-        Intent it = new Intent(this, LoginActivity.class);
-        startActivity(it);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.dialog_registerOK, Toast.LENGTH_SHORT).show();
+                Intent it = new Intent();
+                it.setClass(UserCadastreActivity.this,
+                        LoginActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
     }
 
 
