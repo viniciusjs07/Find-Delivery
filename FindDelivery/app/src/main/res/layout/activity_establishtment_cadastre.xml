@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="finddelivery.es.projeto.finddelivery.EstablishtmentCadastreActivity"
+    android:id="@+id/EstablishmentCadastre"
+    android:background="#00ff7712">
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewEstablishmentLogo"
+            android:hint="Logo do restaurante"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Restaurante"
+            android:ems="10"
+            android:id="@+id/editTextEstablishmentName"
+            android:layout_below="@+id/imageViewEstablishmentLogo"
+            android:layout_centerHorizontal="true"
+            android:textIsSelectable="false" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:hint="Endereço"
+            android:ems="10"
+            android:id="@+id/editTextAddress"
+            android:layout_below="@+id/editTextEstablishmentName"
+            android:layout_alignLeft="@+id/editTextEstablishmentName"
+            android:layout_alignStart="@+id/editTextEstablishmentName" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="Telefone"
+            android:ems="10"
+            android:id="@+id/editTextPhone"
+            android:layout_below="@+id/editTextAddress"
+            android:layout_alignLeft="@+id/editTextAddress"
+            android:layout_alignStart="@+id/editTextAddress" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextEspeciality"
+            android:hint="Especialidade"
+            android:layout_below="@+id/editTextPhone"
+            android:layout_alignLeft="@+id/editTextPhone"
+            android:layout_alignStart="@+id/editTextPhone"
+            android:layout_alignRight="@+id/editTextPhone"
+            android:layout_alignEnd="@+id/editTextPhone" />
+
+
+
+
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:id="@+id/btnCadastrarEstabelecimento"
+        android:background="@color/orange"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:fontFamily="Arial"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
