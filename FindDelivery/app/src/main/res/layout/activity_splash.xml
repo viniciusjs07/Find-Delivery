@@ -10,17 +10,17 @@
    <ImageView
        android:background="@mipmap/logotipo"
 
-       android:layout_width="320px"
-       android:layout_height="160px"
-       android:layout_marginTop="143dp"
+       android:layout_width="250dp"
+       android:layout_height="135dp"
+       android:layout_marginTop="113dp"
        android:id="@+id/imageView"
        android:layout_alignParentTop="true"
        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:background="@mipmap/textologo"
-        android:layout_width="600px"
-        android:layout_height="180px"
+        android:layout_width="600dp"
+        android:layout_height="80dp"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true" />
 

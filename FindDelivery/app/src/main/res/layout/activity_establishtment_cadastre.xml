@@ -61,10 +61,6 @@
             android:layout_alignRight="@+id/editTextPhone"
             android:layout_alignEnd="@+id/editTextPhone" />
 
-
-
-
-
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
