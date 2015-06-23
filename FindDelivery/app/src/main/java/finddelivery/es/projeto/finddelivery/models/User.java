@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery.model;
+package finddelivery.es.projeto.finddelivery.models;
 
 import java.io.Serializable;
 
