@@ -44,6 +44,10 @@
             android:name=".MyEstablishmentActivity"
             android:label="@string/title_activity_my_establishment" >
         </activity>
+        <activity
+            android:name=".FindEstablishmentActivity"
+            android:label="@string/title_activity_find_establishment" >
+        </activity>
     </application>
 
 </manifest>
