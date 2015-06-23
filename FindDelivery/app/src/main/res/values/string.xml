@@ -19,7 +19,8 @@
     <string name="dialog_registerOK">Seu cadastro foi realizado com sucesso!</string>
     <string name="dialog_positiveAwswer">Sim</string>
     <string name="dialog_negativeAwswer">Cancelar</string>
-
+    <string name="title_activity_establishtment_cadastre">EstablishtmentCadastreActivity</string>
+    <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
 
 
 </resources>

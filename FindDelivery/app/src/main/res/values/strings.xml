@@ -1,8 +1,0 @@
-<resources>
-    <string name="title_activity_establishtment_cadastre">EstablishtmentCadastreActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
-
-</resources>
