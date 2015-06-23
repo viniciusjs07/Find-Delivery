@@ -1,7 +1,9 @@
 package finddelivery.es.projeto.finddelivery.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Vinicius on 10/06/2015.
@@ -55,6 +57,29 @@ public class ManagerFindDelivery {
                 }
         }
 
+    }
+
+    public Set<Establishment> findEstablishmentBySpeciality(SpecialityType speciality) {
+        Set<Establishment> listEstablishments = new HashSet<Establishment>();
+        for (User user: getListUser()) {
+            for(Establishment establishment: user.getEstablishments()) {
+                if(speciality.equals(establishment.getSpeciality())) {
+                    listEstablishments.add(establishment);
+                }
+            }
+        }
+        return listEstablishments;
+    }
+
+    public Establishment findEstablishmentByName(String name) {
+        for (User user: getListUser()) {
+            for(Establishment establishment: user.getEstablishments()) {
+                if(establishment.getName().equals(name)) {
+                    return establishment;
+                }
+            }
+        }
+        return null;
     }
 
     //is metodo not implemented//
