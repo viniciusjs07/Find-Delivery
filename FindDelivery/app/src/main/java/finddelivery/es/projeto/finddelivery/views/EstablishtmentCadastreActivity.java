@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery;
+package finddelivery.es.projeto.finddelivery.views;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import finddelivery.es.projeto.finddelivery.R;
+
 
 
 public class EstablishtmentCadastreActivity extends ActionBarActivity {
@@ -24,9 +26,6 @@ public class EstablishtmentCadastreActivity extends ActionBarActivity {
     private Button btnCadastrar;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +37,6 @@ public class EstablishtmentCadastreActivity extends ActionBarActivity {
         establishmentAddress = (EditText) findViewById(R.id.editTextAddress);
         establishmentPhoneNumber = (EditText) findViewById(R.id.editTextPhone);
         btnCadastrar = (Button) findViewById(R.id.btnCadastrarEstabelecimento);
-
-
 
 
     }

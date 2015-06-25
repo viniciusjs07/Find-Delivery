@@ -22,6 +22,8 @@
     <string name="title_activity_establishtment_cadastre">EstablishtmentCadastreActivity</string>
     <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
     <string name="restaurant_example">Ex: China Restaurante</string>
+    <string name="title_activity_find_establishment">FindEstablishmentActivity</string>
+
 
 
 

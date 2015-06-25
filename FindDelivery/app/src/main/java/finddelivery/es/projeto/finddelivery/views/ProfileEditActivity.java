@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery;
+package finddelivery.es.projeto.finddelivery.views;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.widget.*;
 import android.content.*;
 import android.app.Dialog;
 import android.app.AlertDialog;
+import finddelivery.es.projeto.finddelivery.R;
+
 
 public class ProfileEditActivity extends ActionBarActivity  {
 

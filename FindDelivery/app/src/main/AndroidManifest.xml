@@ -8,11 +8,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".views.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,31 +21,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".views.UserProfileActivity"
             android:label="Meus dados" >
         </activity>
         <activity
-            android:name=".ProfileEditActivity"
+            android:name=".views.ProfileEditActivity"
             android:label="Edite seu perfil" >
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".views.LoginActivity"
             android:label="Faça seu login" >
         </activity>
         <activity
-            android:name=".UserCadastreActivity"
+            android:name=".views.UserCadastreActivity"
             android:label="Cadastre-se" >
         </activity>
         <activity
-            android:name=".EstablishtmentCadastreActivity"
+            android:name=".views.EstablishtmentCadastreActivity"
             android:label="@string/title_activity_establishtment_cadastre" >
         </activity>
         <activity
-            android:name=".MyEstablishmentActivity"
+            android:name=".views.MyEstablishmentActivity"
             android:label="@string/title_activity_my_establishment" >
         </activity>
         <activity
-            android:name=".FindEstablishmentActivity"
+            android:name=".views.FindEstablishmentActivity"
             android:label="@string/title_activity_find_establishment" >
         </activity>
     </application>

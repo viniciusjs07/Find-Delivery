@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery;
+package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.*;
 import android.support.v7.app.ActionBarActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import android.app.AlertDialog;
+import finddelivery.es.projeto.finddelivery.R;
+
 
 
 public class UserProfileActivity extends ActionBarActivity  {

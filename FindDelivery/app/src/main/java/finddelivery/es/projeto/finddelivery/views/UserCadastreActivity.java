@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery;
+package finddelivery.es.projeto.finddelivery.views;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.*;
 import android.view.*;
 import android.content.Intent;
+import finddelivery.es.projeto.finddelivery.R;
+
 
 public class UserCadastreActivity extends ActionBarActivity {
 
