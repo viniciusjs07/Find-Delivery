@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,61 +9,73 @@
     tools:context="finddelivery.es.projeto.finddelivery.UserProfileActivity">
 
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Alterar Dados"
-        android:id="@+id/btnAlterarDados"
-        android:layout_marginBottom="110dp"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <Button
-        android:text="Excluir"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnExcluirConta"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnAlterarDados"
-        android:layout_alignStart="@+id/btnAlterarDados"
-        android:layout_marginBottom="44dp"
-        android:layout_marginTop="20dp" />
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageViewUserProfile"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/name"
-        android:ems="10"
-        android:id="@+id/editTextNameUser"
-        android:layout_below="@+id/imageViewUserProfile"
-        android:layout_alignLeft="@+id/btnAlterarDados"
-        android:layout_alignStart="@+id/btnAlterarDados"
-        android:layout_marginTop="35dp" />
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/login"
-        android:ems="10"
-        android:id="@+id/editTextLoginUser"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/editTextNameUser"
-        android:layout_alignStart="@+id/editTextNameUser" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
+        
 
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewUserProfile"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/name"
+            android:ems="12"
+            android:layout_marginTop="20dp"
+            android:id="@+id/editTextNameUser"
+            android:textIsSelectable="false"
+            android:editable="false"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/login"
+            android:ems="12"
+            android:layout_marginTop="20dp"
+            android:id="@+id/editTextLoginUser"
+            android:textIsSelectable="false"
+            android:editable="false"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text="Alterar Dados"
+            android:id="@+id/btnAlterarDados"
+            android:background="@color/orange"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:text="Excluir Conta"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnExcluirConta"
+            android:background="@color/orange"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal" />
+
+
+    </LinearLayout>
+</ScrollView>
+</FrameLayout>
