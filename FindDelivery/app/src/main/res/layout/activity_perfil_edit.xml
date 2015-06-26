@@ -1,86 +1,104 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="finddelivery.es.projeto.finddelivery.ProfileEditActivity">
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageViewUserProfile2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|top">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/name"
-        android:ems="10"
-        android:id="@+id/editTextNameUser2"
-        android:layout_below="@+id/imageViewUserProfile2"
-        android:layout_alignRight="@+id/btnSalvarAlteracoes"
-        android:layout_alignEnd="@+id/btnSalvarAlteracoes"
-        android:layout_marginTop="39dp" />
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageViewUserProfile2"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/name"
+                android:ems="12"
+                android:id="@+id/editTextNameUser2"
+                android:layout_marginTop="20dp"
+                android:textIsSelectable="false"
+                android:editable="false"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/login"
+                android:ems="12"
+                android:id="@+id/editTextLogin"
+                android:layout_marginTop="20dp"
+                android:textIsSelectable="false"
+                android:editable="false"
+                android:layout_gravity="center_horizontal" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextPassword"
-        android:layout_above="@+id/editTextNewPassword"
-        android:layout_alignLeft="@+id/editTextNameUser2"
-        android:layout_alignStart="@+id/editTextNameUser2" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:ems="12"
+                android:id="@+id/editTextPassword"
+                android:layout_marginTop="20dp"
+                android:textIsSelectable="false"
+                android:editable="false"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextNewPassword"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/editTextNameUser2"
-        android:layout_alignEnd="@+id/editTextNameUser2" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/passwordConfirm"
+                android:ems="12"
+                android:id="@+id/editTextNewPassword"
+                android:layout_marginTop="20dp"
+                android:textIsSelectable="false"
+                android:editable="false"
+                android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editTextNewPassword2"
-        android:layout_below="@+id/editTextNewPassword"
-        android:layout_alignLeft="@+id/editTextNewPassword"
-        android:layout_alignStart="@+id/editTextNewPassword" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Salvar alterações"
+                android:id="@+id/btnSalvarAlteracoes"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Salvar alterações"
-        android:id="@+id/btnSalvarAlteracoes"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_above="@+id/btnCancelar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="41dp" />
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelar"
+                android:id="@+id/btnCancelar"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Cancelar"
-        android:id="@+id/btnCancelar"
-        android:background="@color/orange"
-        android:textColor="@color/white"
-        android:textSize="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnSalvarAlteracoes"
-        android:layout_alignStart="@+id/btnSalvarAlteracoes"
-        android:layout_marginBottom="0dp" />
+        </LinearLayout>
 
-</RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>
