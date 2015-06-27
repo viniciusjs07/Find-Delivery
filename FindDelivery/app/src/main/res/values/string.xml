@@ -19,7 +19,7 @@
     <string name="dialog_registerOK">Seu cadastro foi realizado com sucesso!</string>
     <string name="dialog_positiveAwswer">Sim</string>
     <string name="dialog_negativeAwswer">Cancelar</string>
-    <string name="title_activity_establishtment_cadastre">Cadastar estabelecimento</string>
+    <string name="title_activity_establishtment_cadastre">Cadastre seu Estabelecimento</string>
     <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
     <string name="restaurant_example">Ex: China Restaurante</string>
     <string name="title_activity_find_establishment">FindEstablishmentActivity</string>
