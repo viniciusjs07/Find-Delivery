@@ -13,7 +13,7 @@ import finddelivery.es.projeto.finddelivery.R;
 
 
 
-public class EstablishtmentCadastreActivity extends ActionBarActivity {
+public class EstablishmentCadastreActivity extends ActionBarActivity {
 
     private ImageView imageViewEstablishmentLogo;
     private EditText establishmentName;

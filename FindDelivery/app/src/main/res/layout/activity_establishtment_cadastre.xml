@@ -40,7 +40,8 @@
                     android:layout_below="@+id/imageViewEstablishmentLogo"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
-                    android:textIsSelectable="false" />
+                    android:textIsSelectable="false"
+                    android:layout_marginTop="20dp" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -52,7 +53,8 @@
                     android:layout_below="@+id/editTextEstablishmentName"
                     android:layout_alignLeft="@+id/editTextEstablishmentName"
                     android:layout_gravity="center"
-                    android:layout_alignStart="@+id/editTextEstablishmentName" />
+                    android:layout_alignStart="@+id/editTextEstablishmentName"
+                    android:layout_marginTop="20dp" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -64,7 +66,8 @@
                     android:layout_below="@+id/editTextAddress"
                     android:layout_alignLeft="@+id/editTextAddress"
                     android:layout_gravity="center"
-                    android:layout_alignStart="@+id/editTextAddress" />
+                    android:layout_alignStart="@+id/editTextAddress"
+                    android:layout_marginTop="20dp" />
 
                 <EditText
                     android:layout_width="wrap_content"
@@ -78,7 +81,8 @@
                     android:layout_alignRight="@+id/editTextPhone"
                     android:layout_gravity="center_horizontal"
                     android:layout_alignEnd="@+id/editTextPhone"
-                    android:autoText="false" />
+                    android:autoText="false"
+                    android:layout_marginTop="20dp" />
 
             <Button
                 android:layout_width="200dp"
@@ -92,7 +96,8 @@
                 android:textStyle="bold"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp" />
 
         </LinearLayout>
     </ScrollView>
