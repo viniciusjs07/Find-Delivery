@@ -1,13 +1,22 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
 import android.view.*;
 import android.content.Intent;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import finddelivery.es.projeto.finddelivery.R;
+
+import java.util.ArrayList;
+
+import finddelivery.es.projeto.finddelivery.Server.ConnectionHTTPClient;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -22,10 +31,10 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginEditText = (EditText)findViewById(R.id.loginEditText);
-        passwordEditText = (EditText)findViewById(R.id.passwordEditText);
-        btnEnter = (Button)findViewById(R.id.btnEnter);
-        btnSingUp = (Button)findViewById(R.id.btnSingUp);
+        loginEditText = (EditText) findViewById(R.id.loginEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        btnEnter = (Button) findViewById(R.id.btnEnter);
+        btnSingUp = (Button) findViewById(R.id.btnSingUp);
 
         btnSingUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -37,8 +46,46 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
+        btnEnter.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String urlGet = "www.finddelivery.dx.am/login.ph?login=" + loginEditText.getText().toString() + "&senha=" + passwordEditText.getText().toString();
+                String urlPost = "http://www.finddelivery.dx.am/login.php";
+                ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
+                postParams.add(new BasicNameValuePair("login", loginEditText.getText().toString()));
+                postParams.add(new BasicNameValuePair("senha", passwordEditText.getText().toString()));
+                String responseReturned = null;
 
+                try {
+
+                    responseReturned = ConnectionHTTPClient.executeHttpPost(urlPost, postParams);
+                    //messageShow("login", "passa");
+
+                    String response = responseReturned.toString();
+                    response = response.replaceAll("\\s+", "");
+
+                    if (response.equals("1")) {
+                        messageShow("login", "Login válido");
+                    } else {
+                        messageShow("login", "Login inválido");
+                    }
+                } catch (Exception error) {
+                    messageShow("erro", "ERRO");
+
+                }
+
+            }
+
+        });
     }
+        public void messageShow(String titulo, String texto){
+            AlertDialog.Builder message = new AlertDialog.Builder(LoginActivity.this);
+            message.setTitle(titulo);
+            message.setMessage(texto);
+            message.setNeutralButton("OK", null);
+            message.show();
+
+        }
+
 
 
 

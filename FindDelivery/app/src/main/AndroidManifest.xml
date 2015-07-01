@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="finddelivery.es.projeto.finddelivery" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logotipo"
@@ -37,7 +39,7 @@
             android:label="Cadastre-se" >
         </activity>
         <activity
-            android:name=".views.EstablishtmentCadastreActivity"
+            android:name=".views.EstablishmentCadastreActivity"
             android:label="@string/title_activity_establishtment_cadastre" >
         </activity>
         <activity
