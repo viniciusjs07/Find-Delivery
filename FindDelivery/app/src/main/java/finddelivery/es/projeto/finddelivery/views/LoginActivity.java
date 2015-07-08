@@ -48,16 +48,19 @@ public class LoginActivity extends ActionBarActivity {
 
         btnEnter.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String urlGet = "www.finddelivery.dx.am/login.ph?login=" + loginEditText.getText().toString() + "&senha=" + passwordEditText.getText().toString();
+                String urlGet = "http://www.finddelivery.dx.am/login.ph?login=" + loginEditText.getText().toString() + "&senha=" + passwordEditText.getText().toString();
                 String urlPost = "http://www.finddelivery.dx.am/login.php";
-                ArrayList<NameValuePair> postParams = new ArrayList<NameValuePair>();
+                ArrayList<NameValuePair> postParams = new ArrayList<>();
                 postParams.add(new BasicNameValuePair("login", loginEditText.getText().toString()));
                 postParams.add(new BasicNameValuePair("senha", passwordEditText.getText().toString()));
                 String responseReturned = null;
 
                 try {
 
-                    responseReturned = ConnectionHTTPClient.executeHttpPost(urlPost, postParams);
+                    responseReturned = ConnectionHTTPClient.executeHttpGet(urlGet);
+
+
+                   // responseReturned = ConnectionHTTPClient.executeHttpPost(urlPost, postParams);
                     //messageShow("login", "passa");
 
                     String response = responseReturned.toString();
@@ -77,16 +80,15 @@ public class LoginActivity extends ActionBarActivity {
 
         });
     }
-        public void messageShow(String titulo, String texto){
-            AlertDialog.Builder message = new AlertDialog.Builder(LoginActivity.this);
-            message.setTitle(titulo);
-            message.setMessage(texto);
-            message.setNeutralButton("OK", null);
-            message.show();
 
-        }
+    public void messageShow(String titulo, String texto) {
+        AlertDialog.Builder message = new AlertDialog.Builder(LoginActivity.this);
+        message.setTitle(titulo);
+        message.setMessage(texto);
+        message.setNeutralButton("OK", null);
+        message.show();
 
-
+    }
 
 
     @Override
@@ -110,5 +112,4 @@ public class LoginActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

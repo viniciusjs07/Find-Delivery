@@ -4,25 +4,25 @@ package finddelivery.es.projeto.finddelivery.Server;
  * Created by Daniela on 30/06/2015.
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.EOFException;
-import java.io.InputStreamReader;
-import java.net.URI;
+        import java.io.IOException;
+        import java.util.ArrayList;
+        import java.io.BufferedReader;
+        import java.io.EOFException;
+        import java.io.InputStreamReader;
+        import java.net.URI;
 
 //Bibliotecas HTTP
 
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpResponse;
-import org.apache.http.conn.params.ConnManagerParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
+        import org.apache.http.NameValuePair;
+        import org.apache.http.client.HttpClient;
+        import org.apache.http.client.methods.HttpGet;
+        import org.apache.http.client.methods.HttpPost;
+        import org.apache.http.HttpResponse;
+        import org.apache.http.conn.params.ConnManagerParams;
+        import org.apache.http.params.HttpConnectionParams;
+        import org.apache.http.params.HttpParams;
+        import org.apache.http.impl.client.DefaultHttpClient;
+        import org.apache.http.client.entity.UrlEncodedFormEntity;
 
 public class ConnectionHTTPClient {
     public static final int HTTP_TIMEOUT = 30 * 1000;
@@ -42,10 +42,11 @@ public class ConnectionHTTPClient {
     }
 
     public static String executeHttpPost(String url, ArrayList<NameValuePair> postParams) throws Exception {
+
         BufferedReader bufferedReader =  null;
         try{
-            HttpClient client = getHttpClient();
-            HttpPost httpPost = new HttpPost(url);
+            HttpClient client = getHttpClient(); //
+            HttpPost httpPost = new HttpPost(url); //
             UrlEncodedFormEntity formEntity =  new UrlEncodedFormEntity(postParams);
             httpPost.setEntity(formEntity);
             HttpResponse httpResponse = client.execute(httpPost);
@@ -58,6 +59,7 @@ public class ConnectionHTTPClient {
             }
             bufferedReader.close();
             String result = stringBuffer.toString();
+
             return result;
         }finally {
             if (bufferedReader != null) {
@@ -69,6 +71,7 @@ public class ConnectionHTTPClient {
             }
         }
     }
+
 
 
     public static String executeHttpGet(String url) throws Exception {
@@ -99,5 +102,3 @@ public class ConnectionHTTPClient {
         }
     }
 }
-
-
