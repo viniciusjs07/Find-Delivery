@@ -50,7 +50,6 @@ public class User implements Serializable{
 
     public void createdPassword(String password){
         this.password = password;
-
     }
 
     public String getPassword() {
@@ -65,39 +64,45 @@ public class User implements Serializable{
         this.photoUrl = photoUrl;
     }
 
-    //methods for establishments
-    public void createEstablishment(String name, String adress, String businessHour, SpecialityType speciality, Set<String> phones,String photoURL) {
-        Establishment establishment = new Establishment(name, adress, businessHour, speciality, phones,photoURL);
+    //This method register a new establishment
+    public void createEstablishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones,String photoURL) {
+        Establishment establishment = new Establishment(name, address, businessHour, speciality, phones,photoURL);
 
         if(!establishments.contains(establishment)){
             establishments.add(establishment);
         }
     }
 
+    //This method evaluate an establishment
     public void evaluateEstablishment(Establishment establishment, int value) {
         if(establishment != null) {
             establishment.addEvaluation(this, value);
         }
     }
 
+    //This method insert a comment to the establishment
     public void insertCommentEstablishment(Establishment establishment, String comment) {
         if(establishment != null) {
             establishment.addComment(this, comment);
         }
     }
 
+    //This method remove a comment from an establishment
     public void removeCommentEstablishment(Establishment establishment, String comment) {
         establishment.removeComment(this, comment);
     }
 
+    //This method allows change an establishment
     public void setEstablishments(Set<Establishment> newEstablishments) {
         this.establishments = newEstablishments;
     }
 
     public Set<Establishment> getEstablishments() {
+
         return establishments;
     }
 
+    //This method remove an establishment
     public void removeEstablishment(Establishment establishment) {
         if(establishments.contains(establishment)) {
             establishments.remove(establishment);
@@ -125,7 +130,5 @@ public class User implements Serializable{
         return getName().equals(newUser.getName()) && getLogin().equals(newUser.getLogin());
 
     }
-
-
 }
 

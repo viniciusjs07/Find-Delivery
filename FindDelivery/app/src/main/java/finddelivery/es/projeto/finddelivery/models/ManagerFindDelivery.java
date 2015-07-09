@@ -22,18 +22,17 @@ public class ManagerFindDelivery {
         return listUser;
     }
 
-
+    //This method register a new user
     public void registerUser(String name,String login, String password) {
         for (User user : getListUser()) {
             if (user.getName().equals(name) && user.getLogin().equals(login) && user.getPassword().equals(password)) {
                 listUser.add(user);
             }
-
         }
     }
 
+    //This method valid a login
     public boolean isLoginValid(String login,String password) {
-
         for(User user:getListUser()){
             if(user.getLogin().equals(login)&& user.getPassword().equals(password)){
                 return true;
@@ -43,13 +42,7 @@ public class ManagerFindDelivery {
         return false;
       }
 
-
-    //not implemented method
-    public void login(String login,String password){
-
-
-    }
-
+    //This method remove an user
      public void removeAccount(User user){
         for(User newUser: listUser) {
             if(newUser.equals(user)) {
@@ -59,6 +52,7 @@ public class ManagerFindDelivery {
 
     }
 
+    //This method search an establishment by especiality and returns a list
     public Set<Establishment> findEstablishmentBySpeciality(SpecialityType speciality) {
         Set<Establishment> listEstablishments = new HashSet<Establishment>();
         for (User user: getListUser()) {
@@ -71,6 +65,7 @@ public class ManagerFindDelivery {
         return listEstablishments;
     }
 
+    //This method search an establishment by name and returns a list
     public Establishment findEstablishmentByName(String name) {
         for (User user: getListUser()) {
             for(Establishment establishment: user.getEstablishments()) {
@@ -82,7 +77,7 @@ public class ManagerFindDelivery {
         return null;
     }
 
-    //is metodo not implemented//
+    //is method not implemented//
     public void listEstablishment(List<Establishment> establishments){
 
     }
