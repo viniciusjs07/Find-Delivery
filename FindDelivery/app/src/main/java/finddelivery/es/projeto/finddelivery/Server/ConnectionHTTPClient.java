@@ -46,7 +46,7 @@ public class ConnectionHTTPClient {
         BufferedReader bufferedReader =  null;
         try{
             HttpClient client = getHttpClient(); //
-            HttpPost httpPost = new HttpPost(url); //
+            HttpPost httpPost = new HttpPost(url); // x
             UrlEncodedFormEntity formEntity =  new UrlEncodedFormEntity(postParams);
             httpPost.setEntity(formEntity);
             HttpResponse httpResponse = client.execute(httpPost);

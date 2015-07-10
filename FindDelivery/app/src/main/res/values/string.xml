@@ -23,6 +23,10 @@
     <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
     <string name="restaurant_example">Ex: China Restaurante</string>
     <string name="title_activity_find_establishment">FindEstablishmentActivity</string>
+    <string name="title_tab_findRestaurants">Procurar restaurantes</string>
+    <string name="title_tab_myRestaurantes">Meus Restaurantes</string>
+    <string name="title_activity_establishments">Restaurantes </string>
+
 
 
 
