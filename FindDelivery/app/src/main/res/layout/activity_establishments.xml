@@ -18,18 +18,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <ListView
+            <FrameLayout
                 android:id="@+id/find_restaurantes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent" >
 
-            <RelativeLayout
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="467dp">
+
+                    <ListView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/listView" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="Busca avançada"
+                    android:id="@+id/btnAdvancedSearch"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="Arial"/>
+            </FrameLayout>
+
+            <FrameLayout
                 android:id="@+id/my_restaurantes"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
 
 
-            </RelativeLayout>
+            </FrameLayout>
+
         </FrameLayout>
     </LinearLayout>
 

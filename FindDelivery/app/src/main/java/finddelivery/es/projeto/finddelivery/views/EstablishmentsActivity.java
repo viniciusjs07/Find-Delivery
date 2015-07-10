@@ -1,20 +1,37 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TabHost;
 
 import finddelivery.es.projeto.finddelivery.R;
 
 public class EstablishmentsActivity extends ActionBarActivity {
 
+    private Button btnAdvancedSearch;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishments);
 
+        btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
+
+        btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(EstablishmentsActivity.this,
+                        FindEstablishmentActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
         TabHost abas = (TabHost) findViewById(R.id.tabhost);
         abas.setup();
