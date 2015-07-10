@@ -6,7 +6,7 @@ import android.app.Activity;
 /**
  * Created by Daniela on 23/06/2015.
  */
-public abstract class Controller {
+public abstract class Controller  {
 
     public static User loggedUser;
 

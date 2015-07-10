@@ -11,16 +11,16 @@ import java.util.Set;
  */
 public class Establishment {
 
-    private String name, adress, businessHour, photoURL;
+    private String name, address, businessHour, photoURL;
     private SpecialityType speciality;
     Set<String> phones;
     Map<User, Integer> evaluations;
     Map<User, List<String>> comments;
 
 
-    public Establishment(String name, String adress, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
+    public Establishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.businessHour = businessHour;
         this.speciality = speciality;
         this.phones = phones;
@@ -38,11 +38,11 @@ public class Establishment {
     }
 
     public String getAdress() {
-        return adress;
+        return address;
     }
 
     public void setAdress(String adress) {
-        this.adress = adress;
+        this.address = adress;
     }
 
     public String getBusinessHour() {

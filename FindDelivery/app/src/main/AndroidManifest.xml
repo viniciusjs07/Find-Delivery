@@ -39,10 +39,6 @@
             android:label="Cadastre-se" >
         </activity>
         <activity
-            android:name=".views.EstablishmentCadastreActivity"
-            android:label="@string/title_activity_establishtment_cadastre" >
-        </activity>
-        <activity
             android:name=".views.MyEstablishmentActivity"
             android:label="@string/title_activity_my_establishment" >
         </activity>
@@ -53,6 +49,14 @@
         <activity
             android:name=".views.EstablishmentsActivity"
             android:label="@string/title_activity_establishments" >
+        </activity>
+        <activity
+            android:name=".Establishment_listActivity"
+            android:label="@string/title_activity_establishment_list" >
+        </activity>
+        <activity
+            android:name=".views.Establishment_listActivity"
+            android:label="@string/title_activity_establishment_list" >
         </activity>
     </application>
 

@@ -1,7 +1,8 @@
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tabhost"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+   >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,12 +17,18 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            >
+            <ScrollView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
 
             <FrameLayout
                 android:id="@+id/find_restaurantes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                >
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -29,9 +36,12 @@
                     android:layout_height="467dp">
 
                     <ListView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listView" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/listViewEstablishments"
+                        android:divider="@color/orange"
+                        android:dividerHeight="0.5sp"/>
+
                 </LinearLayout>
 
                 <Button
@@ -45,15 +55,13 @@
                     android:textSize="20dp"
                     android:fontFamily="Arial"/>
             </FrameLayout>
-
+            </ScrollView>
             <FrameLayout
                 android:id="@+id/my_restaurantes"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
 
-
             </FrameLayout>
-
         </FrameLayout>
     </LinearLayout>
 
