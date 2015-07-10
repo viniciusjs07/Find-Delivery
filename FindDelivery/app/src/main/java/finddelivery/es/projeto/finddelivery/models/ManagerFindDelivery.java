@@ -23,12 +23,13 @@ public class ManagerFindDelivery {
     }
 
     //This method register a new user
-    public void registerUser(String name,String login, String password) {
-        for (User user : getListUser()) {
-            if (user.getName().equals(name) && user.getLogin().equals(login) && user.getPassword().equals(password)) {
-                listUser.add(user);
-            }
+    public void registerUser(String name,String login, String password) throws ExceededCharacterException, EmptyFieldException {
+        User user = new User(name,login,password);
+        if(!listUser.contains(user)){
+            listUser.add(user);
         }
+
+
     }
 
     //This method valid a login
@@ -80,5 +81,9 @@ public class ManagerFindDelivery {
     //is method not implemented//
     public void listEstablishment(List<Establishment> establishments){
 
+    }
+    //this method user updates
+    public void setUser(List<User> newUser){
+        this.listUser = newUser;
     }
 }
