@@ -4,16 +4,31 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.models.SpecialityType;
 
 
 public class FindEstablishmentActivity extends ActionBarActivity {
+
+    private Spinner sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_establishment);
+
+        ArrayAdapter<SpecialityType> adapter = new ArrayAdapter<SpecialityType>(this, android.R.layout.simple_spinner_dropdown_item, SpecialityType.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        sp = (Spinner) findViewById(R.id.spinnerTipoCozinha);
+        sp.setAdapter(adapter);
+
+
     }
 
 
