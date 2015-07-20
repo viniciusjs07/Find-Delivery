@@ -10,79 +10,91 @@
 
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="281dp"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="right|center_vertical">
+            android:layout_gravity="right|top">
 
             <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/imageViewEstablishmentLogo"
-                    android:hint="Logo do restaurante"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-                    android:layout_centerHorizontal="true" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageViewEstablishmentLogo"
+                android:hint="Logo do restaurante"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:hint="Restaurante"
-                    android:ems="10"
-                    android:id="@+id/editTextEstablishmentName"
-                    android:layout_below="@+id/imageViewEstablishmentLogo"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:textIsSelectable="false"
-                    android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Restaurante"
+                android:ems="10"
+                android:id="@+id/editTextEstablishmentName"
+                android:layout_below="@+id/imageViewEstablishmentLogo"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:textIsSelectable="false"
+                android:layout_marginTop="20dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPostalAddress"
-                    android:hint="Endereço"
-                    android:ems="10"
-                    android:id="@+id/editTextAddress"
-                    android:layout_below="@+id/editTextEstablishmentName"
-                    android:layout_alignLeft="@+id/editTextEstablishmentName"
-                    android:layout_gravity="center"
-                    android:layout_alignStart="@+id/editTextEstablishmentName"
-                    android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:hint="Endereço"
+                android:ems="10"
+                android:id="@+id/editTextAddress"
+                android:layout_below="@+id/editTextEstablishmentName"
+                android:layout_alignLeft="@+id/editTextEstablishmentName"
+                android:layout_gravity="center"
+                android:layout_alignStart="@+id/editTextEstablishmentName"
+                android:layout_marginTop="20dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:hint="Telefone"
-                    android:ems="10"
-                    android:id="@+id/editTextPhone"
-                    android:layout_below="@+id/editTextAddress"
-                    android:layout_alignLeft="@+id/editTextAddress"
-                    android:layout_gravity="center"
-                    android:layout_alignStart="@+id/editTextAddress"
-                    android:layout_marginTop="20dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Campina Grande - Paraíba"
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/editTextEspeciality"
-                    android:hint="Especialidade"
-                    android:ems="10"
-                    android:layout_below="@+id/editTextPhone"
-                    android:layout_alignLeft="@+id/editTextPhone"
-                    android:layout_alignStart="@+id/editTextPhone"
-                    android:layout_alignRight="@+id/editTextPhone"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_alignEnd="@+id/editTextPhone"
-                    android:autoText="false"
-                    android:layout_marginTop="20dp" />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerTipoDeCozinha"
+                android:layout_marginTop="20dp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="Telefone 1"
+                android:ems="10"
+                android:id="@+id/editTextPhoneOne"
+                android:layout_below="@+id/editTextAddress"
+                android:layout_alignLeft="@+id/editTextAddress"
+                android:layout_gravity="center"
+                android:layout_alignStart="@+id/editTextAddress"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="Telefone 2"
+                android:ems="10"
+                android:id="@+id/editTextPhoneTwo"
+                android:layout_below="@+id/editTextPhoneOne"
+                android:layout_alignLeft="@+id/editTextPhoneOne"
+                android:layout_gravity="center"
+                android:layout_alignStart="@+id/editTextPhoneOne"
+                android:layout_marginTop="20dp" />
 
             <Button
                 android:layout_width="200dp"
