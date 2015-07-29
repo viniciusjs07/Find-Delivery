@@ -20,12 +20,39 @@
             android:layout_height="match_parent"
             android:layout_gravity="left|top">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/cadastrePhotoImageView"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/cadastrePhotoImageView"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="130dp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/camera"
+                    android:src="@drawable/camera" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/galeria"
+                    android:src="@drawable/galeria"
+                    android:layout_below="@id/camera"/>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/excluir"
+                    android:src="@drawable/excluir"
+                    android:layout_below="@id/galeria"/>
+
+            </RelativeLayout>
+
 
             <EditText
                 android:layout_width="wrap_content"
