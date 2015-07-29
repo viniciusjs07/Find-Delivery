@@ -1,5 +1,6 @@
 package finddelivery.es.projeto.finddelivery.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Set;
 /**
  * Created by Vinicius on 10/06/2015.
  */
-public class Establishment {
+public class Establishment implements Serializable {
 
     private String name, address, businessHour, photoURL;
     private SpecialityType speciality;
@@ -17,6 +18,9 @@ public class Establishment {
     Map<User, Integer> evaluations;
     Map<User, List<String>> comments;
 
+    public Establishment(String name){
+        this.name = name;
+    }
 
     public Establishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
         this.name = name;

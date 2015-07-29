@@ -3,21 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="finddelivery.es.projeto.finddelivery.views.Establishment_listActivity"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="5sp">
 
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageViewRestaurant" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="5sp"
-        android:id="@+id/textViewNameRestaurant"
-        android:gravity="center_vertical" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nome do restaurante"
+        android:id="@+id/textViewNameRestaurant" />
 
 
 
