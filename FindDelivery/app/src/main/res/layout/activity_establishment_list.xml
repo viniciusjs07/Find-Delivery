@@ -6,14 +6,35 @@
     android:orientation="vertical"
     android:padding="5sp">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nome do restaurante"
-        android:id="@+id/textViewNameRestaurant" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewRestaurant" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nome do restaurante"
+            android:id="@+id/textViewNameRestaurant"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Especialidade"
+                android:id="@+id/textViewSpeciallity"
+                android:layout_below="@+id/textViewNameRestaurant"
+                android:layout_alignLeft="@+id/textViewNameRestaurant"
+                android:layout_alignStart="@+id/textViewNameRestaurant" />
+    </RelativeLayout>
 
 
 </LinearLayout>

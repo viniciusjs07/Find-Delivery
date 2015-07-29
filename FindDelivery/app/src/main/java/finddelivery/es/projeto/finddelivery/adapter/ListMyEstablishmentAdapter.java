@@ -57,8 +57,13 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         //atraves do layout pego pelo LayoutInflater, pegamos cada id relacionado
         //ao item e definimos as informações.
         ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
+        ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getName());
 
+        ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageResource(R.mipmap.photodefault);
 
         return view;
     }
+
+
+
 }

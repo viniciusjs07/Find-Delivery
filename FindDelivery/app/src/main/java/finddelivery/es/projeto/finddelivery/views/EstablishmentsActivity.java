@@ -62,7 +62,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
 
 
-        est =  new ArrayList<Establishment>();
+        est =  new ArrayList<>();
 
         est.add(new Establishment("Nome 1"));
         est.add(new Establishment("Nome 2" ));
