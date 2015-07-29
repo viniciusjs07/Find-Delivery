@@ -49,7 +49,7 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        //Pega o item de acordo com a posção.
+        //Pega o item de acordo com a posição.
         Establishment item = items.get(position);
         //infla o layout para podermos preencher os dados
         view = mInflater.inflate(R.layout.activity_establishment_list, null);

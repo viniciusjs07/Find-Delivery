@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,17 +33,18 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
 
         cadastrePhotoImageView = (ImageView)findViewById(R.id.cadastrePhotoImageView);
-        btnCamera = (ImageButton)findViewById(R.id.camera);
+        btnCamera = (ImageButton)findViewById(R.id.imgCamera);
         btnCamera.setOnClickListener(this);
-        btnGalery = (ImageButton)findViewById(R.id.galeria);
+        btnGalery = (ImageButton)findViewById(R.id.imgGallery);
         btnGalery.setOnClickListener(this);
-        btnDelete = (ImageButton)findViewById(R.id.excluir);
+        btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
         cadastreNameEditText = (EditText)findViewById(R.id.cadastreNameEditText);
         cadastreLoginEditText = (EditText)findViewById(R.id.cadastreLoginEditText);
@@ -50,7 +52,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         cadastrePasswordConfirmEditText = (EditText)findViewById(R.id.cadastrePasswordConfirmEditText);
         btnRegister = (Button)findViewById(R.id.btnRegister);
         btnCancel = (Button)findViewById(R.id.btnCancel);
-
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -101,15 +102,15 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         Intent intent;
 
         switch (view.getId()) {
-            case R.id.camera:
+            case R.id.imgCamera:
                 intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, RESULT_CAMERA);
                 break;
-            case R.id.galeria:
+            case R.id.imgGallery:
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
-            case R.id.excluir:
+            case R.id.imgDelete:
                 cadastrePhotoImageView.setImageBitmap(null);
                 break;
         }

@@ -29,27 +29,31 @@
                     android:layout_height="100dp"
                     android:id="@+id/cadastrePhotoImageView"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="130dp" />
+                    android:layout_marginLeft="130dp"
+                    android:src="@drawable/avatar"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/camera"
-                    android:src="@drawable/camera" />
+                    android:id="@+id/imgCamera"
+                    android:src="@drawable/camera"
+                    android:layout_marginLeft="260dp"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/galeria"
-                    android:src="@drawable/galeria"
-                    android:layout_below="@id/camera"/>
+                    android:id="@+id/imgGallery"
+                    android:src="@drawable/gallery"
+                    android:layout_below="@id/imgCamera"
+                    android:layout_marginLeft="260dp"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/excluir"
-                    android:src="@drawable/excluir"
-                    android:layout_below="@id/galeria"/>
+                    android:id="@+id/imgDelete"
+                    android:src="@drawable/delete"
+                    android:layout_below="@id/imgGallery"
+                    android:layout_marginLeft="260dp"/>
 
             </RelativeLayout>
 
