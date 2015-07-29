@@ -28,15 +28,15 @@ public class EstablishmentsActivity extends ActionBarActivity {
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
 /*
-        listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                        .show();
-            }
-        });*/
+       listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view,
+                                   int position, long id) {
+               Toast.makeText(getApplicationContext(),
+                       "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                       .show();
+           }
+       });*/
 
         // Defined Array values to show in ListView
         String[] values = new String[] { "Por enquanto",
@@ -85,7 +85,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
 
 
-    btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
+        btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent();
                 it.setClass(EstablishmentsActivity.this,
@@ -95,7 +95,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-        TabHost abas = (TabHost) findViewById(R.id.tabhost);
+        TabHost abas = (TabHost) findViewById(R.id.tabHost);
         abas.setup();
 
         TabHost.TabSpec descritor = abas.newTabSpec("aba1");
