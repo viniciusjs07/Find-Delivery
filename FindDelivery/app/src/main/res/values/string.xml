@@ -29,6 +29,7 @@
     <string name="title_activity_establishment_list">Establishment_listActivity</string>
     <string name="title_activity_evaluation_establishment">Establishment name</string>
     <string name="title_activity_evaluate_establishment">Establishment name</string>
+    <string name="title_activity_establishment_details">EstablishmentDetails</string>
 
 
 </resources>
