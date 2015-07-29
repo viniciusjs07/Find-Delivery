@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="finddelivery.es.projeto.finddelivery.EstablishtmentCadastreActivity"
+    tools:context="finddelivery.es.projeto.finddelivery.EstablishmentCadastreActivity"
     android:id="@+id/EstablishmentCadastre"
     android:background="#00ff7712">
 
@@ -17,18 +17,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="right|top">
 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/imageViewEstablishmentLogo"
-                android:hint="Logo do restaurante"
-                android:layout_alignParentTop="true"
-                android:layout_gravity="center"
-                android:layout_centerHorizontal="true" />
+                android:layout_gravity="center" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -37,8 +32,6 @@
                 android:hint="Restaurante"
                 android:ems="10"
                 android:id="@+id/editTextEstablishmentName"
-                android:layout_below="@+id/imageViewEstablishmentLogo"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:textIsSelectable="false"
                 android:layout_marginTop="20dp" />
@@ -50,10 +43,7 @@
                 android:hint="Endereço"
                 android:ems="10"
                 android:id="@+id/editTextAddress"
-                android:layout_below="@+id/editTextEstablishmentName"
-                android:layout_alignLeft="@+id/editTextEstablishmentName"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/editTextEstablishmentName"
                 android:layout_marginTop="20dp" />
 
             <TextView
@@ -62,14 +52,25 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Campina Grande - Paraíba"
                 android:id="@+id/textView6"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp" />
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Tipo de cozinha"
+                android:id="@+id/textViewTipoDeCozinha"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center" />
 
             <Spinner
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerTipoDeCozinha"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center" />
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,10 +78,7 @@
                 android:hint="Telefone 1"
                 android:ems="10"
                 android:id="@+id/editTextPhoneOne"
-                android:layout_below="@+id/editTextAddress"
-                android:layout_alignLeft="@+id/editTextAddress"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/editTextAddress"
                 android:layout_marginTop="20dp" />
 
             <EditText
@@ -90,10 +88,7 @@
                 android:hint="Telefone 2"
                 android:ems="10"
                 android:id="@+id/editTextPhoneTwo"
-                android:layout_below="@+id/editTextPhoneOne"
-                android:layout_alignLeft="@+id/editTextPhoneOne"
                 android:layout_gravity="center"
-                android:layout_alignStart="@+id/editTextPhoneOne"
                 android:layout_marginTop="20dp" />
 
             <Button
@@ -106,11 +101,12 @@
                 android:textSize="20dp"
                 android:fontFamily="Arial"
                 android:textStyle="bold"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp" />
 
         </LinearLayout>
+
     </ScrollView>
+
 </FrameLayout>
+
