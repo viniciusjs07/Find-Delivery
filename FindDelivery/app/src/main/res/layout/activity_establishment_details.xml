@@ -127,7 +127,18 @@
 
                 </LinearLayout>
             </LinearLayout>
-
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Avaliações"
+                android:id="@+id/btnAvaliacoes"
+                android:layout_gravity="center_horizontal|bottom"
+                android:background="@color/orange"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:fontFamily="Arial"/>
         </LinearLayout>
     </ScrollView>
+
+
 </FrameLayout>
