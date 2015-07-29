@@ -37,15 +37,15 @@ public class EstablishmentsActivity extends ActionBarActivity {
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
 /*
-        listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                        .show();
-            }
-        });*/
+       listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view,
+                                   int position, long id) {
+               Toast.makeText(getApplicationContext(),
+                       "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                       .show();
+           }
+       });*/
 
         listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-        TabHost abas = (TabHost) findViewById(R.id.tabhost);
+        TabHost abas = (TabHost) findViewById(R.id.tabHost);
         abas.setup();
 
         TabHost.TabSpec descritor = abas.newTabSpec("aba1");
