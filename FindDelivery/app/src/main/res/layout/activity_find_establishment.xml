@@ -27,7 +27,7 @@
                 android:text="Procure pelo nome do estabelecimento"
                 android:textSize="20dp"
                 android:id="@+id/textView"
-                android:layout_marginTop="57dp"
+                android:layout_marginTop="0dp"
                 android:textAlignment="center"
                 android:textIsSelectable="false"
                 android:editable="false"
@@ -107,7 +107,7 @@
                 android:layout_alignLeft="@+id/restaurantNameEditText"
                 android:layout_alignStart="@+id/restaurantNameEditText"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_gravity="top" />
 
             <LinearLayout
@@ -118,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinnerTipoCozinha"
-                    android:layout_weight="1.93" />
+                    android:layout_weight="1.93"/>
 
 
                 <ImageButton
