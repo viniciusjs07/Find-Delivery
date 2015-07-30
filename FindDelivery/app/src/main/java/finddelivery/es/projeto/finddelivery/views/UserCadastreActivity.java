@@ -3,6 +3,7 @@ package finddelivery.es.projeto.finddelivery.views;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
@@ -111,7 +112,8 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
             case R.id.imgDelete:
-                cadastrePhotoImageView.setImageBitmap(null);
+                Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+                cadastrePhotoImageView.setImageBitmap(avatar);
                 break;
         }
     }
