@@ -116,7 +116,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
             case R.id.imgDelete:
-                logoEstablishmentImageView.setImageBitmap(null);
+                Bitmap photoDefaultEstablishment = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
+                logoEstablishmentImageView.setImageBitmap(photoDefaultEstablishment);
                 break;
         }
     }
