@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,12 +14,20 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EstablishmentsActivity extends ActionBarActivity {
 
     private Button btnAdvancedSearch;
     private ListView listViewEstablishments;
+    private ListMyEstablishmentAdapter adapter;
+    private  List<Establishment> est;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,64 +37,40 @@ public class EstablishmentsActivity extends ActionBarActivity {
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
 /*
+       listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view,
+                                   int position, long id) {
+               Toast.makeText(getApplicationContext(),
+                       "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                       .show();
+           }
+       });*/
+
         listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                        .show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Establishment item = adapter.getItem(position);
+
+                Intent intent = new Intent(EstablishmentsActivity.this, LoginActivity.class);
+                intent.putExtra("ESTABLISHMENT", item);
+
+                startActivity(intent);
             }
-        });*/
-
-        // Defined Array values to show in ListView
-        String[] values = new String[] { "Por enquanto",
-                "Soh para mostrar",
-                "Como vai ficar a lista",
-                "Mas precisamos colocar",
-                "Foto, nome, especialidade e",
-                "Avaliacao do estabelecimento"
-
-        };
-
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-
-        // Assign adapter to ListView
-        listViewEstablishments.setAdapter(adapter);
-
-        // ListView Item Click Listener
-        listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-
-                // ListView Clicked item index
-                int itemPosition     = position;
-
-                // ListView Clicked item value
-                String  itemValue    = (String) listViewEstablishments.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
-
-            }
-
         });
 
 
 
-    btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
+
+        est =  new ArrayList<>();
+
+        est.add(new Establishment("Nome 1"));
+        est.add(new Establishment("Nome 2" ));
+        est.add(new Establishment("Nome 3" ));
+        est.add(new Establishment("Nome 4"));
+
+
+        btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent();
                 it.setClass(EstablishmentsActivity.this,
@@ -95,7 +80,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-        TabHost abas = (TabHost) findViewById(R.id.tabhost);
+        TabHost abas = (TabHost) findViewById(R.id.tabHost);
         abas.setup();
 
         TabHost.TabSpec descritor = abas.newTabSpec("aba1");
@@ -109,6 +94,12 @@ public class EstablishmentsActivity extends ActionBarActivity {
         abas.addTab(descritor);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter = new ListMyEstablishmentAdapter(this, est);
+        listViewEstablishments.setAdapter(adapter);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

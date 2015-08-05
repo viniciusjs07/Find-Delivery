@@ -9,7 +9,8 @@
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_gravity="right|bottom">
 
         <LinearLayout
             android:orientation="vertical"
@@ -26,7 +27,7 @@
                 android:text="Procure pelo nome do estabelecimento"
                 android:textSize="20dp"
                 android:id="@+id/textView"
-                android:layout_marginTop="57dp"
+                android:layout_marginTop="0dp"
                 android:textAlignment="center"
                 android:textIsSelectable="false"
                 android:editable="false"
@@ -71,30 +72,29 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginLeft="20dp"/>
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:hint="@string/restaurant_example"
-                android:ems="10"
-                android:id="@+id/restaurantNameEditText"
-                android:layout_below="@+id/textView4"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="15dp"/>
+           <LinearLayout android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="225dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="@string/restaurant_example"
+                    android:ems="10"
+                    android:id="@+id/restaurantNameEditText"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"/>
 
-            <SearchView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/searchView"
-                android:layout_alignTop="@+id/textView4"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="40dp"
-                android:layout_gravity="right"
-                android:gravity="top"
-                android:textAlignment="textEnd" />
+               <ImageButton
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/searchByName"
+                   android:layout_marginLeft="15dp"
+                   android:layout_gravity="right"
+                   android:gravity="top"
+                   android:src="@drawable/button_search" />
+           </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,17 +107,29 @@
                 android:layout_alignLeft="@+id/restaurantNameEditText"
                 android:layout_alignStart="@+id/restaurantNameEditText"
                 android:layout_marginTop="50dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="20dp"
                 android:layout_gravity="top" />
 
-            <Spinner
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerTipoCozinha"
-                android:layout_below="@+id/textView5"
-                android:layout_alignLeft="@+id/textView5"
-                android:layout_alignStart="@+id/textView5" />
+                android:weightSum="1">
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerTipoCozinha"
+                    android:layout_weight="1.93"/>
 
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchBySpeciality"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="right"
+                    android:gravity="top"
+                    android:src="@drawable/button_search" />
+            </LinearLayout>
 
         </LinearLayout>
 

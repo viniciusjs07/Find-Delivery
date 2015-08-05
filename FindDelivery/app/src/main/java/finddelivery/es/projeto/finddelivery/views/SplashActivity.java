@@ -35,7 +35,7 @@ public class SplashActivity extends ActionBarActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, EvaluationEstablishmentActivity.class);
+                Intent i = new Intent(SplashActivity.this, UserCadastreActivity.class);
                 startActivity(i);
 
                 // close this activity

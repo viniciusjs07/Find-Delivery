@@ -1,32 +1,32 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.*;
-import android.view.*;
-import android.content.Intent;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import finddelivery.es.projeto.finddelivery.R;
 
+public class EstablishmentCadastreActivity extends ActionBarActivity implements View.OnClickListener {
 
-public class UserCadastreActivity extends ActionBarActivity implements View.OnClickListener {
+    private Spinner sp;
+    private List<String> specialityTypes;
 
-    private ImageView cadastrePhotoImageView;
-    private EditText cadastreNameEditText;
-    private EditText cadastreLoginEditText;
-    private EditText cadastrePasswordEditText;
-    private EditText cadastrePasswordConfirmEditText;
-    private Button btnRegister;
-    private Button btnCancel;
-
+    private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
     private ImageButton btnGalery;
     private ImageButton btnDelete;
@@ -34,52 +34,56 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_cadastre);
+        setContentView(R.layout.activity_establishment_cadastre);
 
-        cadastrePhotoImageView = (ImageView)findViewById(R.id.cadastrePhotoImageView);
+        logoEstablishmentImageView = (ImageView)findViewById(R.id.logoEstablishmentImageView);
         btnCamera = (ImageButton)findViewById(R.id.imgCamera);
         btnCamera.setOnClickListener(this);
         btnGalery = (ImageButton)findViewById(R.id.imgGallery);
         btnGalery.setOnClickListener(this);
         btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
-        cadastreNameEditText = (EditText)findViewById(R.id.cadastreNameEditText);
-        cadastreLoginEditText = (EditText)findViewById(R.id.cadastreLoginEditText);
-        cadastrePasswordEditText = (EditText)findViewById(R.id.cadastrePasswordEditText);
-        cadastrePasswordConfirmEditText = (EditText)findViewById(R.id.cadastrePasswordConfirmEditText);
-        btnRegister = (Button)findViewById(R.id.btnRegister);
-        btnCancel = (Button)findViewById(R.id.btnCancel);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent();
-                it.setClass(UserCadastreActivity.this, LoginActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
+        specialityTypes = new ArrayList<String>();
+        addTypes();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.dialog_registerOK, Toast.LENGTH_SHORT).show();
-                Intent it = new Intent();
-                it.setClass(UserCadastreActivity.this,
-                        LoginActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, specialityTypes);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
+        sp.setAdapter(adapter);
+
+
     }
 
+    private void addTypes() {
+        specialityTypes.add("Comida Brasileira");
+        specialityTypes.add("Comida Mexicana");
+        specialityTypes.add("Comida Japonesa");
+        specialityTypes.add("Comida Chinesa");
+        specialityTypes.add("Comida Italiana");
+        specialityTypes.add("Comida Variada");
+        specialityTypes.add("Comida Saudavel");
+        specialityTypes.add("Lanches");
+        specialityTypes.add("Pizza");
+        specialityTypes.add("Doces");
+        specialityTypes.add("Salgados");
+        specialityTypes.add("Frutos do Mar");
+        specialityTypes.add("Cafe");
+        specialityTypes.add("Carnes");
+        specialityTypes.add("Bebidas");
+        specialityTypes.add("Saladas");
+        specialityTypes.add("Marmitas");
+        specialityTypes.add("Massas");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_cadastro_usuario, menu);
+        getMenuInflater().inflate(R.menu.menu_establishment_cadastre, menu);
         return true;
     }
 
@@ -112,8 +116,8 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
             case R.id.imgDelete:
-                Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
-                cadastrePhotoImageView.setImageBitmap(avatar);
+                Bitmap photoDefaultEstablishment = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
+                logoEstablishmentImageView.setImageBitmap(photoDefaultEstablishment);
                 break;
         }
     }
@@ -122,7 +126,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
             Bitmap foto = (Bitmap)data.getExtras().get("data");
-            cadastrePhotoImageView.setImageBitmap(foto);
+            logoEstablishmentImageView.setImageBitmap(foto);
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
             Uri imageUri = data.getData();
@@ -141,9 +145,8 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             Bitmap foto = BitmapFactory.decodeFile(picturePath.toString());
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (foto != null) {
-                cadastrePhotoImageView.setImageBitmap(foto);
+                logoEstablishmentImageView.setImageBitmap(foto);
             }
         }
-
     }
 }
