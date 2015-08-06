@@ -17,7 +17,11 @@ public class User implements Serializable{
     private Set<Establishment> establishments;
     private ManagerFindDelivery manager;
 
-    public User(String name,String login,String password)throws EmptyFieldException, ExceededCharacterException{
+    private Integer id; //Temp
+
+    public User(String name,String login,String password){
+
+       // public User(String name,String login,String password)throws EmptyFieldException, ExceededCharacterException{
         this.name = name;
         this.login = login;
         this.password = password;
@@ -25,11 +29,27 @@ public class User implements Serializable{
         this.manager = new ManagerFindDelivery();
     }
 
+    public User(Integer id, String login, String password){ //Temp
+        this.id = id;
+        this.login = login;
+        this.password = password;
+    }
+
     public User(String name,String login,String password, String photoUrl){
         this.name = name;
         this.login = login;
         this.password = password;
         this.photoUrl = photoUrl;
+    }
+
+    //Temp
+    public Integer getId() {
+        return id;
+    }
+
+    //Temp
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName(){
