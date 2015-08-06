@@ -30,6 +30,6 @@
     <string name="title_activity_evaluation_establishment">Establishment name</string>
     <string name="title_activity_evaluate_establishment">Establishment name</string>
     <string name="title_activity_establishment_details">EstablishmentDetails</string>
-
+    <string name="title_activity_establishment_cadastre">EstablishmentCadastreActivity</string>
 
 </resources>

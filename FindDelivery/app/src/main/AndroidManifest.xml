@@ -3,6 +3,9 @@
     package="finddelivery.es.projeto.finddelivery" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.Camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -69,6 +72,10 @@
         <activity
             android:name=".views.EstablishmentDetails"
             android:label="@string/title_activity_establishment_details" >
+        </activity>
+        <activity
+            android:name=".views.EstablishmentCadastreActivity"
+            android:label="@string/title_activity_establishment_cadastre" >
         </activity>
     </application>
 

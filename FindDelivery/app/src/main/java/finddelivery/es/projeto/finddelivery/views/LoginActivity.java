@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,23 +18,29 @@ import finddelivery.es.projeto.finddelivery.R;
 import java.util.ArrayList;
 
 import finddelivery.es.projeto.finddelivery.Server.ConnectionHTTPClient;
+import finddelivery.es.projeto.finddelivery.controllers.UserController;
+import finddelivery.es.projeto.finddelivery.models.User;
 
 
 public class LoginActivity extends ActionBarActivity {
 
     private EditText loginEditText;
     private EditText passwordEditText;
-    private Button btnEnter;
     private Button btnSingUp;
+    private Context context;
+    private UserController userController;
+    private AlertDialog.Builder alert;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        context = this;
+        userController = UserController.getInstance(context);
         loginEditText = (EditText) findViewById(R.id.loginEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        btnEnter = (Button) findViewById(R.id.btnEnter);
+
         btnSingUp = (Button) findViewById(R.id.btnSingUp);
 
         btnSingUp.setOnClickListener(new View.OnClickListener() {
@@ -46,70 +53,59 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-        btnEnter.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String urlGet = "http://www.finddelivery.dx.am/login.ph?login=" + loginEditText.getText().toString() + "&senha=" + passwordEditText.getText().toString();
-                String urlPost = "http://www.finddelivery.dx.am/login.php";
-                ArrayList<NameValuePair> postParams = new ArrayList<>();
-                postParams.add(new BasicNameValuePair("login", loginEditText.getText().toString()));
-                postParams.add(new BasicNameValuePair("senha", passwordEditText.getText().toString()));
-                String responseReturned = null;
 
-                try {
+        try {
+            testaInicializacao();
+        } catch (Exception e) {
+            exibeDialogo("Erro inicializando banco de dados");
+            e.printStackTrace();
+        }
 
-                    responseReturned = ConnectionHTTPClient.executeHttpGet(urlGet);
+    }
 
 
-                   // responseReturned = ConnectionHTTPClient.executeHttpPost(urlPost, postParams);
-                    //messageShow("login", "passa");
+    public void testaInicializacao() throws Exception {
+        if (userController.findAll().isEmpty()) {
+            User user = new User(0,"dani", "123456");
+            userController.insert(user);
+        }
+    }
 
-                    String response = responseReturned.toString();
-                    response = response.replaceAll("\\s+", "");
+    /**
+     *
+     */
+    public void exibeDialogo(String mensagem) {
+        alert = new AlertDialog.Builder(context);
+        alert.setPositiveButton("OK", null);
+        alert.setMessage(mensagem);
+        alert.create().show();
+    }
 
-                    if (response.equals("1")) {
-                        messageShow("login", "Login válido");
-                    } else {
-                        messageShow("login", "Login inválido");
-                    }
-                } catch (Exception error) {
-                    messageShow("erro", "ERRO");
+    public void validar(View view) {
+        String usuario = loginEditText.getText().toString();
+        String senha = passwordEditText.getText().toString();
 
-                }
-
+        try {
+            boolean isValid = userController.validaLogin(usuario, senha);
+            if (isValid) {
+                exibeDialogo("Usuario e senha validados com sucesso!");
+                Intent it = new Intent();
+                it.setClass(LoginActivity.this,
+                        EstablishmentsActivity.class);
+                startActivity(it);
+                finish();
+            } else {
+                exibeDialogo("Verifique usuario e senha!");
             }
-
-        });
+        } catch (Exception e) {
+            exibeDialogo("Erro validando usuario e senha");
+            e.printStackTrace();
+        }
     }
-
-    public void messageShow(String titulo, String texto) {
-        AlertDialog.Builder message = new AlertDialog.Builder(LoginActivity.this);
-        message.setTitle(titulo);
-        message.setMessage(texto);
-        message.setNeutralButton("OK", null);
-        message.show();
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -51,8 +51,8 @@
                 android:fontFamily="Arial"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal" />
-
+                android:layout_gravity="center_horizontal"
+                android:onClick="validar" />
 
             <Button
                 android:text="Cadastre-se"
