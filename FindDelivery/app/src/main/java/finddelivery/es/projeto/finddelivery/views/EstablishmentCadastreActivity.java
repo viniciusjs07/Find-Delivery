@@ -8,10 +8,12 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -20,11 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EstablishmentCadastreActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Spinner sp;
     private List<String> specialityTypes;
+    private EditText workHour;
+    private EditText addres;
+    private EditText name;
+    private EditText fone1;
+    private EditText fone2;
 
     private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
@@ -46,6 +54,13 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         btnGalery.setOnClickListener(this);
         btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
+
+        workHour = (EditText)findViewById(R.id.editTextHorario);
+        addres = (EditText)findViewById(R.id.editTextAddress);
+        name = (EditText)findViewById(R.id.editTextEstablishmentName);
+        fone1 = (EditText)findViewById(R.id.editTextPhoneOne);
+        fone2 = (EditText)findViewById(R.id.editTextPhoneTwo);
+
 
         specialityTypes = new ArrayList<String>();
         addTypes();
@@ -100,6 +115,24 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void submitEstablishment(View view){
+        workHour.getText().toString();
+        name.getText().toString();
+        addres.getText().toString();
+        fone1.getText().toString();
+        fone2.getText().toString();
+        Intent i = new Intent(EstablishmentCadastreActivity.this,EstablishmentsActivity.class);
+        i.putExtra("name",name.getText().toString());
+        i.putExtra("addres",addres.getText().toString());
+        i.putExtra("fone1",fone1.getText().toString());
+        i.putExtra("fone2",fone2.getText().toString());
+        startActivity(i);
+
+
+        //EstablishmentController.getInstance().addEstablishment(...);
+
     }
 
     @Override

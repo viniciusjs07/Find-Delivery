@@ -79,9 +79,17 @@ public class ManagerFindDelivery {
     }
 
     //is method not implemented//
-    public void listEstablishment(List<Establishment> establishments){
-
+    public void listEstablishment(){
+        List<Establishment> estab = new ArrayList<Establishment>();
+        for (User user: listUser){
+            for(Establishment estabelecimento: user.getEstablishments()){
+                estab.add(estabelecimento);
+            }
+        }
     }
+
+
+
     //this method user updates
     public void setUser(List<User> newUser){
         this.listUser = newUser;

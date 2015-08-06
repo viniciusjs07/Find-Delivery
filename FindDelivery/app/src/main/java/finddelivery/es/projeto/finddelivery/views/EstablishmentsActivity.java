@@ -59,12 +59,12 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
+        Intent i = getIntent();
 
-
-
+       // est = EstablishmentController..getEstablishments();
         est =  new ArrayList<>();
 
-        est.add(new Establishment("Nome 1"));
+        est.add(new Establishment(i.getStringExtra("name")));
         est.add(new Establishment("Nome 2" ));
         est.add(new Establishment("Nome 3" ));
         est.add(new Establishment("Nome 4"));
