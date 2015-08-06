@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
 /**
  * Created by Vinicius on 10/06/2015.
  */
@@ -18,11 +19,14 @@ public class Establishment implements Serializable {
     Map<User, Integer> evaluations;
     Map<User, List<String>> comments;
 
+    private Integer id;
+
     public Establishment(String name){
         this.name = name;
     }
 
-    public Establishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
+    public Establishment(Integer id, String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.businessHour = businessHour;
@@ -32,6 +36,10 @@ public class Establishment implements Serializable {
         this.evaluations = new HashMap<User, Integer>();
         this.comments = new HashMap<User, List<String>>();
     }
+
+    public Integer getId() {return id}
+
+    public void setId(Integer id) {return id}
 
     public String getName() {
         return name;
