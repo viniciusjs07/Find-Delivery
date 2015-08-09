@@ -30,7 +30,6 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         myContext = context;
     }
 
-
     @Override
     public int getCount() {
         return items.size();
@@ -39,7 +38,6 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
     @Override
     public Establishment getItem(int position) {
         return items.get(position);
-
     }
 
     @Override
@@ -63,7 +61,4 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
 
         return view;
     }
-
-
-
 }

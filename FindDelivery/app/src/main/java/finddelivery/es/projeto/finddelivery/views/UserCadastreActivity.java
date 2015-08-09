@@ -1,5 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,6 +17,9 @@ import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.UserController;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
 
 
 public class UserCadastreActivity extends ActionBarActivity implements View.OnClickListener {
@@ -26,11 +31,12 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private EditText cadastrePasswordConfirmEditText;
     private Button btnRegister;
     private Button btnCancel;
-
     private ImageButton btnCamera;
     private ImageButton btnGalery;
     private ImageButton btnDelete;
-
+    private Context context;
+    private UserController userController;
+    private AlertDialog.Builder alert;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
 
@@ -40,19 +46,21 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
 
-        cadastrePhotoImageView = (ImageView)findViewById(R.id.cadastrePhotoImageView);
-        btnCamera = (ImageButton)findViewById(R.id.imgCamera);
+        context = this;
+        userController = UserController.getInstance(context);
+        cadastrePhotoImageView = (ImageView) findViewById(R.id.cadastrePhotoImageView);
+        btnCamera = (ImageButton) findViewById(R.id.imgCamera);
         btnCamera.setOnClickListener(this);
-        btnGalery = (ImageButton)findViewById(R.id.imgGallery);
+        btnGalery = (ImageButton) findViewById(R.id.imgGallery);
         btnGalery.setOnClickListener(this);
-        btnDelete = (ImageButton)findViewById(R.id.imgDelete);
+        btnDelete = (ImageButton) findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
-        cadastreNameEditText = (EditText)findViewById(R.id.cadastreNameEditText);
-        cadastreLoginEditText = (EditText)findViewById(R.id.cadastreLoginEditText);
-        cadastrePasswordEditText = (EditText)findViewById(R.id.cadastrePasswordEditText);
-        cadastrePasswordConfirmEditText = (EditText)findViewById(R.id.cadastrePasswordConfirmEditText);
-        btnRegister = (Button)findViewById(R.id.btnRegister);
-        btnCancel = (Button)findViewById(R.id.btnCancel);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnCancel = (Button) findViewById(R.id.btnCancel);
+        cadastreNameEditText = (EditText) findViewById(R.id.cadastreNameEditText);
+        cadastreLoginEditText = (EditText) findViewById(R.id.cadastreLoginEditText);
+        cadastrePasswordEditText = (EditText) findViewById(R.id.cadastrePasswordEditText);
+        cadastrePasswordConfirmEditText = (EditText) findViewById(R.id.cadastrePasswordConfirmEditText);
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -63,18 +71,56 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.dialog_registerOK, Toast.LENGTH_SHORT).show();
+    }
+
+    public void showDialog(String mensagem) {
+        alert = new AlertDialog.Builder(context);
+        alert.setPositiveButton("OK", null);
+        alert.setMessage(mensagem);
+        alert.create().show();
+    }
+
+    public void validates(View view) throws Exception {
+        String name = cadastreNameEditText.getText().toString();
+        String login = cadastreLoginEditText.getText().toString();
+        String password = cadastrePasswordEditText.getText().toString();
+        String passwordConfirm = cadastrePasswordConfirmEditText.getText().toString();
+
+        boolean passwordsValid = userController.validatesPasswords(password, passwordConfirm);
+        boolean loginValid = userController.validatesUserName(login);
+        try {
+
+
+        if (loginValid){
+            if (!passwordsValid) {
+                showDialog("As senhas nao correspondem");
+                cadastrePasswordEditText.setText("");
+                cadastrePasswordConfirmEditText.setText("");
+
+            } else {
+                showDialog("Cadastro realizado com sucesso!");
+                User user = new User(name, login, password);
+                userController.insert(user);
+
                 Intent it = new Intent();
                 it.setClass(UserCadastreActivity.this,
                         LoginActivity.class);
                 startActivity(it);
                 finish();
             }
-        });
-    }
+        } else if (!loginValid) {
+            showDialog("Login ja existente");
+            cadastreLoginEditText.setText("");
+            cadastrePasswordEditText.setText("");
+            cadastrePasswordConfirmEditText.setText("");
+        }
+        }
+        catch (Exception e){
+            showDialog("Erro validando usuario");
+            e.printStackTrace();
+        }
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

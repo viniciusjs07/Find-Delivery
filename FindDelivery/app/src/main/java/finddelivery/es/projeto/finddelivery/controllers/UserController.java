@@ -23,29 +23,47 @@ public class UserController {
         return instance;
     }
 
-    public void insert(User usuario) throws Exception {
-        userDAO.insert(usuario);
+    public void insert(User user) throws Exception {
+        userDAO.insert(user);
     }
 
-    public void update(User usuario) throws Exception {
-        userDAO.update(usuario);
+    public void update(User user) throws Exception {
+        userDAO.update(user);
     }
 
     public List<User> findAll() throws Exception {
         return userDAO.findAll();
     }
 
-    public boolean validaLogin(String usuario, String senha) throws Exception {
-        User user = userDAO.findByLogin(usuario, senha);
+    public boolean validatesLogin(String login, String password) throws Exception {
+        User user = userDAO.findByLogin(login, password);
         if (user == null || user.getLogin() == null || user.getPassword() == null) {
             return false;
         }
-        String informado = usuario + senha;
-        String esperado = user.getLogin() + user.getPassword();
-        if (informado.equals(esperado)) {
+        String input = login + password;
+        String expected = user.getLogin() + user.getPassword();
+        if (input.equals(expected)) {
             return true;
         }
         return false;
+
+    }
+
+    public  boolean validatesPasswords(String password, String passwordConfirm){
+        if (password.equals(passwordConfirm)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validatesUserName(String login) throws Exception {
+
+        for (User user : findAll()){
+            if (user.getLogin().equals(login)) {
+                return false;
+            }
+        }
+        return true;
 
     }
 

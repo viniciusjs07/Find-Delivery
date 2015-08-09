@@ -11,8 +11,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     private final static int VERSAO = 1;
-    private final static String NOME = "nomebanco.sqlite";
-    private static final String CREATE = "CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario VARCHAR( 20 ) NOT NULL, senha VARCHAR( 8 ));";
+    private final static String NOME = "FD_DATABASE";
+   // private static final String CREATE = ;
     protected SQLiteDatabase database;
 
     public DatabaseHelper(Context context) {
@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE);
+        db.execSQL("CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, login VARCHAR( 20 ) NOT NULL, password VARCHAR( 8 ));");
 
     }
 

@@ -12,7 +12,7 @@ import finddelivery.es.projeto.finddelivery.models.User;
 /**
  * Created by Daniela on 05/08/2015.
  */
-    public class DAOUser extends DatabaseHelper {
+public class DAOUser extends DatabaseHelper {
 
     private final String TABLE = "usuario";
 
@@ -23,8 +23,8 @@ import finddelivery.es.projeto.finddelivery.models.User;
     public void insert(User user) throws Exception {
         ContentValues values = new ContentValues();
 
-        values.put("usuario", user.getLogin());
-        values.put("senha", user.getPassword());
+        values.put("login", user.getLogin());
+        values.put("password", user.getPassword());
 
         getDatabase().insert(TABLE, null, values);
     }
@@ -32,8 +32,8 @@ import finddelivery.es.projeto.finddelivery.models.User;
     public void update(User user) throws Exception {
         ContentValues values = new ContentValues();
 
-        values.put("usuario", user.getLogin());
-        values.put("senha", user.getPassword());
+        values.put("login", user.getLogin());
+        values.put("password", user.getPassword());
 
         getDatabase().update(TABLE, values, "id = ?", new String[]{"" + user.getId()});
     }
@@ -45,40 +45,39 @@ import finddelivery.es.projeto.finddelivery.models.User;
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
 
-        return montaUsuario(cursor);
+        return mountUser(cursor);
     }
 
     public List<User> findAll() throws Exception {
-        List<User> retorno = new ArrayList<User>();
+        List<User> users = new ArrayList<User>();
         String sql = "SELECT * FROM " + TABLE;
         Cursor cursor = getDatabase().rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            retorno.add(montaUsuario(cursor));
+            users.add(mountUser(cursor));
             cursor.moveToNext();
         }
-        return retorno;
+        return users;
     }
 
-    public User montaUsuario(Cursor cursor) {
+    public User mountUser(Cursor cursor) {
         if (cursor.getCount() == 0) {
             return null;
         }
         Integer id = cursor.getInt(cursor.getColumnIndex("id"));
-        String usuario = cursor.getString(cursor.getColumnIndex("usuario"));
-        String senha = cursor.getString(cursor.getColumnIndex("senha"));
+        String login = cursor.getString(cursor.getColumnIndex("login"));
+        String password = cursor.getString(cursor.getColumnIndex("password"));
 
-        return new User(id, usuario, senha);
-
+        return new User(id, login, password);
     }
 
 
-    public User findByLogin(String usuario, String senha) {
-        String sql = "SELECT * FROM " + TABLE + " WHERE usuario = ? AND senha = ?";
-        String[] selectionArgs = new String[] { usuario, senha };
+    public User findByLogin(String login, String password) {
+        String sql = "SELECT * FROM " + TABLE + " WHERE login = ? AND password = ?";
+        String[] selectionArgs = new String[] { login, password };
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
 
-        return montaUsuario(cursor);
+        return mountUser(cursor);
     }
-    }
+}

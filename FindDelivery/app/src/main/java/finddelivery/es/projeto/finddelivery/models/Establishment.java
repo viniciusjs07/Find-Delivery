@@ -36,10 +36,21 @@ public class Establishment implements Serializable {
         this.evaluations = new HashMap<User, Integer>();
         this.comments = new HashMap<User, List<String>>();
     }
+    public Establishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
 
-    public Integer getId() {return id}
+        this.name = name;
+        this.address = address;
+        this.businessHour = businessHour;
+        this.speciality = speciality;
+        this.phones = phones;
+        this.photoURL = photoURL;
+        this.evaluations = new HashMap<User, Integer>();
+        this.comments = new HashMap<User, List<String>>();
+    }
 
-    public void setId(Integer id) {return id}
+    public Integer getId() {return id;}
+
+   // public void setId(Integer id) {return id}
 
     public String getName() {
         return name;

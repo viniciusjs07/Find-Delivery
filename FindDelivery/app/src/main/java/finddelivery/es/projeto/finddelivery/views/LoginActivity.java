@@ -57,7 +57,7 @@ public class LoginActivity extends ActionBarActivity {
         try {
             testaInicializacao();
         } catch (Exception e) {
-            exibeDialogo("Erro inicializando banco de dados");
+            showDialog("Erro inicializando banco de dados");
             e.printStackTrace();
         }
 
@@ -66,7 +66,8 @@ public class LoginActivity extends ActionBarActivity {
 
     public void testaInicializacao() throws Exception {
         if (userController.findAll().isEmpty()) {
-            User user = new User(0,"dani", "123456");
+           // User user = new User(0,"dani", "123456");
+            User user = new User(0,"dani", "123456");//Name vazio
             userController.insert(user);
         }
     }
@@ -74,31 +75,32 @@ public class LoginActivity extends ActionBarActivity {
     /**
      *
      */
-    public void exibeDialogo(String mensagem) {
+    public void showDialog(String mensagem) {
         alert = new AlertDialog.Builder(context);
         alert.setPositiveButton("OK", null);
         alert.setMessage(mensagem);
         alert.create().show();
     }
 
-    public void validar(View view) {
-        String usuario = loginEditText.getText().toString();
-        String senha = passwordEditText.getText().toString();
+    public void validates(View view) {
+        String login = loginEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
         try {
-            boolean isValid = userController.validaLogin(usuario, senha);
+            boolean isValid = userController.validatesLogin(login, password);
             if (isValid) {
-                exibeDialogo("Usuario e senha validados com sucesso!");
                 Intent it = new Intent();
                 it.setClass(LoginActivity.this,
                         EstablishmentsActivity.class);
                 startActivity(it);
                 finish();
             } else {
-                exibeDialogo("Verifique usuario e senha!");
+                showDialog("Login ou senha invalidos!");
+                passwordEditText.setText("");
+
             }
         } catch (Exception e) {
-            exibeDialogo("Erro validando usuario e senha");
+            showDialog("Erro validando login e senha");
             e.printStackTrace();
         }
     }

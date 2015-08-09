@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery.database;
+/*package finddelivery.es.projeto.finddelivery.database;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import android.content.ContentValues;
@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Created by Acácio on 06/08/2015.
  */
+/*
 public class DAOEstablishment extends DatabaseHelper {
 
     private final String TABLE = 'Estabelecimento';
@@ -88,5 +89,4 @@ public class DAOEstablishment extends DatabaseHelper {
 
         return montaEstabelecimento(cursor);
     }
-}
-
+}*/
