@@ -89,31 +89,29 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         boolean passwordsValid = userController.validatesPasswords(password, passwordConfirm);
         boolean loginValid = userController.validatesUserName(login);
         try {
+            if (loginValid){
+                if (!passwordsValid) {
+                    showDialog("Senha invalida!");
+                    cadastrePasswordEditText.setText("");
+                    cadastrePasswordConfirmEditText.setText("");
 
+                } else {
+                    showDialog("Cadastro realizado com sucesso!");
+                    User user = new User(name, login, password);
+                    userController.insert(user);
 
-        if (loginValid){
-            if (!passwordsValid) {
-                showDialog("As senhas nao correspondem");
+                    Intent it = new Intent();
+                    it.setClass(UserCadastreActivity.this,
+                            LoginActivity.class);
+                    startActivity(it);
+                    finish();
+                }
+            } else if (!loginValid) {
+                showDialog("Login invalido!");
+                cadastreLoginEditText.setText("");
                 cadastrePasswordEditText.setText("");
                 cadastrePasswordConfirmEditText.setText("");
-
-            } else {
-                showDialog("Cadastro realizado com sucesso!");
-                User user = new User(name, login, password);
-                userController.insert(user);
-
-                Intent it = new Intent();
-                it.setClass(UserCadastreActivity.this,
-                        LoginActivity.class);
-                startActivity(it);
-                finish();
             }
-        } else if (!loginValid) {
-            showDialog("Login ja existente");
-            cadastreLoginEditText.setText("");
-            cadastrePasswordEditText.setText("");
-            cadastrePasswordConfirmEditText.setText("");
-        }
         }
         catch (Exception e){
             showDialog("Erro validando usuario");

@@ -50,6 +50,15 @@ public class UserController {
     }
 
     public  boolean validatesPasswords(String password, String passwordConfirm){
+        if(password == null || password.equals("")){
+            return false;
+        }
+        if(passwordConfirm == null || passwordConfirm.equals("")){
+            return false;
+        }
+        if(password.length() <= 5  || password.length() > 15  || passwordConfirm.length() <=5 || passwordConfirm.length() > 15 ){
+            return false;
+        }
         if (password.equals(passwordConfirm)){
             return true;
         }
@@ -57,7 +66,9 @@ public class UserController {
     }
 
     public boolean validatesUserName(String login) throws Exception {
-
+        if(login == null || login.equals("")){
+            return false;
+        }
         for (User user : findAll()){
             if (user.getLogin().equals(login)) {
                 return false;
