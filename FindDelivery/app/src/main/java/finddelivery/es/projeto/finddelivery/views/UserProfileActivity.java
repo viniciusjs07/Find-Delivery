@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 import android.app.AlertDialog;
-import finddelivery.es.projeto.finddelivery.R;
 
+import java.util.HashMap;
+
+import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 
 public class UserProfileActivity extends ActionBarActivity  {
@@ -16,9 +19,10 @@ public class UserProfileActivity extends ActionBarActivity  {
     private Button btnAlterarDados;
     private Button btnExcluirConta;
     private ImageView imageViewUserProfile;
-    private EditText editTextNameUser;
-    private EditText editTextLoginUser;
+    private TextView editTextNameUser;
+    private TextView editTextLoginUser;
 
+    UserSessionController session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +31,29 @@ public class UserProfileActivity extends ActionBarActivity  {
         setContentView(R.layout.activity_user_profile);
 
         imageViewUserProfile = (ImageView) findViewById((R.id.imageViewUserProfile));
-        editTextNameUser = (EditText) findViewById(R.id.editTextNameUser);
-        editTextLoginUser = (EditText) findViewById(R.id.editTextLoginUser);
+        editTextNameUser = (TextView) findViewById(R.id.editTextNameUser);
+        editTextLoginUser = (TextView) findViewById(R.id.editTextLoginUser);
         btnAlterarDados = (Button) findViewById(R.id.btnAlterarDados);
         btnExcluirConta = (Button) findViewById(R.id.btnExcluirConta);
+
+        session = new  UserSessionController(getApplicationContext());
+
+        Toast.makeText(getApplicationContext(),
+                "User Login Status: " + session.isUserLoggedIn(),
+                Toast.LENGTH_LONG).show();
+
+        if(session.checkLogin()) {
+            finish();
+        }
+
+
+        HashMap<String, String> user = session.getUserDetails();
+        String name = user.get( UserSessionController.KEY_NAME);
+        String login = user.get( UserSessionController.KEY_LOGIN);
+
+
+        editTextNameUser.setText(name);
+        editTextLoginUser.setText(login);
 
 
         btnAlterarDados.setOnClickListener(new View.OnClickListener() {

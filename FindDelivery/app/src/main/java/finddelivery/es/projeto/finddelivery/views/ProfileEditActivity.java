@@ -7,7 +7,10 @@ import android.widget.*;
 import android.content.*;
 import android.app.Dialog;
 import android.app.AlertDialog;
-import finddelivery.es.projeto.finddelivery.R;
+
+import java.util.HashMap;
+
+import finddelivery.es.projeto.finddelivery.R;import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 
 public class ProfileEditActivity extends ActionBarActivity  {
@@ -20,6 +23,8 @@ public class ProfileEditActivity extends ActionBarActivity  {
     private EditText editTextNewPassword;
     private EditText getEditTextNewPassword2;
 
+    UserSessionController session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,12 +32,31 @@ public class ProfileEditActivity extends ActionBarActivity  {
 
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnSalvarAteracaoes = (Button) findViewById(R.id.btnSalvarAlteracoes);
+        editTextNameUser2 = (EditText) findViewById(R.id.editTextNameUser2);
+
+        session = new  UserSessionController(getApplicationContext());
+
+        Toast.makeText(getApplicationContext(),
+                "User Login Status: " + session.isUserLoggedIn(), Toast.LENGTH_LONG).show();
+
+        if(session.checkLogin()) {
+            finish();
+        }
+
+
+        HashMap<String, String> user = session.getUserDetails();
+        String name = user.get( UserSessionController.KEY_NAME);
+
+        editTextNameUser2.setText(name);
+
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                session.logoutUser(); //Temp
                 Intent it = new Intent();
                 it.setClass(ProfileEditActivity.this,
-                        UserProfileActivity.class);
+                        LoginActivity.class);//Temp
+                //  UserProfileActivity.class);
                 startActivity(it);
                 finish();
             }

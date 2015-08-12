@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 import finddelivery.es.projeto.finddelivery.Server.ConnectionHTTPClient;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
 
@@ -31,6 +33,7 @@ public class LoginActivity extends ActionBarActivity {
     private UserController userController;
     private AlertDialog.Builder alert;
 
+    UserSessionController session;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,14 @@ public class LoginActivity extends ActionBarActivity {
         setContentView(R.layout.activity_login);
         context = this;
         userController = UserController.getInstance(context);
+        session = new  UserSessionController(getApplicationContext());
+
         loginEditText = (EditText) findViewById(R.id.loginEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+
+        Toast.makeText(getApplicationContext(),
+                "User Login Status: " + session.isUserLoggedIn(),
+                Toast.LENGTH_LONG).show();
 
         btnSingUp = (Button) findViewById(R.id.btnSingUp);
 
@@ -66,8 +75,7 @@ public class LoginActivity extends ActionBarActivity {
 
     public void testaInicializacao() throws Exception {
         if (userController.findAll().isEmpty()) {
-           // User user = new User(0,"dani", "123456");
-            User user = new User(0,"dani", "123456");//Name vazio
+            User user = new User(0,"dani", "123456");
             userController.insert(user);
         }
     }
@@ -89,9 +97,13 @@ public class LoginActivity extends ActionBarActivity {
         try {
             boolean isValid = userController.validatesLogin(login, password);
             if (isValid) {
-                Intent it = new Intent();
-                it.setClass(LoginActivity.this,
-                        EstablishmentsActivity.class);
+                session.createUserLoginSession("Meu nome", login);
+
+                // Intent it = new Intent();
+                Intent it = new Intent(getApplicationContext(), UserProfileActivity.class);
+                // it.setClass(LoginActivity.this,EstablishmentsActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);
                 finish();
             } else {
@@ -99,6 +111,7 @@ public class LoginActivity extends ActionBarActivity {
                 passwordEditText.setText("");
 
             }
+
         } catch (Exception e) {
             showDialog("Erro validando login e senha");
             e.printStackTrace();
