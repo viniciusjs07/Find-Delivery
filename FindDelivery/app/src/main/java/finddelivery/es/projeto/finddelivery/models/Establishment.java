@@ -15,42 +15,29 @@ public class Establishment implements Serializable {
 
     private String name, address, businessHour, photoURL;
     private SpecialityType speciality;
-    Set<String> phones;
+    private String phone1;
+    private String phone2;
     Map<User, Integer> evaluations;
     Map<User, List<String>> comments;
 
-    private Integer id;
+
 
     public Establishment(String name){
         this.name = name;
     }
 
-    public Establishment(Integer id, String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.businessHour = businessHour;
-        this.speciality = speciality;
-        this.phones = phones;
-        this.photoURL = photoURL;
-        this.evaluations = new HashMap<User, Integer>();
-        this.comments = new HashMap<User, List<String>>();
-    }
-    public Establishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones, String photoURL) {
+    public Establishment(String name, String address, String businessHour, SpecialityType speciality, String phone1, String phone2, String photoURL) {
 
         this.name = name;
         this.address = address;
         this.businessHour = businessHour;
         this.speciality = speciality;
-        this.phones = phones;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
         this.photoURL = photoURL;
         this.evaluations = new HashMap<User, Integer>();
         this.comments = new HashMap<User, List<String>>();
     }
-
-    public Integer getId() {return id;}
-
-   // public void setId(Integer id) {return id}
 
     public String getName() {
         return name;
@@ -66,6 +53,22 @@ public class Establishment implements Serializable {
 
     public void setAdress(String adress) {
         this.address = adress;
+    }
+
+    public String getPhone2() {
+        return phone2;
+    }
+
+    public String getPhone1() {
+        return phone1;
+    }
+
+    public void setPhone1(String phone1) {
+        this.phone1 = phone1;
+    }
+
+    public void setPhone2(String phone2) {
+        this.phone2 = phone2;
     }
 
     public String getBusinessHour() {
@@ -90,14 +93,6 @@ public class Establishment implements Serializable {
 
     public void setSpeciality(SpecialityType speciality) {
         this.speciality = speciality;
-    }
-
-    public Set<String> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<String> phones) {
-        this.phones = phones;
     }
 
     public Map<User, Integer> getEvaluations() {
