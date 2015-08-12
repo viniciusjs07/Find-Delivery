@@ -12,12 +12,10 @@ public class User implements Serializable{
 
     private String name;
     private String login;
-    private String photoUrl;
+    private byte[] photo;
     private String password;
     private Set<Establishment> establishments;
     private ManagerFindDelivery manager;
-
-    private Integer id; //Temp
 
     public User(String name,String login,String password){
 
@@ -29,27 +27,11 @@ public class User implements Serializable{
         this.manager = new ManagerFindDelivery();
     }
 
-    public User(Integer id, String login, String password){ //Temp
-        this.id = id;
-        this.login = login;
-        this.password = password;
-    }
-
-    public User(String name,String login,String password, String photoUrl){
+    public User(String name,String login,String password, byte[] photo){
         this.name = name;
         this.login = login;
         this.password = password;
-        this.photoUrl = photoUrl;
-    }
-
-    //Temp
-    public Integer getId() {
-        return id;
-    }
-
-    //Temp
-    public void setId(Integer id) {
-        this.id = id;
+        this.photo = photo;
     }
 
     public String getName(){
@@ -67,23 +49,18 @@ public class User implements Serializable{
     public void setLogin(String login) {
         this.login = login;
     }
-
-    public void createdPassword(String password){
-        this.password = password;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) { this.password = password;}
 
-    public String getPhotoUrl(){
-        return photoUrl;
+    public byte[] getPhoto(){
+        return photo;
     }
 
-    public void addsPhotoUrl(String photoUrl) throws EmptyFieldException{
-        this.photoUrl = photoUrl;
+    public void addsPhoto(byte[] photo) throws EmptyFieldException{
+        this.photo = photo;
     }
 
     //This method register a new establishment

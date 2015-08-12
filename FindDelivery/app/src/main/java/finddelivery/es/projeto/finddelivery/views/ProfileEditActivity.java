@@ -71,16 +71,6 @@ public class ProfileEditActivity extends ActionBarActivity  {
                 finish();
             }
         });
-/*
-        btnSalvarAteracaoes.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.dialog_changesSaved, Toast.LENGTH_SHORT).show();
-                Intent it = new Intent();
-                it.setClass(ProfileEditActivity.this, UserProfileActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });*/
     }
 
     public void showDialog(String mensagem) {

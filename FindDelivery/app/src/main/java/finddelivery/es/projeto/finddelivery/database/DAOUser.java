@@ -26,6 +26,7 @@ public class DAOUser extends DatabaseHelper {
         values.put("name", user.getName());
         values.put("login", user.getLogin());
         values.put("password", user.getPassword());
+       // values.put("photo", user.getPhoto());
 
         getDatabase().insert(TABLE, null, values);
     }
@@ -36,6 +37,7 @@ public class DAOUser extends DatabaseHelper {
         values.put("name", user.getName());
         values.put("login", user.getLogin());
         values.put("password", user.getPassword());
+       // values.put("photo", user.getPhoto());
 
         getDatabase().update(TABLE, values, "login = ?", new String[]{"" + user.getLogin()});
     }
@@ -72,8 +74,9 @@ public class DAOUser extends DatabaseHelper {
         String name = cursor.getString(cursor.getColumnIndex("name"));
         String login = cursor.getString(cursor.getColumnIndex("login"));
         String password = cursor.getString(cursor.getColumnIndex("password"));
-
+        //byte[] photo = cursor.getBlob(cursor.getColumnIndex("photo"));
         return new User(name, login, password);
+        //return new User(name, login, password, photo);
 
     }
 
