@@ -1,16 +1,19 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import finddelivery.es.projeto.finddelivery.R;
 
-public class EstablishmentDetails extends ActionBarActivity {
+public class EstablishmentDetails extends ActionBarActivity implements View.OnClickListener {
 
     private Button btnAvaliacoes;
 
@@ -24,6 +27,9 @@ public class EstablishmentDetails extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_establishment_details, menu);
+
+        final ImageButton btLigar = (ImageButton) findViewById(R.id.phone);
+        btLigar.setOnClickListener(this);
 
         btnAvaliacoes = (Button) findViewById(R.id.btnAvaliacoes);
 
@@ -53,5 +59,14 @@ public class EstablishmentDetails extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        EditText campoTelefone = (EditText) findViewById(R.id.fieldPhone);
+        String telefone = campoTelefone.getText().toString();
+        Uri uri = Uri.parse("tel:"+telefone);
+        Intent intent = new Intent(Intent.ACTION_DIAL,uri);
+        startActivity(intent);
     }
 }
