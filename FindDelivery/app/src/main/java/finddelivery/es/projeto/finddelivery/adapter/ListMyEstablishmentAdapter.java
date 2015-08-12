@@ -47,13 +47,13 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        //Pega o item de acordo com a posição.
+        //Pega o item de acordo com a posicao.
         Establishment item = items.get(position);
         //infla o layout para podermos preencher os dados
         view = mInflater.inflate(R.layout.activity_establishment_list, null);
 
         //atraves do layout pego pelo LayoutInflater, pegamos cada id relacionado
-        //ao item e definimos as informações.
+        //ao item e definimos as informacoes.
         ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
         ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getName());
 

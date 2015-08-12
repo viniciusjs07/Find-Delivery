@@ -28,7 +28,7 @@ public class ConnectionHTTPClient {
     public static final int HTTP_TIMEOUT = 30 * 1000;
     private static HttpClient httpClient;
 
-    //Retorna uma conexão
+    //Retorna uma conexao
     private static HttpClient getHttpClient(){
 
         if (httpClient == null){

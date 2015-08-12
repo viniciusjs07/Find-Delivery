@@ -9,10 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-
     private final static int VERSAO = 1;
     private final static String NOME = "FD_DATABASE";
-   // private static final String CREATE = ;
     protected SQLiteDatabase database;
 
     public DatabaseHelper(Context context) {
@@ -21,14 +19,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, login VARCHAR( 20 ) NOT NULL, password VARCHAR( 8 ));");
-
+        db.execSQL("CREATE TABLE usuario (name VARCHAR( 20 ), login VARCHAR( 20 ) NOT NULL, password VARCHAR( 8 ), photo VARBINARY( 100 ));");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO Auto-generated method stub
-
     }
 
     public SQLiteDatabase getDatabase() {

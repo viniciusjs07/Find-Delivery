@@ -43,9 +43,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/password"
+                android:hint="@string/actualPassword"
                 android:ems="12"
-                android:id="@+id/editTextPassword"
+                android:id="@+id/editTextActualPassword"
                 android:layout_marginTop="20dp"
                 android:textIsSelectable="false"
                 android:editable="false"
@@ -55,9 +55,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="@string/passwordConfirm"
+                android:hint="@string/newPassword"
                 android:ems="12"
                 android:id="@+id/editTextNewPassword"
+                android:layout_marginTop="20dp"
+                android:textIsSelectable="false"
+                android:editable="false"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/newPasswordConfirm"
+                android:ems="12"
+                android:id="@+id/editTextNewPasswordConfirm"
                 android:layout_marginTop="20dp"
                 android:textIsSelectable="false"
                 android:editable="false"
@@ -72,7 +84,8 @@
                 android:textColor="@color/white"
                 android:textSize="23dp"
                 android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center_horizontal"
+                android:onClick="validates"/>
 
             <Button
                 android:layout_width="200dp"

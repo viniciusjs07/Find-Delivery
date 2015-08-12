@@ -78,5 +78,14 @@ public class UserController {
 
     }
 
+    public User getUser(String login){
+        return userDAO.findById(login);
+    }
 
+    public void updateData(String name, String login, String newPassword) throws Exception{
+        User userLogged = getUser(login);
+        userLogged.setName(name);
+        userLogged.setPassword(newPassword);
+        userDAO.update(userLogged);
+    }
 }

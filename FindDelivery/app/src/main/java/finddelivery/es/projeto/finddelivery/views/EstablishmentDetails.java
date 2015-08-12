@@ -31,6 +31,9 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         final ImageButton btLigar = (ImageButton) findViewById(R.id.phone);
         btLigar.setOnClickListener(this);
 
+        final ImageButton btLigar2 = (ImageButton) findViewById(R.id.phoneTwo);
+        btLigar2.setOnClickListener(this);
+
         btnAvaliacoes = (Button) findViewById(R.id.btnAvaliacoes);
 
         btnAvaliacoes.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +66,21 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        EditText campoTelefone = (EditText) findViewById(R.id.fieldPhone);
-        String telefone = campoTelefone.getText().toString();
+        String telefone = null;
+
+        switch (v.getId()){
+            case R.id.phone:
+                EditText campoTelefone = (EditText) findViewById(R.id.fieldPhone);
+                telefone = campoTelefone.getText().toString();
+                break;
+            case R.id.phoneTwo:
+                EditText campoTelefone2 = (EditText) findViewById(R.id.fieldPhoneTwo);
+                 telefone = campoTelefone2.getText().toString();
+                break;
+        }
         Uri uri = Uri.parse("tel:"+telefone);
         Intent intent = new Intent(Intent.ACTION_DIAL,uri);
         startActivity(intent);
+
     }
 }
