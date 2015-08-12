@@ -10,6 +10,7 @@
     <string name="name">Nome</string>
     <string name="login">Login</string>
     <string name="password">Senha</string>
+    <string name="actualPassword">Senha atual</string>
     <string name="newPassword">Nova senha</string>
     <string name="passwordConfirm">Confirmar senha</string>
     <string name="newPasswordConfirm">Confirmar nova senha</string>

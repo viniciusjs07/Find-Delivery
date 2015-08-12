@@ -75,7 +75,7 @@ public class LoginActivity extends ActionBarActivity {
 
     public void testaInicializacao() throws Exception {
         if (userController.findAll().isEmpty()) {
-            User user = new User(0,"dani", "123456");
+            User user = new User("Daniela","dani", "123456");
             userController.insert(user);
         }
     }
@@ -97,8 +97,8 @@ public class LoginActivity extends ActionBarActivity {
         try {
             boolean isValid = userController.validatesLogin(login, password);
             if (isValid) {
-                session.createUserLoginSession("Meu nome", login);
-
+                User user = userController.getUser(login);
+                session.createUserLoginSession(user);
                 // Intent it = new Intent();
                 Intent it = new Intent(getApplicationContext(), UserProfileActivity.class);
                 // it.setClass(LoginActivity.this,EstablishmentsActivity.class);

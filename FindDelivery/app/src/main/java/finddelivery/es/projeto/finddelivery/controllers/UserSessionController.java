@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
+import finddelivery.es.projeto.finddelivery.models.User;
 import finddelivery.es.projeto.finddelivery.views.LoginActivity;
 
 /**
@@ -33,12 +34,13 @@ public class UserSessionController {
     }
 
 
-    public void createUserLoginSession(String name, String login){
+    public void createUserLoginSession(User user){
 
         editor.putBoolean(IS_USER_LOGIN, true);
-        editor.putString(KEY_NAME, name);
-        editor.putString(KEY_LOGIN, login);
-        // editor.putString(KEY_PHOTO, photo);
+        editor.putString(KEY_NAME, user.getName());
+        editor.putString(KEY_LOGIN, user.getLogin());
+        editor.putString(KEY_PASSWORD, user.getPassword());
+        //editor.putString(KEY_PHOTO, photo);
 
         editor.commit();
     }
@@ -58,8 +60,8 @@ public class UserSessionController {
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_LOGIN, pref.getString(KEY_LOGIN, null));
-        user.put(KEY_PHOTO, pref.getString(KEY_PHOTO, null));
-
+        user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
+        //user.put(KEY_PHOTO, pref.getString(KEY_PHOTO, null));
 
         return user;
     }
@@ -76,4 +78,5 @@ public class UserSessionController {
     public boolean isUserLoggedIn(){
         return pref.getBoolean(IS_USER_LOGIN, false);
     }
+
 }

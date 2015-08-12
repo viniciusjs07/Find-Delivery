@@ -23,6 +23,7 @@ public class DAOUser extends DatabaseHelper {
     public void insert(User user) throws Exception {
         ContentValues values = new ContentValues();
 
+        values.put("name", user.getName());
         values.put("login", user.getLogin());
         values.put("password", user.getPassword());
 
@@ -32,16 +33,18 @@ public class DAOUser extends DatabaseHelper {
     public void update(User user) throws Exception {
         ContentValues values = new ContentValues();
 
+        values.put("name", user.getName());
         values.put("login", user.getLogin());
         values.put("password", user.getPassword());
 
-        getDatabase().update(TABLE, values, "id = ?", new String[]{"" + user.getId()});
+        getDatabase().update(TABLE, values, "login = ?", new String[]{"" + user.getLogin()});
     }
 
-    public User findById(Integer id) {
 
-        String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
-        String[] selectionArgs = new String[]{"" + id};
+    public User findById(String login) { //Id user  = login
+
+        String sql = "SELECT * FROM " + TABLE + " WHERE login = ?";
+        String[] selectionArgs = new String[]{"" + login};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
 
@@ -60,15 +63,18 @@ public class DAOUser extends DatabaseHelper {
         return users;
     }
 
+
     public User mountUser(Cursor cursor) {
         if (cursor.getCount() == 0) {
             return null;
         }
-        Integer id = cursor.getInt(cursor.getColumnIndex("id"));
+
+        String name = cursor.getString(cursor.getColumnIndex("name"));
         String login = cursor.getString(cursor.getColumnIndex("login"));
         String password = cursor.getString(cursor.getColumnIndex("password"));
 
-        return new User(id, login, password);
+        return new User(name, login, password);
+
     }
 
 
