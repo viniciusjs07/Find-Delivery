@@ -11,50 +11,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ac�cio on 06/08/2015.
+ * Created by Acacio on 06/08/2015.
  */
 
 public class DAOEstablishment extends DatabaseHelper {
 
-    private final String TABLE = "Estabelecimento";
+    private final String TABLE = "estabelecimento";
 
     public  DAOEstablishment (Context context) {
         super(context);
     }
 
     public void insert(Establishment establishment) throws Exception {
-        ContentValues values = new ContentValues();
-
-        values.put("restaurante", establishment.getName());
-        values.put("endereco", establishment.getAdress());
-        values.put("especialidade", String.valueOf(establishment.getSpeciality()));
-        values.put("horario de funcionamento", establishment.getBusinessHour());
+        ContentValues valuesInsert = new ContentValues();
 
 
-        getDatabase().insert(TABLE, null, values);
+        valuesInsert.put("restaurante", establishment.getName());
+        valuesInsert.put("endereco", establishment.getAdress());
+        valuesInsert.put("especialidade", String.valueOf(establishment.getSpeciality()));
+        valuesInsert.put("horario_de_funcionamento", establishment.getBusinessHour());
+        valuesInsert.put("phone1", establishment.getPhone1());
+        valuesInsert.put("phone2", establishment.getPhone2());
+
+
+        getDatabase().insert(TABLE, null, valuesInsert);
 
     }
 
     public void update(Establishment establishment) throws Exception {
-        ContentValues values = new ContentValues();
-
-        values.put("restaurante", establishment.getName());
-        values.put("endere�o", establishment.getAdress());
-        values.put("especialidade", String.valueOf(establishment.getSpeciality()));
-        values.put("horario de funcionamento", establishment.getBusinessHour());
+        ContentValues valuesUpdate = new ContentValues();
 
 
-        getDatabase().update(TABLE, values, "id = ?", new String[]{"" + establishment.getId()});
-    }
+        valuesUpdate.put("restaurante", establishment.getName());
+        valuesUpdate.put("endereco", establishment.getAdress());
+        valuesUpdate.put("especialidade", String.valueOf(establishment.getSpeciality()));
+        valuesUpdate.put("horario_de_funcionamento", establishment.getBusinessHour());
+        valuesUpdate.put("phone1", establishment.getPhone1());
+        valuesUpdate.put("phone2", establishment.getPhone2());
 
-    public Establishment findByName(String name) {
 
-        String sql = "SELECT * FROM " + TABLE + " WHERE name = ?";
-        String[] selectionArgs = new String[]{"" + name};
-        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
-        cursor.moveToFirst();
-
-        return montaEstabelecimento(cursor);
+        getDatabase().update(TABLE, valuesUpdate, "restaurante = ?", new String[]{"" + establishment.getName()});
     }
 
     public List<Establishment> findAll() throws Exception {
@@ -77,13 +73,15 @@ public class DAOEstablishment extends DatabaseHelper {
         String restaurante = cursor.getString(cursor.getColumnIndex("restaurante"));
         String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
         SpecialityType especialidade = SpecialityType.valueOf(cursor.getString(cursor.getColumnIndex("especialidade")));
-        String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("horario de funcionamento"));
+        String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("horario_de_funcionamento"));
+        String fone1 = cursor.getString(cursor.getColumnIndex("phone1"));
+        String fone2 = cursor.getString(cursor.getColumnIndex("phone2"));
 
-        return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,null,null);
+        return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,null);
 
     }
 
-    public Establishment findByLogin(String restaurante) {
+    public Establishment findByName(String restaurante) {
         String sql = "SELECT * FROM " + TABLE + " WHERE restaurante = ?";
         String[] selectionArgs = new String[] { restaurante};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
