@@ -1,6 +1,8 @@
-/*package finddelivery.es.projeto.finddelivery.database;
+package finddelivery.es.projeto.finddelivery.database;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.SpecialityType;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Acácio on 06/08/2015.
+ * Created by Acï¿½cio on 06/08/2015.
  */
-/*
+
 public class DAOEstablishment extends DatabaseHelper {
 
-    private final String TABLE = 'Estabelecimento';
+    private final String TABLE = "Estabelecimento";
 
     public  DAOEstablishment (Context context) {
         super(context);
@@ -25,7 +27,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
         values.put("restaurante", establishment.getName());
         values.put("endereco", establishment.getAdress());
-        values.put("especialidade", establishment.getSpeciality());
+        values.put("especialidade", String.valueOf(establishment.getSpeciality()));
         values.put("horario de funcionamento", establishment.getBusinessHour());
 
 
@@ -37,18 +39,18 @@ public class DAOEstablishment extends DatabaseHelper {
         ContentValues values = new ContentValues();
 
         values.put("restaurante", establishment.getName());
-        values.put("endereço", establishment.getAdress());
-        values.put("especialidade", establishment.getSpeciality());
+        values.put("endereï¿½o", establishment.getAdress());
+        values.put("especialidade", String.valueOf(establishment.getSpeciality()));
         values.put("horario de funcionamento", establishment.getBusinessHour());
 
 
         getDatabase().update(TABLE, values, "id = ?", new String[]{"" + establishment.getId()});
     }
 
-    public Establishment findById(Integer id) {
+    public Establishment findByName(String name) {
 
-        String sql = "SELECT * FROM " + TABLE + " WHERE id = ?";
-        String[] selectionArgs = new String[]{"" + id};
+        String sql = "SELECT * FROM " + TABLE + " WHERE name = ?";
+        String[] selectionArgs = new String[]{"" + name};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
 
@@ -72,12 +74,12 @@ public class DAOEstablishment extends DatabaseHelper {
             return null;
         }
         Integer id = cursor.getInt(cursor.getColumnIndex("id"));
-        String restaurante = cursor.getString(cursor.getColumnIndex("Restaurante"));
-        String endereco = cursor.getString(cursor.getColumnIndex("Endereco"));
-        String especialidade = cursor.getString(cursor.getColumnIndex("Especialidade"));
-        String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("Horario de funcionamento"));
+        String restaurante = cursor.getString(cursor.getColumnIndex("restaurante"));
+        String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
+        SpecialityType especialidade = SpecialityType.valueOf(cursor.getString(cursor.getColumnIndex("especialidade")));
+        String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("horario de funcionamento"));
 
-        return new Establishment(id, restaurante, endereco,especialidade, horarioDeFuncionamento);
+        return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,null,null);
 
     }
 
@@ -89,4 +91,4 @@ public class DAOEstablishment extends DatabaseHelper {
 
         return montaEstabelecimento(cursor);
     }
-}*/
+}
