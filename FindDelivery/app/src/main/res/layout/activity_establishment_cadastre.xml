@@ -1,62 +1,62 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="finddelivery.es.projeto.finddelivery.EstablishmentCadastreActivity"
-    android:id="@+id/EstablishmentCadastre"
-    android:background="#00ff7712">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="finddelivery.es.projeto.finddelivery.EstablishmentCadastreActivity"
+        android:id="@+id/EstablishmentCadastre"
+        android:background="#00ff7712">
 
-    </ScrollView>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right|bottom">
-
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_gravity="right|bottom">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:id="@+id/logoEstablishmentImageView"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="130dp"
-                android:src="@mipmap/photodefault"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgCamera"
-                android:src="@drawable/camera"
-                android:layout_marginLeft="260dp"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/logoEstablishmentImageView"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="130dp"
+                    android:src="@mipmap/photodefault"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgGallery"
-                android:src="@drawable/gallery"
-                android:layout_below="@id/imgCamera"
-                android:layout_marginLeft="260dp"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgCamera"
+                    android:src="@drawable/camera"
+                    android:layout_marginLeft="260dp"/>
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imgDelete"
-                android:src="@drawable/delete"
-                android:layout_below="@id/imgGallery"
-                android:layout_marginLeft="260dp"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgGallery"
+                    android:src="@drawable/gallery"
+                    android:layout_below="@id/imgCamera"
+                    android:layout_marginLeft="260dp"/>
 
-        </RelativeLayout>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgDelete"
+                    android:src="@drawable/delete"
+                    android:layout_below="@id/imgGallery"
+                    android:layout_marginLeft="260dp"/>
+
+            </RelativeLayout>
 
         <EditText
             android:layout_width="wrap_content"
@@ -68,8 +68,6 @@
             android:layout_gravity="center"
             android:textIsSelectable="false"
             android:layout_marginTop="20dp" />
-
-
 
         <EditText
             android:layout_width="wrap_content"
@@ -90,7 +88,6 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp" />
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +96,6 @@
             android:id="@+id/textViewTipoDeCozinha"
             android:layout_marginTop="30dp"
             android:layout_gravity="center" />
-
 
         <Spinner
             android:layout_width="wrap_content"
@@ -116,15 +112,11 @@
             android:id="@+id/textViewHorario"
             android:layout_marginTop="30dp"
             android:layout_gravity="center" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextHorario"
-
-            />
-
-
-
+            android:id="@+id/editTextHorario" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -160,8 +152,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="30dp" />
 
+        </LinearLayout>
 
-    </LinearLayout>
-
-</FrameLayout>
+    </FrameLayout>
+</ScrollView>
 

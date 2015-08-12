@@ -1,3 +1,8 @@
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="right|bottom">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -5,11 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="finddelivery.es.projeto.finddelivery.views.EstablishmentDetails">
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="right|bottom">
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical" android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -103,43 +104,35 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="164dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_gravity="left|center"
-                android:layout_marginTop="20dp">
+                android:layout_gravity="left|top">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:layout_gravity="center">
-
-                    <EditText
+                <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Telefone"
-                        android:id="@+id/textView9"
+                        android:text="986313463"
+                        android:id="@+id/fieldPhone"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="20dp"
                         android:enabled="true"
                         android:width="200dp" />
 
                     <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/searchBySpeciality"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/phone"
+                        android:layout_marginLeft="260dp"
                         android:layout_gravity="left"
-                        android:src="@drawable/telefone"/>
+                        android:src="@drawable/telefone"
+                        android:layout_alignTop="@+id/fieldPhone" />
 
-                </LinearLayout>
-            </LinearLayout>
+               </RelativeLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -151,7 +144,7 @@
                 android:textSize="20dp"
                 android:fontFamily="Arial"/>
         </LinearLayout>
-    </ScrollView>
 
 
 </FrameLayout>
+    </ScrollView>
