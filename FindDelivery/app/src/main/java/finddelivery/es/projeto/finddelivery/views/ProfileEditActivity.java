@@ -1,5 +1,10 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.*;
@@ -15,10 +20,13 @@ import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.User;
 
 
-public class ProfileEditActivity extends ActionBarActivity  {
+public class ProfileEditActivity extends ActionBarActivity implements View.OnClickListener  {
 
     private Button btnCancelar;
     private Button btnSalvarAteracaoes;
+    private ImageButton btnCamera;
+    private ImageButton btnGalery;
+    private ImageButton btnDelete;
     private ImageView imageViewUserProfile2;
     private EditText editTextNameUser2;
     private EditText editTextActualPassword;
@@ -28,6 +36,8 @@ public class ProfileEditActivity extends ActionBarActivity  {
     private Context context;
     private AlertDialog.Builder alert;
     private HashMap<String, String> user;
+    private static final int RESULT_CAMERA = 111;
+    private static final int RESULT_GALERIA = 222;
 
     UserSessionController session;
 
@@ -40,6 +50,13 @@ public class ProfileEditActivity extends ActionBarActivity  {
         userController = UserController.getInstance(context);
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnSalvarAteracaoes = (Button) findViewById(R.id.btnSalvarAlteracoes);
+        btnCamera = (ImageButton) findViewById(R.id.imgCamera);
+        btnCamera.setOnClickListener(this);
+        btnGalery = (ImageButton) findViewById(R.id.imgGallery);
+        btnGalery.setOnClickListener(this);
+        btnDelete = (ImageButton) findViewById(R.id.imgDelete);
+        btnDelete.setOnClickListener(this);
+        imageViewUserProfile2 = (ImageView) findViewById(R.id.imageViewUserProfile2);
         editTextNameUser2 = (EditText) findViewById(R.id.editTextNameUser2);
         editTextActualPassword = (EditText) findViewById(R.id.editTextActualPassword);
         editTextNewPassword = (EditText) findViewById(R.id.editTextNewPassword);
@@ -152,5 +169,53 @@ public class ProfileEditActivity extends ActionBarActivity  {
 
     public void showUserProfile() {
         setContentView(R.layout.activity_user_profile);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent;
+
+        switch (view.getId()) {
+            case R.id.imgCamera:
+                intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, RESULT_CAMERA);
+                break;
+            case R.id.imgGallery:
+                intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, RESULT_GALERIA);
+                break;
+            case R.id.imgDelete:
+                Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+                imageViewUserProfile2.setImageBitmap(avatar);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap)data.getExtras().get("data");
+            imageViewUserProfile2.setImageBitmap(photo);
+        } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
+            //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
+            Uri imageUri = data.getData();
+            //Se tratantando de banco de dados, devemos selecionar exatamente qual coluna queremos
+            String[] colunaArquivo = {MediaStore.Images.Media.DATA};
+            //Fazemos um select simples na tabela trazendo apenas a coluna que selecionamos
+            Cursor cursor = getContentResolver().query(imageUri, colunaArquivo, null, null, null);
+            //Movemos nosso cursor para o primeiro resultado do select
+            cursor.moveToFirst();
+            //Recuperamos o indice de qual coluna da tabela estamos referenciando
+            int columnIndex = cursor.getColumnIndex(colunaArquivo[0]);
+            //O campo da tabela guarda o caminho da imagem. Recuperamos tal caminho
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            //Pegamos o arquivo do caminho que recuperamos e decodificamos para imagem
+            Bitmap photo = BitmapFactory.decodeFile(picturePath.toString());
+            //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
+            if (photo != null) {
+                imageViewUserProfile2.setImageBitmap(photo);
+            }
+        }
     }
 }

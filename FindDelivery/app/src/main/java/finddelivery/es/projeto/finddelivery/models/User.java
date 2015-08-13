@@ -64,8 +64,8 @@ public class User implements Serializable{
     }
 
     //This method register a new establishment
-    public void createEstablishment(String name, String address, String businessHour, SpecialityType speciality, Set<String> phones,String photoURL) {
-        Establishment establishment = new Establishment(name, address, businessHour, speciality, phones,photoURL);
+    public void createEstablishment(String name, String address, String businessHour, SpecialityType speciality, String phone1, String phone2,String photoURL) {
+        Establishment establishment = new Establishment(name, address, businessHour, speciality, phone1, phone2, photoURL);
 
         if(!establishments.contains(establishment)){
             establishments.add(establishment);
