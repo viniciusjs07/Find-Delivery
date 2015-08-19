@@ -15,8 +15,11 @@ import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.User;
 
 
@@ -37,13 +40,20 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private AlertDialog.Builder alert;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
+    UserSessionController session;
+
+
+    private Bitmap photo;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_cadastre);
+        Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+        photo = avatar;
 
+        session = new  UserSessionController(getApplicationContext());
         context = this;
         userController = UserController.getInstance(context);
         cadastrePhotoImageView = (ImageView) findViewById(R.id.cadastrePhotoImageView);
@@ -68,6 +78,17 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 finish();
             }
         });
+
+
+//        HashMap<String, String> user = session.getUserDetails();
+  //      String photoUser = user.get(UserSessionController.KEY_PHOTO);
+        //String login = user.get( UserSessionController.KEY_LOGIN);
+
+       // Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photo , 0, photoUser.length());
+//        Bitmap photoUserBitmap = BitmapFactory.decodeFile(photoUser);
+
+        //cadastrePhotoImageView.setImageBitmap(photoUserBitmap);
+
 
     }
 
@@ -94,14 +115,13 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                     cadastrePasswordConfirmEditText.setText("");
 
                 } else {
-                    //Bitmap photoBitmap = cadastrePhotoImageView.getDrawingCache();
-                    //ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    //photoBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    //byte[] photo = baos.toByteArray();
-                   // byte[] photo = teste(this.photo);
+                    ByteArrayOutputStream b = new ByteArrayOutputStream();
+                    photo.compress(Bitmap.CompressFormat.JPEG, 50, b);
+                    byte[] photo = b.toByteArray();
 
                     showDialog("Cadastro realizado com sucesso!");
-                    User user = new User(name, login, password);
+                    User user = new User(name, login, password, photo);
+
                     userController.insert(user);
 
                     Intent it = new Intent();
@@ -166,13 +186,13 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         }
     }
 
-    //private static Bitmap photo;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap)data.getExtras().get("data");
+            photo = (Bitmap)data.getExtras().get("data");
             cadastrePhotoImageView.setImageBitmap(photo);
+
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
             Uri imageUri = data.getData();
@@ -188,7 +208,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             //Pegamos o arquivo do caminho que recuperamos e decodificamos para imagem
-            Bitmap photo = BitmapFactory.decodeFile(picturePath.toString());
+            photo = BitmapFactory.decodeFile(picturePath.toString());
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (photo != null) {
                 cadastrePhotoImageView.setImageBitmap(photo);
@@ -196,11 +216,4 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         }
     }
 
-    private byte[] teste(Bitmap photoBitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        photoBitmap.compress(Bitmap.CompressFormat.JPEG, 90, baos);
-        byte[] photo = baos.toByteArray();
-
-        return photo;
-    }
 }

@@ -63,12 +63,7 @@ public class LoginActivity extends ActionBarActivity {
         });
 
 
-        try {
-            testaInicializacao();
-        } catch (Exception e) {
-            showDialog("Erro inicializando banco de dados");
-            e.printStackTrace();
-        }
+
 
     }
 

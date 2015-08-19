@@ -1,8 +1,11 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.*;
 import android.widget.*;
 import android.app.AlertDialog;
@@ -48,12 +51,19 @@ public class UserProfileActivity extends ActionBarActivity  {
 
 
         HashMap<String, String> user = session.getUserDetails();
-        String name = user.get( UserSessionController.KEY_NAME);
-        String login = user.get( UserSessionController.KEY_LOGIN);
+        String name = user.get(UserSessionController.KEY_NAME);
+        String login = user.get(UserSessionController.KEY_LOGIN);
 
+        String photoUser = user.get(UserSessionController.KEY_PHOTO);
+        byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte,0, photoUserByte.length);
+
+       imageViewUserProfile.setImageBitmap(photoUserBitmap);
 
         editTextNameUser.setText(name);
         editTextLoginUser.setText(login);
+
 
 
         btnAlterarDados.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +128,5 @@ public class UserProfileActivity extends ActionBarActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 }

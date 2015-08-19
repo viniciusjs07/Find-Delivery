@@ -3,7 +3,9 @@ package finddelivery.es.projeto.finddelivery.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Base64;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.models.User;
@@ -40,7 +42,7 @@ public class UserSessionController {
         editor.putString(KEY_NAME, user.getName());
         editor.putString(KEY_LOGIN, user.getLogin());
         editor.putString(KEY_PASSWORD, user.getPassword());
-        //editor.putString(KEY_PHOTO, photo);
+        editor.putString(KEY_PHOTO, Base64.encodeToString(user.getPhoto(), Base64.DEFAULT));
 
         editor.commit();
     }
@@ -61,7 +63,7 @@ public class UserSessionController {
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_LOGIN, pref.getString(KEY_LOGIN, null));
         user.put(KEY_PASSWORD, pref.getString(KEY_PASSWORD, null));
-        //user.put(KEY_PHOTO, pref.getString(KEY_PHOTO, null));
+        user.put(KEY_PHOTO, pref.getString(KEY_PHOTO, null));
 
         return user;
     }
