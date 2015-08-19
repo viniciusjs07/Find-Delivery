@@ -29,7 +29,7 @@
                     android:id="@+id/imageViewUserProfile2"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="120dp"
-                    android:src="@drawable/avatar"/>
+                    />
 
                 <ImageButton
                     android:layout_width="wrap_content"

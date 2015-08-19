@@ -59,7 +59,7 @@ public class UserProfileActivity extends ActionBarActivity  {
 
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte,0, photoUserByte.length);
 
-       imageViewUserProfile.setImageBitmap(photoUserBitmap);
+        imageViewUserProfile.setImageBitmap(photoUserBitmap);
 
         editTextNameUser.setText(name);
         editTextLoginUser.setText(login);

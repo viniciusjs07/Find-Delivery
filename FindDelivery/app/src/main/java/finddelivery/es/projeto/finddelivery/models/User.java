@@ -59,7 +59,7 @@ public class User implements Serializable{
         return photo;
     }
 
-    public void addsPhoto(byte[] photo) throws EmptyFieldException{
+    public void setPhoto(byte[] photo) throws EmptyFieldException{
         this.photo = photo;
     }
 

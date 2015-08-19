@@ -82,10 +82,11 @@ public class UserController {
         return userDAO.findById(login);
     }
 
-    public void updateData(String name, String login, String newPassword) throws Exception{
+    public void updateData(String name, String login, String newPassword, byte[] photo) throws Exception{
         User userLogged = getUser(login);
         userLogged.setName(name);
         userLogged.setPassword(newPassword);
+        userLogged.setPhoto(photo);
         userDAO.update(userLogged);
     }
 }

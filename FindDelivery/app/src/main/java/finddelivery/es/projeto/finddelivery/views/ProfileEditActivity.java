@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.*;
 import android.widget.*;
 import android.content.*;
 import android.app.AlertDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.R;
@@ -38,7 +40,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
     private HashMap<String, String> user;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
-
+    private Bitmap photo;
     UserSessionController session;
 
     @Override
@@ -74,6 +76,12 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
 
         String name = user.get(UserSessionController.KEY_NAME);
+        String photoUser = user.get(UserSessionController.KEY_PHOTO);
+        byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+
+        imageViewUserProfile2.setImageBitmap(photoUserBitmap);
         editTextNameUser2.setText(name);
 
 
@@ -111,6 +119,10 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
         try {
 
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            photo.compress(Bitmap.CompressFormat.JPEG, 50, b);
+            byte[] photo = b.toByteArray();
+
             if(name != null && name.trim().equals("")){
                 showDialog("Nome invalido!");
                 editTextNameUser2.setText("");
@@ -126,7 +138,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             } else {
                 if (name != null && !name.trim().equals("") && !name.equals(actualName)) {
                     if (actualPassword != null && actualPassword.equals(password) && passwordsValid) {
-                        userController.updateData(name, login, newPassword);
+                        userController.updateData(name, login, newPassword, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
@@ -134,7 +146,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                         startActivity(it);
                         finish();
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
-                        userController.updateData(name, login, password);
+                        userController.updateData(name, login, password, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
@@ -145,7 +157,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
                 } else if (name != null && name.equals(actualName)) {
                     if (actualPassword != null && !actualPassword.trim().equals("") && actualPassword.equals(password) && passwordsValid) {
-                        userController.updateData(actualName, login, newPassword);
+                        userController.updateData(actualName, login, newPassword, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
@@ -153,6 +165,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                         startActivity(it);
                         finish();
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
+                        userController.updateData(actualName, login, password, photo);
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
@@ -161,6 +174,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                     }
                 }
             }
+            //userController.updateData(actualName, login, actualPassword, photo);
         }
         catch (Exception e){
             showDialog("Erro validando usuario");
@@ -211,6 +225,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             case R.id.imgDelete:
                 Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
                 imageViewUserProfile2.setImageBitmap(avatar);
+                photo = avatar;
                 break;
         }
     }
@@ -218,7 +233,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
-            Bitmap photo = (Bitmap)data.getExtras().get("data");
+            photo = (Bitmap)data.getExtras().get("data");
             imageViewUserProfile2.setImageBitmap(photo);
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
@@ -235,7 +250,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             //Pegamos o arquivo do caminho que recuperamos e decodificamos para imagem
-            Bitmap photo = BitmapFactory.decodeFile(picturePath.toString());
+            photo = BitmapFactory.decodeFile(picturePath.toString());
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (photo != null) {
                 imageViewUserProfile2.setImageBitmap(photo);

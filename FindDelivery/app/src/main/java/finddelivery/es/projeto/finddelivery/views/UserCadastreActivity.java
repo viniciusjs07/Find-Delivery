@@ -40,9 +40,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private AlertDialog.Builder alert;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
-    UserSessionController session;
-
-
     private Bitmap photo;
 
 
@@ -53,7 +50,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
         photo = avatar;
 
-        session = new  UserSessionController(getApplicationContext());
         context = this;
         userController = UserController.getInstance(context);
         cadastrePhotoImageView = (ImageView) findViewById(R.id.cadastrePhotoImageView);
@@ -78,18 +74,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 finish();
             }
         });
-
-
-//        HashMap<String, String> user = session.getUserDetails();
-  //      String photoUser = user.get(UserSessionController.KEY_PHOTO);
-        //String login = user.get( UserSessionController.KEY_LOGIN);
-
-       // Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photo , 0, photoUser.length());
-//        Bitmap photoUserBitmap = BitmapFactory.decodeFile(photoUser);
-
-        //cadastrePhotoImageView.setImageBitmap(photoUserBitmap);
-
-
     }
 
     public void showDialog(String mensagem) {
