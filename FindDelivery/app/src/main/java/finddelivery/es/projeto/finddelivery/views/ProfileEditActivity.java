@@ -103,39 +103,63 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         String newPassword = editTextNewPassword.getText().toString();
         String newPasswordConfirm = editTextNewPasswordConfirm.getText().toString();
 
+        String actualName = user.get(UserSessionController.KEY_NAME);
         String password = user.get(UserSessionController.KEY_PASSWORD);
         String login = user.get(UserSessionController.KEY_LOGIN);
 
         boolean passwordsValid = userController.validatesPasswords(newPassword, newPasswordConfirm);
 
         try {
-            if(!password.equals(actualPassword)){
-                showDialog("Senha atual invalida!");
-                editTextActualPassword.setText("");
-            }
 
-            if (name != null || !name.equals("")){
-                if (!passwordsValid) {
-                    showDialog("Senha invalida!");
-                    editTextActualPassword.setText("");
-                    editTextNewPassword.setText("");
-                    editTextNewPasswordConfirm.setText("");
-
-                } else {
-                    userController.updateData(name, login, newPassword);
-                    showDialog("Dados alterados com sucesso!");
-                    Intent it = new Intent();
-                    it.setClass(ProfileEditActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
-                    finish();
-                }
-            } else if (name == null || name.equals("")) {
+            if(name != null && name.trim().equals("")){
                 showDialog("Nome invalido!");
                 editTextNameUser2.setText("");
+            } else if (actualPassword != null && !actualPassword.trim().equals("") && !actualPassword.equals(password)){
+                showDialog("Senha atual invalida!");
                 editTextActualPassword.setText("");
                 editTextNewPassword.setText("");
                 editTextNewPasswordConfirm.setText("");
+            } else if(actualPassword != null && actualPassword.equals(password) && !passwordsValid) {
+                showDialog("Senhas nao correspondem!");
+                editTextNewPassword.setText("");
+                editTextNewPasswordConfirm.setText("");
+            } else {
+                if (name != null && !name.trim().equals("") && !name.equals(actualName)) {
+                    if (actualPassword != null && actualPassword.equals(password) && passwordsValid) {
+                        userController.updateData(name, login, newPassword);
+                        showDialog("Dados alterados com sucesso!");
+                        Intent it = new Intent();
+                        it.setClass(ProfileEditActivity.this,
+                                UserProfileActivity.class);
+                        startActivity(it);
+                        finish();
+                    } else if (actualPassword != null && actualPassword.trim().equals("")) {
+                        userController.updateData(name, login, password);
+                        showDialog("Dados alterados com sucesso!");
+                        Intent it = new Intent();
+                        it.setClass(ProfileEditActivity.this,
+                                UserProfileActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+
+                } else if (name != null && name.equals(actualName)) {
+                    if (actualPassword != null && !actualPassword.trim().equals("") && actualPassword.equals(password) && passwordsValid) {
+                        userController.updateData(actualName, login, newPassword);
+                        showDialog("Dados alterados com sucesso!");
+                        Intent it = new Intent();
+                        it.setClass(ProfileEditActivity.this,
+                                UserProfileActivity.class);
+                        startActivity(it);
+                        finish();
+                    } else if (actualPassword != null && actualPassword.trim().equals("")) {
+                        Intent it = new Intent();
+                        it.setClass(ProfileEditActivity.this,
+                                UserProfileActivity.class);
+                        startActivity(it);
+                        finish();
+                    }
+                }
             }
         }
         catch (Exception e){

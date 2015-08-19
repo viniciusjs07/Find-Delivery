@@ -29,7 +29,7 @@
                     android:layout_height="100dp"
                     android:id="@+id/cadastrePhotoImageView"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="130dp"
+                    android:layout_marginLeft="120dp"
                     android:src="@drawable/avatar"/>
 
                 <ImageButton
@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imgCamera"
                     android:src="@drawable/camera"
-                    android:layout_marginLeft="260dp"/>
+                    android:layout_marginLeft="250dp"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                     android:id="@+id/imgGallery"
                     android:src="@drawable/gallery"
                     android:layout_below="@id/imgCamera"
-                    android:layout_marginLeft="260dp"/>
+                    android:layout_marginLeft="250dp"/>
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                     android:id="@+id/imgDelete"
                     android:src="@drawable/delete"
                     android:layout_below="@id/imgGallery"
-                    android:layout_marginLeft="260dp"/>
+                    android:layout_marginLeft="250dp"/>
 
             </RelativeLayout>
 
