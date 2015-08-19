@@ -2,6 +2,7 @@ package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,12 +23,28 @@ import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
+import android.os.Bundle;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 public class EstablishmentsActivity extends ActionBarActivity {
 
     private Button btnAdvancedSearch;
     private ListView listViewEstablishments;
     private ListMyEstablishmentAdapter adapter;
     private  List<Establishment> est;
+
+    String[] menu;
+    DrawerLayout dLayout;
+    ListView dList;
+    ArrayAdapter<String> adapterArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +53,32 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
-/*
-       listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view,
-                                   int position, long id) {
-               Toast.makeText(getApplicationContext(),
-                       "Click ListItem Number " + position, Toast.LENGTH_LONG)
-                       .show();
-           }
-       });*/
+
+
+        menu = new String[]{"Minha conta","Meus estabelecimentos","Sair"};
+        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dList = (ListView) findViewById(R.id.left_drawer);
+
+        adapterArray = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,menu);
+
+        dList.setAdapter(adapterArray);
+        dList.setSelector(android.R.color.holo_blue_dark);
+        dList.setOnItemClickListener(new OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+
+                dLayout.closeDrawers();
+                Bundle args = new Bundle();
+                args.putString("Menu", menu[position]);
+                Fragment detail = new MenuDetailsFragment();
+                detail.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, detail).commit();
+            }
+
+        });
+
 
         listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,18 +113,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-        TabHost abas = (TabHost) findViewById(R.id.tabHost);
-        abas.setup();
-
-        TabHost.TabSpec descritor = abas.newTabSpec("aba1");
-        descritor.setContent(R.id.find_restaurantes);
-        descritor.setIndicator(getString(R.string.title_tab_findRestaurants));
-        abas.addTab(descritor);
-
-        descritor = abas.newTabSpec("aba2");
-        descritor.setContent(R.id.my_restaurantes);
-        descritor.setIndicator(getString(R.string.title_tab_myRestaurantes));
-        abas.addTab(descritor);
     }
 
     @Override

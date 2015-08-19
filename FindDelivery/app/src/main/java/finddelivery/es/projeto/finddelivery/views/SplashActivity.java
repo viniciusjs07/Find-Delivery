@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 
 public class SplashActivity extends ActionBarActivity {
@@ -35,7 +36,7 @@ public class SplashActivity extends ActionBarActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent i = new Intent(SplashActivity.this, EstablishmentsActivity.class);
                 startActivity(i);
 
                 // close this activity
