@@ -119,6 +119,14 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
         try {
 
+            if(photo == null) {
+                String photoUser = user.get(UserSessionController.KEY_PHOTO);
+                byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
+                Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+                imageViewUserProfile2.setImageBitmap(photoUserBitmap);
+                photo = photoUserBitmap;
+            }
+            
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.JPEG, 50, b);
             byte[] photo = b.toByteArray();
