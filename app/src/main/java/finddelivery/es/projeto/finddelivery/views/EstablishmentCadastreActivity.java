@@ -156,7 +156,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
 
         try {
-            if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo) {
+          //  if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo) {
 
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
                 establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);
@@ -172,7 +172,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 startActivity(it);
                 finish();
 
-            }
+           // }
         }
         catch (Exception e){
             showDialog("Erro ao cadastrar estabelecimento!");

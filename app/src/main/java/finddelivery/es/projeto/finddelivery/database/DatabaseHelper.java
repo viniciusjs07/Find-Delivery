@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
        db.execSQL("CREATE TABLE usuario (name VARCHAR( 20 ), login VARCHAR( 20 ) NOT NULL, password VARCHAR( 8 ), photo VARBINARY( 100 ));");
-       db.execSQL("CREATE TABLE estabelecimento (restaurant VARCHAR( 20 ) NOT NULL, endereco( 20 ), especialidade VARCHAR( 20 ), horario VARCHAR( 20 ), phone1 VARCHAR( 15 ), phone2 VARCHAR( 15 ), logo VARBINARY( 100 ));");
+       db.execSQL("CREATE TABLE estabelecimento (restaurant VARCHAR( 20 ) NOT NULL, endereco VARCHAR( 20 ), especialidade VARCHAR( 20 ), horario VARCHAR( 20 ), phone1 VARCHAR( 15 ), phone2 VARCHAR( 15 ), logo VARBINARY( 100 ));");
 
     }
 
