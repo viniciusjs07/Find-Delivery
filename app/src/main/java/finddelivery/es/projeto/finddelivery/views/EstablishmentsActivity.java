@@ -100,18 +100,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
         est.add(new Establishment("Nome 2", "end" ));
         est.add(new Establishment("Nome 3", "end" ));
         est.add(new Establishment("Nome 4", "end"));
-        est.add(new Establishment("Nome 2", "end" ));
-        est.add(new Establishment("Nome 3", "end" ));
-        est.add(new Establishment("Nome 4", "end"));
-        est.add(new Establishment("Nome 2", "end" ));
-        est.add(new Establishment("Nome 3", "end" ));
-        est.add(new Establishment("Nome 4", "end"));
-        est.add(new Establishment("Nome 2", "end" ));
-        est.add(new Establishment("Nome 3", "end" ));
-        est.add(new Establishment("Nome 4", "end"));
-        est.add(new Establishment("Nome 2", "end" ));
-        est.add(new Establishment("Nome 3", "end" ));
-        est.add(new Establishment("Nome 4", "end"));
 
 
         btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
