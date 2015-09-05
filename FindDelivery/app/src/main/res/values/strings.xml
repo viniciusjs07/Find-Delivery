@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Find Delivery</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_user_cadastre">Cadastre-se</string>
+    <string name="title_activity_user_profile">Meus dados</string>
+    <string name="title_activity_perfil_edit">Edite seu perfil</string>
+    <string name="title_activity_login">Faça seu login</string>
+    <string name="name">Nome</string>
+    <string name="login">Login</string>
+    <string name="password">Senha</string>
+    <string name="actualPassword">Senha atual</string>
+    <string name="newPassword">Nova senha</string>
+    <string name="passwordConfirm">Confirmar senha</string>
+    <string name="newPasswordConfirm">Confirmar nova senha</string>
+    <string name="dialog_deleteAccount">Tem certeza que deseja excluir sua conta no Find Delivery?</string>
+    <string name="dialog_accountDeleted">Sua conta foi excluída!</string>
+    <string name="dialog_changesSaved">Seus dados foram alterados!</string>
+    <string name="dialog_registerOK">Seu cadastro foi realizado com sucesso!</string>
+    <string name="dialog_positiveAwswer">Sim</string>
+    <string name="dialog_negativeAwswer">Cancelar</string>
+    <string name="title_activity_establishtment_cadastre">Cadastre seu Estabelecimento</string>
+    <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
+    <string name="restaurant_example">Ex: China Restaurante</string>
+    <string name="title_activity_find_establishment">FindEstablishmentActivity</string>
+    <string name="title_tab_findRestaurants">Procurar restaurantes</string>
+    <string name="title_tab_myRestaurantes">Meus Restaurantes</string>
+    <string name="title_activity_establishments">Restaurantes </string>
+    <string name="title_activity_establishment_list">Establishment_listActivity</string>
+    <string name="title_activity_evaluation_establishment">Establishment name</string>
+    <string name="title_activity_evaluate_establishment">Establishment name</string>
+    <string name="title_activity_establishment_details">EstablishmentDetails</string>
+    <string name="title_activity_establishment_cadastre">EstablishmentCadastreActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_menu_detail_fragment">MenuDetailFragment</string>
+
+</resources>
