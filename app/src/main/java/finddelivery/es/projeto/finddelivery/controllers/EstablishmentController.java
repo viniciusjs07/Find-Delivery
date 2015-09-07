@@ -40,6 +40,10 @@ public class EstablishmentController  {
         return establishmentDAO.findAll();
     }
 
+    public Establishment getEstablishment(String name) {
+        return  establishmentDAO.findByName(name);
+    }
+
     // Valida nome do estabelecimento
     public boolean validatesEstablishmentName(String name) throws Exception {
         if(name == null || name.equals("")){

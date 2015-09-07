@@ -1,5 +1,6 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
+import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 import android.os.Bundle;
@@ -39,8 +41,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private Button btnAdvancedSearch;
     private ListView listViewEstablishments;
     private ListMyEstablishmentAdapter adapter;
-    private  List<Establishment> est;
-
+    private Context context;
+    EstablishmentController establishmentController;
     String[] menu;
     DrawerLayout dLayout;
     ListView dList;
@@ -50,6 +52,9 @@ public class EstablishmentsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishments);
+
+        context = this;
+        establishmentController = EstablishmentController.getInstance(context);
 
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
@@ -63,7 +68,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         dList.setAdapter(adapterArray);
         dList.setSelector(android.R.color.holo_blue_dark);
-        dList.setOnItemClickListener(new OnItemClickListener(){
+        dList.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
@@ -92,16 +97,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-        Intent i = getIntent();
-
-       // est = EstablishmentController..getEstablishments();
-        est =  new ArrayList<>();
-
-        est.add(new Establishment(i.getStringExtra("name")));
-        est.add(new Establishment("Nome 2" ));
-        est.add(new Establishment("Nome 3" ));
-        est.add(new Establishment("Nome 4"));
-
 
         btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -118,7 +113,11 @@ public class EstablishmentsActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new ListMyEstablishmentAdapter(this, est);
+        try {
+            adapter = new ListMyEstablishmentAdapter(this, establishmentController.findAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         listViewEstablishments.setAdapter(adapter);
     }
     @Override

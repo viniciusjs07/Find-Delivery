@@ -28,8 +28,8 @@ public class DAOEstablishment extends DatabaseHelper {
 
         valuesInsert.put("restaurante", establishment.getName());
         valuesInsert.put("endereco", establishment.getAdress());
-        valuesInsert.put("especialidade", establishment.getSpeciality());
         valuesInsert.put("horario_de_funcionamento", establishment.getBusinessHour());
+        valuesInsert.put("especialidade", establishment.getSpeciality());
         valuesInsert.put("phone1", establishment.getPhone1());
         valuesInsert.put("phone2", establishment.getPhone2());
         valuesInsert.put("logo", establishment.getPhoto());
@@ -43,8 +43,8 @@ public class DAOEstablishment extends DatabaseHelper {
 
         valuesUpdate.put("restaurante", establishment.getName());
         valuesUpdate.put("endereco", establishment.getAdress());
-        valuesUpdate.put("especialidade", establishment.getSpeciality());
         valuesUpdate.put("horario_de_funcionamento", establishment.getBusinessHour());
+        valuesUpdate.put("especialidade", establishment.getSpeciality());
         valuesUpdate.put("phone1", establishment.getPhone1());
         valuesUpdate.put("phone2", establishment.getPhone2());
         valuesUpdate.put("logo", establishment.getPhoto());
@@ -71,8 +71,8 @@ public class DAOEstablishment extends DatabaseHelper {
         //Integer id = cursor.getInt(cursor.getColumnIndex("id"));
         String restaurante = cursor.getString(cursor.getColumnIndex("restaurante"));
         String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
-        String especialidade = cursor.getString(cursor.getColumnIndex("especialidade"));
         String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("horario_de_funcionamento"));
+        String especialidade = cursor.getString(cursor.getColumnIndex("especialidade"));
         String fone1 = cursor.getString(cursor.getColumnIndex("phone1"));
         String fone2 = cursor.getString(cursor.getColumnIndex("phone2"));
         byte[] photo = cursor.getBlob(cursor.getColumnIndex("logo"));

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +54,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishment_cadastre);
+
+        context = this;
         establishmentController = EstablishmentController.getInstance(context);
 
         Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
@@ -74,7 +75,6 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         editTextPhoneOne = (EditText) findViewById(R.id.editTextPhoneOne);
         editTextPhoneTwo = (EditText) findViewById(R.id.editTextPhoneTwo);
 
-
         specialityTypes = new ArrayList<String>();
         addTypes();
 
@@ -83,7 +83,6 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
-
 
     }
 
@@ -132,7 +131,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
     public void showDialog(String mensagem) {
         alert = new AlertDialog.Builder(context);
-        alert.setPositiveButton("OK", null);
+        alert.setPositiveButton(null, null);
         alert.setMessage(mensagem);
         alert.create().show();
     }
@@ -153,42 +152,27 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         boolean validatePhoneTwo = establishmentController.validateEstablishmentPhone(phone2);
 
         try {
-            if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
+          //  if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
 
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
                 establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);
                 byte[] establishmentLogo = b.toByteArray();
 
-                showDialog("Estabelecimento cadastrado com sucesso!");
-                Establishment establishment = new Establishment(name, address, specialityType, workHour, phone1, phone2, establishmentLogo);
-
+                Establishment establishment = new Establishment(name, address, workHour, specialityType, phone1, phone2, establishmentLogo);
                 establishmentController.insert(establishment);
+                showDialog("Estabelecimento cadastrado com sucesso!");
 
-                Intent it = new Intent();
+            Intent it = new Intent();
                 it.setClass(EstablishmentCadastreActivity.this,
                         EstablishmentsActivity.class);
                 startActivity(it);
                 finish();
-
-            }
+          //  }
         }
         catch (Exception e){
             showDialog("Erro ao cadastrar estabelecimento!");
             e.printStackTrace();
         }
-
-        /*
-        Intent i = new Intent(EstablishmentCadastreActivity.this,EstablishmentsActivity.class);
-
-        i.putExtra("name",name.getText().toString());
-        i.putExtra("addres",addres.getText().toString());
-        i.putExtra("fone1",fone1.getText().toString());
-        i.putExtra("fone2",fone2.getText().toString());
-        startActivity(i);
-        */
-
-        //EstablishmentController.getInstance().addEstablishment(...);
-
     }
 
     @Override

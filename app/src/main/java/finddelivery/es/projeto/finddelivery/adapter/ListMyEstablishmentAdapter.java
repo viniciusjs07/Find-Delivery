@@ -1,6 +1,8 @@
 package finddelivery.es.projeto.finddelivery.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 /**
@@ -21,13 +24,13 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private List<Establishment> items;
     private Context myContext;
+    EstablishmentController establishmentController;
 
     public ListMyEstablishmentAdapter(Context context, List<Establishment> items) {
-        //Itens que preencheram o listview
         this.items = items;
-        //responsavel por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
         myContext = context;
+        establishmentController = EstablishmentController.getInstance(context);
     }
 
     @Override
@@ -47,17 +50,17 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        //Pega o item de acordo com a posicao.
+
         Establishment item = items.get(position);
-        //infla o layout para podermos preencher os dados
         view = mInflater.inflate(R.layout.activity_establishment_list, null);
 
-        //atraves do layout pego pelo LayoutInflater, pegamos cada id relacionado
-        //ao item e definimos as informacoes.
-        ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
-        ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getName());
+        byte[] photo = (establishmentController.getEstablishment(item.getName())).getPhoto();
+        Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
 
-        ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageResource(R.mipmap.photodefault);
+
+        ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
+        ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getSpeciality());
+        ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(photoBitmap);
 
         return view;
     }
