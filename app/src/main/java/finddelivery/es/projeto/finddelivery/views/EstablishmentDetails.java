@@ -17,6 +17,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
     private Button btnAvaliacoes;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

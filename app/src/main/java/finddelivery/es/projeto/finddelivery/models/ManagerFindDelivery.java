@@ -28,8 +28,6 @@ public class ManagerFindDelivery {
         if(!listUser.contains(user)){
             listUser.add(user);
         }
-
-
     }
 
     //This method valid a login

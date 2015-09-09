@@ -2,6 +2,7 @@ package finddelivery.es.projeto.finddelivery.controllers;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,12 +16,18 @@ public class EstablishmentController  {
 
     private  static DAOEstablishment establishmentDAO;
     private static EstablishmentController instance;
+    private List<Establishment> establishmentsByName;
+    private List<Establishment> establishmentsBySpeciality;
+
+    public static boolean isSearchAdvanced = false;
+    public static boolean isIsSearchAdvancedByName = true;
 
     // Construtor
     public static EstablishmentController getInstance(Context context) {
         if (instance == null) {
             instance = new EstablishmentController();
             establishmentDAO = new DAOEstablishment(context);
+
         }
         return instance;
     }
@@ -42,6 +49,34 @@ public class EstablishmentController  {
 
     public Establishment getEstablishment(String name) {
         return  establishmentDAO.findByName(name);
+    }
+
+    //listar estabelecimentos encontrados pelo nome
+    public List<Establishment> listByName() {
+        return establishmentsByName;
+    }
+
+    public List<Establishment> listBySpeciality() {
+        return  establishmentsBySpeciality;
+    }
+
+
+    public void insertByName(String name) throws Exception {
+        establishmentsByName = new ArrayList<>();
+        for (Establishment est: findAll()) {
+            if (est.getName().equals(name)) {
+                establishmentsByName.add(est);
+            }
+        }
+    }
+
+    public void insertBySpeciality(String speciality) throws Exception {
+        establishmentsBySpeciality = new ArrayList<>();
+        for (Establishment est: findAll()) {
+            if (est.getSpeciality().equals(speciality)) {
+                establishmentsBySpeciality.add(est);
+            }
+        }
     }
 
     // Valida nome do estabelecimento
@@ -78,5 +113,7 @@ public class EstablishmentController  {
         }
         return  true;
     }
+
+
 
 }

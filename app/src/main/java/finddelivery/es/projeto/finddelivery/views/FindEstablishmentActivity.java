@@ -1,5 +1,8 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,34 +10,53 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+
+import org.apache.http.protocol.ExecutionContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.SpecialityType;
-
 
 public class FindEstablishmentActivity extends ActionBarActivity {
 
     private Spinner sp;
     private List<String> specialityTypes;
+    private EditText restaurantNameEditText;
+    private ImageButton searchByName;
+    private ImageButton searchBySpeciality;
+    private EstablishmentController establishmentController;
+    private Context context;
+    private AlertDialog.Builder alert;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         setContentView(R.layout.activity_find_establishment);
+        setContentView(R.layout.activity_find_establishment);
+
+        context = this;
+        establishmentController = EstablishmentController.getInstance(context);
 
         specialityTypes = new ArrayList<String>();
         addTypes();
+
+        restaurantNameEditText = (EditText)findViewById(R.id.restaurantNameEditText);
+        searchByName = (ImageButton)findViewById(R.id.searchByName);
+        searchBySpeciality = (ImageButton)findViewById(R.id.searchBySpeciality);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, specialityTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         sp = (Spinner) findViewById(R.id.spinnerTipoCozinha);
         sp.setAdapter(adapter);
-
 
     }
 
@@ -58,6 +80,48 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         specialityTypes.add("Marmitas");
         specialityTypes.add("Massas");
     }
+
+    public void searchByName(View view) throws Exception{
+        try {
+            String name = restaurantNameEditText.getText().toString();
+            establishmentController.insertByName(name);
+            establishmentController.isSearchAdvanced = true;
+            establishmentController.isIsSearchAdvancedByName = true;
+            Intent it = new Intent();
+            it.setClass(FindEstablishmentActivity.this,
+                    EstablishmentsActivity.class);
+            startActivity(it);
+            finish();
+        }catch (Exception e) {
+            showDialog("Erro de busca!");
+            e.printStackTrace();
+        }
+    }
+
+    public void searchBySpeciality(View view) throws Exception{
+      try {
+          String speciality = sp.getSelectedItem().toString();
+          establishmentController.insertBySpeciality(speciality);
+          establishmentController.isSearchAdvanced = true;
+          establishmentController.isIsSearchAdvancedByName = false;
+          Intent it = new Intent();
+          it.setClass(FindEstablishmentActivity.this,
+                  EstablishmentsActivity.class);
+          startActivity(it);
+          finish();
+      }catch (Exception e) {
+          showDialog("Erro de busca!");
+          e.printStackTrace();
+      }
+    }
+
+    public void showDialog(String mensagem) {
+        alert = new AlertDialog.Builder(context);
+        alert.setPositiveButton("OK", null);
+        alert.setMessage(mensagem);
+        alert.create().show();
+    }
+
 
 
     @Override

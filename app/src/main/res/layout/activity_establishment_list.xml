@@ -32,8 +32,7 @@
                 android:text="Especialidade"
                 android:id="@+id/textViewSpeciallity"
                 android:layout_below="@+id/textViewNameRestaurant"
-                android:layout_alignLeft="@+id/textViewNameRestaurant"
-                android:layout_alignStart="@+id/textViewNameRestaurant" />
+                android:layout_alignLeft="@+id/textViewNameRestaurant" />
     </RelativeLayout>
 
 

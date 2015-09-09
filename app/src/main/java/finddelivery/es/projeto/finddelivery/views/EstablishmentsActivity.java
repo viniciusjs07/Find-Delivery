@@ -1,5 +1,6 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -47,6 +48,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
     DrawerLayout dLayout;
     ListView dList;
     ArrayAdapter<String> adapterArray;
+    private AlertDialog.Builder alert;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,11 +113,48 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
     }
 
+    public void showDialog(String mensagem) {
+        alert = new AlertDialog.Builder(context);
+        alert.setPositiveButton("OK", null);
+        alert.setMessage(mensagem);
+        alert.create().show();
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
         try {
-            adapter = new ListMyEstablishmentAdapter(this, establishmentController.findAll());
+            if (!establishmentController.isSearchAdvanced) {
+                List<Establishment> establishmentsList = establishmentController.findAll();
+                adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+            }else {
+                if (establishmentController.isIsSearchAdvancedByName) {
+                    List<Establishment> establishmentsList = establishmentController.listByName();
+                    if(establishmentsList.size() == 0){
+                        showDialog("Restaurante nao encontrado!");
+                        Intent it = new Intent();
+                        it.setClass(EstablishmentsActivity.this,
+                                FindEstablishmentActivity.class);
+                        startActivity(it);
+                        finish();
+                    }else {
+                        adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+                    }
+                }else{
+                    List<Establishment> establishmentsList = establishmentController.listBySpeciality();
+                    if(establishmentsList.size() == 0){
+                        showDialog("Restaurante nao encontrado!");
+                        Intent it = new Intent();
+                        it.setClass(EstablishmentsActivity.this,
+                                FindEstablishmentActivity.class);
+                        startActivity(it);
+                        finish();
+                    }else {
+                        adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
