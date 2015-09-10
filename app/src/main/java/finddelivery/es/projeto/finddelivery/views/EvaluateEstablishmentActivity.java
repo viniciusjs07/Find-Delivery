@@ -4,15 +4,51 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import finddelivery.es.projeto.finddelivery.R;
 
 public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
+    private RatingBar yourEvaluationForEstablishment;
+    private RatingBar averageOfEstablishment;
+    private TextView averageTextView;
+    private TextView yourComment;
+    private EditText insertComment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluate_establishment);
+
+        yourEvaluationForEstablishment = (RatingBar)findViewById(R.id.yourEvaluationForEstablishment);
+        averageOfEstablishment = (RatingBar)findViewById(R.id.averageOfEstablishment);
+        averageTextView = (TextView)findViewById(R.id.averageTextView);
+        insertComment = (EditText)findViewById(R.id.insertComment);
+        yourComment = (TextView)findViewById(R.id.yourComment);
+
+        yourEvaluationForEstablishment.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                float grade = yourEvaluationForEstablishment.getRating();
+                averageOfEstablishment.setRating(grade);
+                String gradeText = String.valueOf(grade);
+                //setar para a media do estabelecimento, por enquanto estamos testando com a nota
+                averageTextView.setText(gradeText);
+            }
+        });
+
+    }
+
+    public void insertComment(View view){
+        String comment = insertComment.getText().toString();
+        if(comment != null && !comment.trim().equals("")){
+            yourComment.setText(comment);
+            insertComment.setText("");
+        }
     }
 
     @Override
