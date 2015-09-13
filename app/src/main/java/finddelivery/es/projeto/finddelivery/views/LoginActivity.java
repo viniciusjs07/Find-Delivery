@@ -68,15 +68,6 @@ public class LoginActivity extends ActionBarActivity {
     }
 
 
-<<<<<<< HEAD
-=======
-    public void testaInicializacao() throws Exception {
-        if (userController.findAll().isEmpty()) {
-            User user = new User("Daniela","dani", "123456");
-            userController.insert(user);
-        }
-    }
->>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
 
     /**
      *
@@ -98,11 +89,8 @@ public class LoginActivity extends ActionBarActivity {
                 User user = userController.getUser(login);
                 session.createUserLoginSession(user);
                 // Intent it = new Intent();
-<<<<<<< HEAD
+
                 Intent it = new Intent(getApplicationContext(), EstablishmentsActivity.class);
-=======
-                Intent it = new Intent(getApplicationContext(), UserProfileActivity.class);
->>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
                 // it.setClass(LoginActivity.this,EstablishmentsActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
