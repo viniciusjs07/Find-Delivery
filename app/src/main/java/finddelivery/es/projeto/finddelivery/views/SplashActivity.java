@@ -37,7 +37,11 @@ public class SplashActivity extends ActionBarActivity {
                 // This method will be executed once the timer is over
                 // Start your app main activity
 <<<<<<< HEAD
+<<<<<<< HEAD
                 Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+=======
+                Intent i = new Intent(SplashActivity.this, EvaluateEstablishmentActivity.class);
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
 =======
                 Intent i = new Intent(SplashActivity.this, EvaluateEstablishmentActivity.class);
 >>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a

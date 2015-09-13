@@ -74,6 +74,10 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
         String name = user.get(UserSessionController.KEY_NAME);
         String photoUser = user.get(UserSessionController.KEY_PHOTO);
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
@@ -86,7 +90,11 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+<<<<<<< HEAD
 
+=======
+                session.logoutUser(); //Temp
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
                 Intent it = new Intent();
                 it.setClass(ProfileEditActivity.this,
                         LoginActivity.class);//Temp

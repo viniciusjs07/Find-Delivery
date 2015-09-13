@@ -24,7 +24,10 @@ import java.util.List;
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
+<<<<<<< HEAD
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
+=======
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 import android.os.Bundle;
@@ -51,8 +54,11 @@ public class EstablishmentsActivity extends ActionBarActivity {
     ArrayAdapter<String> adapterArray;
     private AlertDialog.Builder alert;
 
+<<<<<<< HEAD
     UserSessionController session;
 
+=======
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +67,24 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
+<<<<<<< HEAD
         session = new  UserSessionController(getApplicationContext());
+=======
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
 
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
 
+<<<<<<< HEAD
         Toast.makeText(getApplicationContext(),
                 "User Login Status: " + session.isUserLoggedIn(),
                 Toast.LENGTH_LONG).show();
 
         menu = new String[]{"Minha conta","Meus restaurantes", "Novo restaurante","Sair"};
+=======
+
+        menu = new String[]{"Minha conta","Meus estabelecimentos","Sair"};
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
 
@@ -86,6 +100,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 dLayout.closeDrawers();
                 Bundle args = new Bundle();
                 args.putString("Menu", menu[position]);
+<<<<<<< HEAD
                 if (position == 0 ){
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
@@ -115,6 +130,12 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     startActivity(it);
                     finish();
                 }
+=======
+                Fragment detail = new MenuDetailsFragment();
+                detail.setArguments(args);
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, detail).commit();
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
             }
 
         });
@@ -153,7 +174,10 @@ public class EstablishmentsActivity extends ActionBarActivity {
     }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 59ba8ec58be81d09c0b83c169e5a026e0100b56a
     @Override
     protected void onStart() {
         super.onStart();
