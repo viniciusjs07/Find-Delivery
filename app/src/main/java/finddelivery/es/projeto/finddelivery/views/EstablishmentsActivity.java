@@ -66,7 +66,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         menu = new String[]{"Minha conta","Meus restaurantes", "Novo restaurante","Sair"};
 
-        menu = new String[]{"Minha conta","Meus estabelecimentos","Sair"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
 
