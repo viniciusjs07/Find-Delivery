@@ -22,7 +22,7 @@ public class DAOEstablishment extends DatabaseHelper {
         super(context);
     }
 
-    public void insert(Establishment establishment) throws Exception {
+    public void insert(Establishment establishment, String idUser) throws Exception {
 
         ContentValues valuesInsert = new ContentValues();
 
@@ -33,11 +33,12 @@ public class DAOEstablishment extends DatabaseHelper {
         valuesInsert.put("phone1", establishment.getPhone1());
         valuesInsert.put("phone2", establishment.getPhone2());
         valuesInsert.put("logo", establishment.getPhoto());
+        valuesInsert.put("idUser", idUser);
 
         getDatabase().insert(TABLE, null, valuesInsert);
     }
 
-    public void update(Establishment establishment) throws Exception {
+    public void update(Establishment establishment, String idUser) throws Exception {
 
         ContentValues valuesUpdate = new ContentValues();
 
@@ -48,6 +49,8 @@ public class DAOEstablishment extends DatabaseHelper {
         valuesUpdate.put("phone1", establishment.getPhone1());
         valuesUpdate.put("phone2", establishment.getPhone2());
         valuesUpdate.put("logo", establishment.getPhoto());
+        valuesUpdate.put("idUser", idUser);
+
 
         getDatabase().update(TABLE, valuesUpdate, "restaurante = ?", new String[]{"" + establishment.getName()});
     }
@@ -75,8 +78,10 @@ public class DAOEstablishment extends DatabaseHelper {
         String especialidade = cursor.getString(cursor.getColumnIndex("especialidade"));
         String fone1 = cursor.getString(cursor.getColumnIndex("phone1"));
         String fone2 = cursor.getString(cursor.getColumnIndex("phone2"));
+       // String idUser = cursor.getString(cursor.getColumnIndex("idUser"));
         byte[] photo = cursor.getBlob(cursor.getColumnIndex("logo"));
 
+       // return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,photo);
         return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,photo);
 
     }
@@ -88,5 +93,19 @@ public class DAOEstablishment extends DatabaseHelper {
         cursor.moveToFirst();
 
         return mountEstablishment(cursor);
+    }
+
+    public List<Establishment> findByUser(String idUser) throws Exception {
+        List<Establishment> establishments = new ArrayList<Establishment>();
+        String sql = "SELECT * FROM " + TABLE + " WHERE idUser = ?";
+        String[] selectionArgs = new String[] {idUser};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            establishments.add(mountEstablishment(cursor));
+            cursor.moveToNext();
+        }
+        return establishments;
+
     }
 }

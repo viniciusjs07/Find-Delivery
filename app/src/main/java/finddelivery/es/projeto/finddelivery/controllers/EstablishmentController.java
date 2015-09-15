@@ -12,12 +12,13 @@ import finddelivery.es.projeto.finddelivery.models.Establishment;
 /**
  * Created by Computação on 12/08/2015.
  */
-public class EstablishmentController  {
+public class EstablishmentController {
 
-    private  static DAOEstablishment establishmentDAO;
+    private static DAOEstablishment establishmentDAO;
     private static EstablishmentController instance;
     private List<Establishment> establishmentsByName;
     private List<Establishment> establishmentsBySpeciality;
+    private List<Establishment> myEstablishments = new ArrayList<>();
 
     public static boolean isSearchAdvanced = false;
     public static boolean isIsSearchAdvancedByName = true;
@@ -33,13 +34,13 @@ public class EstablishmentController  {
     }
 
     // insert
-    public void insert(Establishment establishment) throws Exception {
-        establishmentDAO.insert(establishment);
+    public void insert(Establishment establishment, String idUser) throws Exception {
+        establishmentDAO.insert(establishment, idUser);
     }
 
     //update
-    public void update(Establishment establishment) throws Exception {
-        establishmentDAO.update(establishment);
+    public void update(Establishment establishment, String idUser) throws Exception {
+        establishmentDAO.update(establishment, idUser);
     }
 
     // listar estabelecimentos
@@ -48,8 +49,13 @@ public class EstablishmentController  {
     }
 
     public Establishment getEstablishment(String name) {
-        return  establishmentDAO.findByName(name);
+        return establishmentDAO.findByName(name);
     }
+
+    public List<Establishment> listMyEstablishments(String idUser) throws Exception {
+        return establishmentDAO.findByUser(idUser);
+    }
+
 
     //listar estabelecimentos encontrados pelo nome
     public List<Establishment> listByName() {
@@ -57,8 +63,9 @@ public class EstablishmentController  {
     }
 
     public List<Establishment> listBySpeciality() {
-        return  establishmentsBySpeciality;
+        return establishmentsBySpeciality;
     }
+
 
 
     public void insertByName(String name) throws Exception {

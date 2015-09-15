@@ -21,7 +21,7 @@
     <string name="dialog_positiveAwswer">Sim</string>
     <string name="dialog_negativeAwswer">Cancelar</string>
     <string name="title_activity_establishtment_cadastre">Cadastre seu Estabelecimento</string>
-    <string name="title_activity_my_establishment">MyEstablishmentActivity</string>
+    <string name="title_activity_my_establishment">Meus restaurantes</string>
     <string name="restaurant_example">Ex: China Restaurante</string>
     <string name="title_activity_find_establishment">FindEstablishmentActivity</string>
     <string name="title_tab_findRestaurants">Procurar restaurantes</string>
@@ -33,7 +33,7 @@
     <string name="title_activity_evaluate_establishment">Establishment name</string>
     <string name="title_activity_establishment_details">EstablishmentDetails</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_menu_detail_fragment">MenuDetailFragment</string>
 

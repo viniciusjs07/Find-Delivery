@@ -21,10 +21,12 @@ import android.widget.Spinner;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EstablishmentCadastreActivity extends ActionBarActivity implements View.OnClickListener {
@@ -49,6 +51,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     private Context context;
     private AlertDialog.Builder alert;
     private Bitmap establishmentLogo;
+    UserSessionController session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
         Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
         establishmentLogo = photoDefault;
+        session = new  UserSessionController(getApplicationContext());
+
 
         logoEstablishmentImageView = (ImageView)findViewById(R.id.logoEstablishmentImageView);
         btnCamera = (ImageButton)findViewById(R.id.imgCamera);
@@ -151,6 +157,10 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         boolean validatePhoneOne = establishmentController.validateEstablishmentPhone(phone1);
         boolean validatePhoneTwo = establishmentController.validateEstablishmentPhone(phone2);
 
+        HashMap<String, String> user = session.getUserDetails();
+        String idUser = user.get(UserSessionController.KEY_LOGIN);
+
+
         try {
           //  if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
 
@@ -159,7 +169,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 byte[] establishmentLogo = b.toByteArray();
 
                 Establishment establishment = new Establishment(name, address, workHour, specialityType, phone1, phone2, establishmentLogo);
-                establishmentController.insert(establishment);
+                establishmentController.insert(establishment, idUser);
                 showDialog("Estabelecimento cadastrado com sucesso!");
 
             Intent it = new Intent();
