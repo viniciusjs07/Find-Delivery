@@ -162,7 +162,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
 
         try {
-          //  if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
+            if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
 
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
                 establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);
@@ -177,7 +177,22 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                         EstablishmentsActivity.class);
                 startActivity(it);
                 finish();
-          //  }
+            } else if (!validateName) {
+                showDialog("Nome inválido!");
+                editTextEstablishmentName.setText("");
+            } else if (!validateAddress) {
+                showDialog("Endereço inválido!");
+                editTextAddress.setText("");
+            } else if (!validateWorkHour){
+                showDialog("Horário inválido!");
+                editTextHorario.setText("");
+            } else if (!validatePhoneOne) {
+                showDialog("Telefone 1 inválido!");
+                editTextPhoneOne.setText("");
+            } else if (!validatePhoneTwo) {
+                showDialog("Telefone 2 inválido!");
+                editTextPhoneTwo.setText("");
+            }
         }
         catch (Exception e){
             showDialog("Erro ao cadastrar estabelecimento!");
