@@ -46,13 +46,13 @@ public class MyEstablishmentActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Establishment item = adapter.getItem(position);
 
-                Intent intent = new Intent(MyEstablishmentActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MyEstablishmentActivity.this, EstablishmentDetails.class);
                 intent.putExtra("ESTABLISHMENT", item);
 
                 startActivity(intent);
             }
-
         });
+
 
     }
 
