@@ -88,7 +88,7 @@ public class EstablishmentController {
 
     // Valida nome do estabelecimento
     public boolean validatesEstablishmentName(String name) throws Exception {
-        if(name == null || name.equals("")){
+        if(name == null || name.trim().equals("")){
             return false;
         }
         for (Establishment establishment : findAll()){
@@ -101,21 +101,21 @@ public class EstablishmentController {
 
     // valida o cadastro do estabelecimento
     public boolean validatesEstablishmentAddress (String address) throws  Exception {
-        if (address == null || address.equals("")) {
+        if (address == null || address.trim().equals("")) {
             return false;
         }
         return  true;
     }
 
     public boolean validatesEstablishmentBusinesseHour (String businessHour) throws  Exception {
-        if (businessHour == null || businessHour.equals("")) {
+        if (businessHour == null || businessHour.trim().equals("")) {
             return false;
         }
         return  true;
     }
 
     public  boolean validateEstablishmentPhone (String phone) throws Exception{
-        if(phone == null || phone.equals("")) {
+        if(phone == null || phone.trim().equals("")) {
             return  false;
         }
         return  true;

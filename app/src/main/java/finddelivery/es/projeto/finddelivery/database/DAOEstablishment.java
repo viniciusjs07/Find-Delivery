@@ -71,17 +71,15 @@ public class DAOEstablishment extends DatabaseHelper {
         if (cursor.getCount() == 0) {
             return null;
         }
-        //Integer id = cursor.getInt(cursor.getColumnIndex("id"));
+
         String restaurante = cursor.getString(cursor.getColumnIndex("restaurante"));
         String endereco = cursor.getString(cursor.getColumnIndex("endereco"));
         String horarioDeFuncionamento = cursor.getString(cursor.getColumnIndex("horario_de_funcionamento"));
         String especialidade = cursor.getString(cursor.getColumnIndex("especialidade"));
         String fone1 = cursor.getString(cursor.getColumnIndex("phone1"));
         String fone2 = cursor.getString(cursor.getColumnIndex("phone2"));
-       // String idUser = cursor.getString(cursor.getColumnIndex("idUser"));
         byte[] photo = cursor.getBlob(cursor.getColumnIndex("logo"));
 
-       // return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,photo);
         return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,photo);
 
     }
