@@ -1,5 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Context;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,7 +11,11 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.CommentController;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
@@ -18,11 +24,18 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     private TextView averageTextView;
     private TextView yourComment;
     private EditText insertComment;
+    private CommentController commentController;
+    private Context context;
+    UserSessionController session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluate_establishment);
+
+        context = this;
+        commentController = CommentController.getInstance(context);
+        session = new  UserSessionController(getApplicationContext());
 
         yourEvaluationForEstablishment = (RatingBar)findViewById(R.id.yourEvaluationForEstablishment);
         averageOfEstablishment = (RatingBar)findViewById(R.id.averageOfEstablishment);
@@ -49,6 +62,11 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             yourComment.setText(comment);
             insertComment.setText("");
         }
+
+        HashMap<String, String> user = session.getUserDetails();
+        String idUser = user.get(UserSessionController.KEY_LOGIN);
+        //commentController.insert();
+
     }
 
     @Override
