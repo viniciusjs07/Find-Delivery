@@ -179,7 +179,8 @@
                     android:background="@color/orange"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:fontFamily="Arial"/>
+                    android:fontFamily="Arial"
+                    android:onClick="getAvaliacao"/>
 
             </LinearLayout>
 

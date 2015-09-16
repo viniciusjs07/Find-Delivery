@@ -1,17 +1,50 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EvaluationEstablishmentActivity extends ActionBarActivity {
+
+    private Establishment establishment;
+    private Button btnEvaluateEstablishment;
+    private TextView establishmentNameTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation_establishment);
+
+        Intent it = getIntent();
+        establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTDETAILS");
+
+        establishmentNameTest = (TextView)findViewById(R.id.establishmentNameTest);
+
+        establishmentNameTest.setText(establishment.getName());
+
+        btnEvaluateEstablishment = (Button) findViewById(R.id.btnEvaluateEstablishment);
+
+        btnEvaluateEstablishment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent it = new Intent();
+                it.setClass(EvaluationEstablishmentActivity.this,
+                        EvaluateEstablishmentActivity.class);
+                it.putExtra("ESTABLISHMENTEVALUATION", establishment);
+
+                startActivity(it);
+                finish();
+            }
+        });
+
+
     }
 
     @Override

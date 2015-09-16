@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.CommentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
@@ -26,6 +28,8 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     private EditText insertComment;
     private CommentController commentController;
     private Context context;
+    private Establishment establishment;
+
     UserSessionController session;
 
     @Override
@@ -54,9 +58,13 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             }
         });
 
+        Intent it = getIntent();
+        establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTEVALUATION");
+
+
     }
 
-    public void insertComment(View view){
+    public void insertComment(View view) throws Exception {
         String comment = insertComment.getText().toString();
         if(comment != null && !comment.trim().equals("")){
             yourComment.setText(comment);
@@ -65,7 +73,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
         HashMap<String, String> user = session.getUserDetails();
         String idUser = user.get(UserSessionController.KEY_LOGIN);
-        //commentController.insert();
+        commentController.insert(idUser, establishment.getName(), comment);
 
     }
 

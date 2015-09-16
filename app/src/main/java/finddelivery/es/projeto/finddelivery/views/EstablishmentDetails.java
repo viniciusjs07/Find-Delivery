@@ -61,7 +61,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         btnAvaliacoes = (Button) findViewById(R.id.btnAvaliacoes);
 
-        btnAvaliacoes.setOnClickListener(new View.OnClickListener() {
+        /*btnAvaliacoes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent();
                 it.setClass(EstablishmentDetails.this,
@@ -69,7 +69,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                 startActivity(it);
                 finish();
             }
-        });
+        });*/
 
 
         Intent it = getIntent();
@@ -105,6 +105,8 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                 Intent it = new Intent();
                 it.setClass(EstablishmentDetails.this,
                         EvaluationEstablishmentActivity.class);
+                it.putExtra("ESTABLISHMENTDETAILS", establishment);
+
                 startActivity(it);
                 finish();
             }
