@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Establishment name"
-                android:id="@+id/establishmentNameTest"
+                android:id="@+id/establishmentName"
                 android:layout_gravity="right"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
@@ -39,9 +39,9 @@
                 android:text="Speciality type"
                 android:id="@+id/specialityTypeTextView"
                 android:layout_gravity="right"
-                android:layout_below="@+id/establishmentNameTextView"
-                android:layout_alignLeft="@+id/establishmentNameTextView"
-                android:layout_alignStart="@+id/establishmentNameTextView" />
+                android:layout_below="@+id/establishmentName"
+                android:layout_alignLeft="@+id/establishmentName"
+                android:layout_alignStart="@+id/establishmentName" />
 
             <ImageView
                 android:layout_width="100dp"

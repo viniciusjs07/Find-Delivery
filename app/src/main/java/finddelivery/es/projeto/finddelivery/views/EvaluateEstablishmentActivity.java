@@ -2,6 +2,8 @@ package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     private CommentController commentController;
     private Context context;
     private Establishment establishment;
+    private TextView establishmentNameTextView;
+    private TextView specialityTypeTextView;
+    private ImageView establishmentPhotoImageView;
 
     UserSessionController session;
 
@@ -41,6 +47,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluate_establishment);
+
+        Intent it = getIntent();
+        establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTEVALUATION");
 
         context = this;
         commentController = CommentController.getInstance(context);
@@ -51,6 +60,15 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         averageTextView = (TextView)findViewById(R.id.averageTextView);
         insertComment = (EditText)findViewById(R.id.insertComment);
         yourComment = (TextView)findViewById(R.id.yourComment);
+        establishmentNameTextView = (TextView)findViewById(R.id.establishmentNameTextView);
+        establishmentNameTextView.setText(establishment.getName());
+        specialityTypeTextView = (TextView)findViewById(R.id.specialityTypeTextView);
+        specialityTypeTextView.setText(establishment.getSpeciality());
+        establishmentPhotoImageView = (ImageView)findViewById(R.id.establishmentPhotoImageView);
+        byte[] photo = establishment.getPhoto();
+        Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+        establishmentPhotoImageView.setImageBitmap(photoBitmap);
+
 
         yourEvaluationForEstablishment.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -62,9 +80,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                 averageTextView.setText(gradeText);
             }
         });
-
-        Intent it = getIntent();
-        establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTEVALUATION");
 
         Map<User,String> mapComment = null;
         try {
