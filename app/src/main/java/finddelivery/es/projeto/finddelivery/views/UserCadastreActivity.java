@@ -94,7 +94,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         try {
             if (loginValid){
                 if (!passwordsValid) {
-                    showDialog("Senha invalida!");
+                    showDialog("Senha inválida!");
                     cadastrePasswordEditText.setText("");
                     cadastrePasswordConfirmEditText.setText("");
 
@@ -115,14 +115,14 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                     finish();
                 }
             } else if (!loginValid) {
-                showDialog("Login invalido!");
+                showDialog("Login inválido!");
                 cadastreLoginEditText.setText("");
                 cadastrePasswordEditText.setText("");
                 cadastrePasswordConfirmEditText.setText("");
             }
         }
         catch (Exception e){
-            showDialog("Erro validando usuario");
+            showDialog("Erro validando usuário");
             e.printStackTrace();
         }
 

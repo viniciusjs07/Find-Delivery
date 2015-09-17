@@ -5,19 +5,24 @@ import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.CommentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
 
 public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
@@ -61,11 +66,35 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTEVALUATION");
 
+        Map<User,String> mapComment = null;
+        try {
+            mapComment = commentController.searchCommentByEstablishment(establishment.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HashMap<String, String> user = session.getUserDetails();
+        String name = user.get(UserSessionController.KEY_NAME);
+        String login = user.get(UserSessionController.KEY_LOGIN);
+        String password = user.get(UserSessionController.KEY_PASSWORD);
+        String photoUser = user.get(UserSessionController.KEY_PHOTO);
+        byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
+        User userLogged = new User(name, login, password, photoUserByte);
+
+      /*  if(mapComment.containsKey(userLogged)){
+            Toast.makeText(getApplicationContext(),
+                    "Contem",
+                    Toast.LENGTH_LONG).show();
+
+            String comment = mapComment.get(userLogged);
+            yourComment.setText(comment);
+        }*/
 
     }
 
     public void insertComment(View view) throws Exception {
         String comment = insertComment.getText().toString();
+
         if(comment != null && !comment.trim().equals("")){
             yourComment.setText(comment);
             insertComment.setText("");

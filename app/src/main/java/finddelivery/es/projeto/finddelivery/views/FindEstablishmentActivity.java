@@ -67,13 +67,13 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         specialityTypes.add("Comida Chinesa");
         specialityTypes.add("Comida Italiana");
         specialityTypes.add("Comida Variada");
-        specialityTypes.add("Comida Saudavel");
+        specialityTypes.add("Comida Saudável");
         specialityTypes.add("Lanches");
         specialityTypes.add("Pizza");
         specialityTypes.add("Doces");
         specialityTypes.add("Salgados");
         specialityTypes.add("Frutos do Mar");
-        specialityTypes.add("Cafe");
+        specialityTypes.add("Café");
         specialityTypes.add("Carnes");
         specialityTypes.add("Bebidas");
         specialityTypes.add("Saladas");

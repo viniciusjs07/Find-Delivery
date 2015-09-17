@@ -125,10 +125,10 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             byte[] photo = b.toByteArray();
 
             if(name != null && name.trim().equals("")){
-                showDialog("Nome invalido!");
+                showDialog("Nome inválido!");
                 editTextNameUser2.setText("");
             } else if (actualPassword != null && !actualPassword.trim().equals("") && !actualPassword.equals(password)){
-                showDialog("Senha atual invalida!");
+                showDialog("Senha atual inválida!");
                 editTextActualPassword.setText("");
                 editTextNewPassword.setText("");
                 editTextNewPasswordConfirm.setText("");
@@ -178,7 +178,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             //userController.updateData(actualName, login, actualPassword, photo);
         }
         catch (Exception e){
-            showDialog("Erro validando usuario");
+            showDialog("Erro validando usuário");
             e.printStackTrace();
         }
 

@@ -99,13 +99,13 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         specialityTypes.add("Comida Chinesa");
         specialityTypes.add("Comida Italiana");
         specialityTypes.add("Comida Variada");
-        specialityTypes.add("Comida Saudavel");
+        specialityTypes.add("Comida Saudável");
         specialityTypes.add("Lanches");
         specialityTypes.add("Pizza");
         specialityTypes.add("Doces");
         specialityTypes.add("Salgados");
         specialityTypes.add("Frutos do Mar");
-        specialityTypes.add("Cafe");
+        specialityTypes.add("Café");
         specialityTypes.add("Carnes");
         specialityTypes.add("Bebidas");
         specialityTypes.add("Saladas");
@@ -178,19 +178,19 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 startActivity(it);
                 finish();
             } else if (!validateName) {
-                showDialog("Nome inv�lido!");
+                showDialog("Nome inválido!");
                 editTextEstablishmentName.setText("");
             } else if (!validateAddress) {
-                showDialog("Endere�o inv�lido!");
+                showDialog("Endereço inválido!");
                 editTextAddress.setText("");
             } else if (!validateWorkHour){
-                showDialog("Hor�rio inv�lido!");
+                showDialog("Horário inválido!");
                 editTextHorario.setText("");
             } else if (!validatePhoneOne) {
-                showDialog("Telefone 1 inv�lido!");
+                showDialog("Telefone 1 inválido!");
                 editTextPhoneOne.setText("");
             } else if (!validatePhoneTwo) {
-                showDialog("Telefone 2 inv�lido!");
+                showDialog("Telefone 2 inválido!");
                 editTextPhoneTwo.setText("");
             }
         }

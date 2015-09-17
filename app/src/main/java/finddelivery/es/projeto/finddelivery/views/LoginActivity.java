@@ -97,7 +97,7 @@ public class LoginActivity extends ActionBarActivity {
                 startActivity(it);
                 finish();
             } else {
-                showDialog("Login ou senha invalidos!");
+                showDialog("Login ou senha inválidos!");
                 passwordEditText.setText("");
 
             }

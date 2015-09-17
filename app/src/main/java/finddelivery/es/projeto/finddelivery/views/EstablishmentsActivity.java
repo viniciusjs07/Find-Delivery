@@ -156,7 +156,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 if (establishmentController.isIsSearchAdvancedByName) {
                     List<Establishment> establishmentsList = establishmentController.listByName();
                     if(establishmentsList.size() == 0){
-                        showDialog("Restaurante nao encontrado!");
+                        showDialog("Restaurante não encontrado!");
                         Intent it = new Intent();
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
@@ -168,7 +168,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 }else{
                     List<Establishment> establishmentsList = establishmentController.listBySpeciality();
                     if(establishmentsList.size() == 0){
-                        showDialog("Restaurante nao encontrado!");
+                        showDialog("Restaurante não encontrado!");
                         Intent it = new Intent();
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
