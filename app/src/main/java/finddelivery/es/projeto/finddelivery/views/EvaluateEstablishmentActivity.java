@@ -45,6 +45,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
     UserSessionController session;
     private HashMap<String, String> user;
+    private Map<User,String> mapComment = null;
+    private Map<User,String> mapEvaluation = null;
+    private User userLogged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,38 +83,49 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         String photoUser = user.get(UserSessionController.KEY_PHOTO);
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
+        userLogged = new User(name, login, password, photoUserByte);
+
         yourEvaluationForEstablishment.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Float grade = yourEvaluationForEstablishment.getRating();
                 String idUser = user.get(UserSessionController.KEY_LOGIN);
                 try{
-                    evaluationController.insert(idUser, establishment.getName(), grade);
-                    Toast.makeText(getApplicationContext(),
-                            "Avaliação salva!",
-                            Toast.LENGTH_LONG).show();
+                    if(!mapEvaluation.containsKey(userLogged)){
+                        evaluationController.insert(idUser, establishment.getName(), grade);
+                        Toast.makeText(getApplicationContext(),
+                                "Avaliação realizada com sucesso!",
+                                Toast.LENGTH_LONG).show();
+
+                        Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+                        averageTextView.setText(String.valueOf(average(evaluations)));
+                        averageOfEstablishment.setRating(average(evaluations));
+                    } else {
+                        evaluationController.update(idUser, establishment.getName(), grade);
+                        Toast.makeText(getApplicationContext(),
+                                "Avaliação atualizada com sucesso!",
+                                Toast.LENGTH_LONG).show();
+
+                        Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+                        averageTextView.setText(String.valueOf(average(evaluations)));
+                        averageOfEstablishment.setRating(average(evaluations));
+                    }
+
                 } catch (Exception e){
                     Toast.makeText(getApplicationContext(),
                             "Erro ao salvar avaliação!",
                             Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
-
-                averageOfEstablishment.setRating(grade);
-                String gradeText = String.valueOf(grade);
-                //setar para a media do estabelecimento, por enquanto estamos testando com a nota
-                averageTextView.setText(gradeText);
             }
         });
 
-        Map<User,String> mapComment = null;
+
         try {
             mapComment = commentController.searchCommentByEstablishment(establishment.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        User userLogged = new User(name, login, password, photoUserByte);
 
         if(mapComment != null && !mapComment.isEmpty()) {
             if (mapComment.containsKey(userLogged)) {
@@ -120,7 +134,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             }
         }
 
-        Map<User,String> mapEvaluation = null;
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
         } catch (Exception e) {
@@ -128,12 +141,20 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         }
 
         if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            if (mapEvaluation.containsKey(userLogged)) {
-                String grade = mapEvaluation.get(userLogged);
-                averageTextView.setText(grade);
-                averageOfEstablishment.setRating(Float.valueOf(grade));
-            }
+
+            averageTextView.setText(String.valueOf(average(mapEvaluation)));
+            averageOfEstablishment.setRating(average(mapEvaluation));
         }
+    }
+
+    public Float average(Map<User,String> mapEvaluation){
+        Collection<String> grades = mapEvaluation.values();
+        Float sum = Float.valueOf(0);
+        for (String grade: grades){
+            sum += Float.valueOf(grade);
+        }
+        Float average = sum / grades.size();
+        return average;
     }
 
     public void insertComment(View view) throws Exception {
@@ -143,10 +164,17 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             yourComment.setText(comment);
             insertComment.setText("");
             String idUser = user.get(UserSessionController.KEY_LOGIN);
-            commentController.insert(idUser, establishment.getName(), comment);
-            Toast.makeText(getApplicationContext(),
-                    "Comentário enviado com sucesso!",
-                    Toast.LENGTH_LONG).show();
+            if(!mapComment.containsKey(userLogged)){
+                commentController.insert(idUser, establishment.getName(), comment);
+                Toast.makeText(getApplicationContext(),
+                        "Comentário enviado com sucesso!",
+                        Toast.LENGTH_LONG).show();
+            } else{
+                commentController.update(idUser, establishment.getName(), comment);
+                Toast.makeText(getApplicationContext(),
+                        "Comentário atualizado com sucesso!",
+                        Toast.LENGTH_LONG).show();
+            }
         }
     }
 

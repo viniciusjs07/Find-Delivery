@@ -66,6 +66,7 @@
                 android:id="@+id/averageOfEstablishment"
                 android:layout_below="@+id/establishmentPhotoImageView"
                 android:isIndicator="true"
+                android:stepSize="0.5"
                 android:numStars="5"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />

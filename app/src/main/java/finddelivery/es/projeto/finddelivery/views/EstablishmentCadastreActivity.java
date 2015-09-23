@@ -189,10 +189,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
             } else if (!validatePhoneOne) {
                 showDialog("Telefone 1 inválido!");
                 editTextPhoneOne.setText("");
-            } else if (!validatePhoneTwo) {
-                showDialog("Telefone 2 inválido!");
-                editTextPhoneTwo.setText("");
-            }
+            } 
         }
         catch (Exception e){
             showDialog("Erro ao cadastrar estabelecimento!");

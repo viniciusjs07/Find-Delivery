@@ -39,7 +39,7 @@ public class DAOComment extends DatabaseHelper {
         valuesUpdate.put("idEstab", idEstab);
         valuesUpdate.put("comentario", comment);
 
-        getDatabase().update(TABLE, valuesUpdate, "idUser = ? AND idEstab = ? ", new String[]{"" + idUser + "," + idEstab});
+        getDatabase().update(TABLE, valuesUpdate, "idUser = ? AND idEstab = ? ", new String[]{idUser, idEstab});
     }
 
     public Map<User, String> searchCommentByEstablishment(String idEstab) throws Exception {

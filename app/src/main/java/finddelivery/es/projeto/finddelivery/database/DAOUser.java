@@ -39,7 +39,7 @@ public class DAOUser extends DatabaseHelper {
         values.put("password", user.getPassword());
         values.put("photo", user.getPhoto());
 
-        getDatabase().update(TABLE, values, "login = ?", new String[]{"" + user.getLogin()});
+        getDatabase().update(TABLE, values, "login = ?", new String[]{user.getLogin()});
     }
 
 

@@ -37,9 +37,9 @@ public class DAOEvaluation extends DatabaseHelper {
 
         valuesUpdate.put("idUser", idUser);
         valuesUpdate.put("idEstab", idEstab);
-        valuesUpdate.put("comentario", grade);
+        valuesUpdate.put("avaliacao", grade);
 
-        getDatabase().update(TABLE, valuesUpdate, "idUser = ? AND idEstab = ? ", new String[]{"" + idUser + "," + idEstab});
+        getDatabase().update(TABLE, valuesUpdate, "idUser = ? AND idEstab = ? ", new String[]{idUser, idEstab});
     }
 
     public Map<User, String> searchEvaluationByEstablishment(String idEstab) throws Exception {

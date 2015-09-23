@@ -52,7 +52,7 @@ public class DAOEstablishment extends DatabaseHelper {
         valuesUpdate.put("idUser", idUser);
 
 
-        getDatabase().update(TABLE, valuesUpdate, "restaurante = ?", new String[]{"" + establishment.getName()});
+        getDatabase().update(TABLE, valuesUpdate, "restaurante = ?", new String[]{establishment.getName()});
     }
 
     public List<Establishment> findAll() throws Exception {
