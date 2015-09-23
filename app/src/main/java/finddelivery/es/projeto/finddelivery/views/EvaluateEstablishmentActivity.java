@@ -96,15 +96,12 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
         User userLogged = new User(name, login, password, photoUserByte);
 
-      /*  if(mapComment.containsKey(userLogged)){
-            Toast.makeText(getApplicationContext(),
-                    "Contem",
-                    Toast.LENGTH_LONG).show();
-
-            String comment = mapComment.get(userLogged);
-            yourComment.setText(comment);
-        }*/
-
+        if(mapComment != null && !mapComment.isEmpty()) {
+            if (mapComment.containsKey(userLogged)) {
+                String comment = mapComment.get(userLogged);
+                yourComment.setText(comment);
+            }
+        }
     }
 
     public void insertComment(View view) throws Exception {
@@ -113,12 +110,13 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         if(comment != null && !comment.trim().equals("")){
             yourComment.setText(comment);
             insertComment.setText("");
+            HashMap<String, String> user = session.getUserDetails();
+            String idUser = user.get(UserSessionController.KEY_LOGIN);
+            commentController.insert(idUser, establishment.getName(), comment);
+            Toast.makeText(getApplicationContext(),
+                    "Comentário enviado com sucesso!",
+                    Toast.LENGTH_LONG).show();
         }
-
-        HashMap<String, String> user = session.getUserDetails();
-        String idUser = user.get(UserSessionController.KEY_LOGIN);
-        commentController.insert(idUser, establishment.getName(), comment);
-
     }
 
     @Override

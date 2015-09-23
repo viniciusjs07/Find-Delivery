@@ -43,10 +43,10 @@ public class DAOComment extends DatabaseHelper {
     }
 
     public Map<User, String> searchCommentByEstablishment(String idEstab) throws Exception {
-
         Map<User, String> comments = new HashMap<User, String>();
-        String sql = "SELECT * FROM " + TABLE + "WHERE idEstab = " + idEstab + " INNER JOIN usuario ON comentario.idUser = usuario.login";
-        Cursor cursor = getDatabase().rawQuery(sql, null);
+        String sql = "SELECT * FROM comentario AS c INNER JOIN usuario AS u ON c.idUser = u.login WHERE c.idEstab = ?";
+        String[] selectionArgs = new String[] { idEstab};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             comments.put(mountUsers(cursor), mountComments(cursor));

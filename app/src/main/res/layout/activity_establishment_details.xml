@@ -61,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Grade"
+                        android:text="Average"
                         android:id="@+id/gradeTextView"
                         android:layout_gravity="right"
                         android:layout_alignBottom="@+id/evaluationEstablishmentRatingBar"
@@ -73,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/evaluationEstablishmentRatingBar"
                         android:layout_below="@+id/establishmentPhotoImageView"
+                        android:isIndicator="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true" />
 
