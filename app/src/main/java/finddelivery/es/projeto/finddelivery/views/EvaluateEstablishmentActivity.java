@@ -148,6 +148,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                     "Comentário enviado com sucesso!",
                     Toast.LENGTH_LONG).show();
         }
+
     }
 
     @Override
