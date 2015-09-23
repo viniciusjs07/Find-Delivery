@@ -176,6 +176,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
+
     }
 
     @Override
