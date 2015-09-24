@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Average"
-                        android:id="@+id/gradeTextView"
+                        android:id="@+id/averageOfEstablishmentTextView"
                         android:layout_gravity="right"
                         android:layout_alignBottom="@+id/evaluationEstablishmentRatingBar"
                         android:layout_toRightOf="@+id/specialityTypeTextView"

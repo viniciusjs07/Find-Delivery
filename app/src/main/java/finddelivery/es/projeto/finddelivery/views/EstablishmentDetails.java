@@ -1,5 +1,6 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,8 +19,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Collection;
+import java.util.Map;
+
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
 
 public class EstablishmentDetails extends ActionBarActivity implements View.OnClickListener {
 
@@ -27,26 +33,29 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private TextView establishmentNameTextView;
     private TextView specialityTypeTextView;
     private ImageView establishmentPhotoImageView;
-    private TextView gradeTextView;
+    private TextView averageOfEstablishmentTextView;
     private RatingBar evaluationEstablishmentRatingBar;
     private TextView textView7;
     private TextView businessHours;
     private TextView fieldPhone;
     private TextView fieldPhoneTwo;
     private Establishment establishment;
-
-
-
+    private Context context;
+    private EvaluationController evaluationController;
+    private Map<User,String> mapEvaluation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishment_details);
 
+        context = this;
+        evaluationController = EvaluationController.getInstance(context);
+
         establishmentNameTextView = (TextView) findViewById(R.id.establishmentNameTextView);
         specialityTypeTextView = (TextView) findViewById(R.id.specialityTypeTextView);
         establishmentPhotoImageView = (ImageView) findViewById(R.id.establishmentPhotoImageView);
-        gradeTextView = (TextView) findViewById(R.id.gradeTextView);
+        averageOfEstablishmentTextView = (TextView) findViewById(R.id.averageOfEstablishmentTextView);
         evaluationEstablishmentRatingBar = (RatingBar) findViewById(R.id.evaluationEstablishmentRatingBar);
         textView7 = (TextView) findViewById(R.id.textView7);
         businessHours = (TextView) findViewById(R.id.businessHours);
@@ -83,8 +92,28 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         businessHours.setText(establishment.getBusinessHour());
         fieldPhone.setText(establishment.getPhone1());
         fieldPhoneTwo.setText(establishment.getPhone2());
+
+        try {
+            mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
+            averageOfEstablishmentTextView.setText(String.valueOf(average(mapEvaluation)));
+            evaluationEstablishmentRatingBar.setRating(average(mapEvaluation));
+        }
     }
 
+    public Float average(Map<User,String> mapEvaluation){
+        Collection<String> grades = mapEvaluation.values();
+        Float sum = Float.valueOf(0);
+        for (String grade: grades){
+            sum += Float.valueOf(grade);
+        }
+        Float average = sum / grades.size();
+        return average;
+    }
 
 
     @Override

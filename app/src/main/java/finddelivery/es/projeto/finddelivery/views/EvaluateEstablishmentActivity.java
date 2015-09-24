@@ -120,7 +120,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             }
         });
 
-
         try {
             mapComment = commentController.searchCommentByEstablishment(establishment.getName());
         } catch (Exception e) {
