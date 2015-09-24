@@ -92,19 +92,9 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         }
 
         if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            averageOfEstablishmentTextView2.setText(String.valueOf(average(mapEvaluation)));
-            evaluationEstablishmentRatingBar2.setRating(average(mapEvaluation));
+            averageOfEstablishmentTextView2.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+            evaluationEstablishmentRatingBar2.setRating(evaluationController.average(mapEvaluation));
         }
-    }
-
-    public Float average(Map<User,String> mapEvaluation){
-        Collection<String> grades = mapEvaluation.values();
-        Float sum = Float.valueOf(0);
-        for (String grade: grades){
-            sum += Float.valueOf(grade);
-        }
-        Float average = sum / grades.size();
-        return average;
     }
 
     @Override

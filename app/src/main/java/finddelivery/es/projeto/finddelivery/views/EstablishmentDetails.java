@@ -100,19 +100,9 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         }
 
         if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            averageOfEstablishmentTextView.setText(String.valueOf(average(mapEvaluation)));
-            evaluationEstablishmentRatingBar.setRating(average(mapEvaluation));
+            averageOfEstablishmentTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+            evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
         }
-    }
-
-    public Float average(Map<User,String> mapEvaluation){
-        Collection<String> grades = mapEvaluation.values();
-        Float sum = Float.valueOf(0);
-        for (String grade: grades){
-            sum += Float.valueOf(grade);
-        }
-        Float average = sum / grades.size();
-        return average;
     }
 
 

@@ -2,6 +2,7 @@ package finddelivery.es.projeto.finddelivery.controllers;
 
 import android.content.Context;
 
+import java.util.Collection;
 import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.database.DAOComment;
@@ -38,5 +39,15 @@ public class EvaluationController {
 
     public Map<User, String> searchEvaluationByEstablishment(String idEstab) throws Exception {
         return evaluationDAO.searchEvaluationByEstablishment(idEstab);
+    }
+
+    public Float average(Map<User,String> mapEvaluation){
+        Collection<String> grades = mapEvaluation.values();
+        Float sum = Float.valueOf(0);
+        for (String grade: grades){
+            sum += Float.valueOf(grade);
+        }
+        Float average = sum / grades.size();
+        return average;
     }
 }

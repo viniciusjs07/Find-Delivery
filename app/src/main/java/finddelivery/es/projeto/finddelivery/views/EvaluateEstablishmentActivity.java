@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -16,8 +15,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,8 +95,8 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.valueOf(average(evaluations)));
-                        averageOfEstablishment.setRating(average(evaluations));
+                        averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                        averageOfEstablishment.setRating(evaluationController.average(evaluations));
                     } else {
                         evaluationController.update(idUser, establishment.getName(), grade);
                         Toast.makeText(getApplicationContext(),
@@ -107,8 +104,8 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.valueOf(average(evaluations)));
-                        averageOfEstablishment.setRating(average(evaluations));
+                        averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                        averageOfEstablishment.setRating(evaluationController.average(evaluations));
                     }
 
                 } catch (Exception e){
@@ -141,19 +138,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
         if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
 
-            averageTextView.setText(String.valueOf(average(mapEvaluation)));
-            averageOfEstablishment.setRating(average(mapEvaluation));
+            averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+            averageOfEstablishment.setRating(evaluationController.average(mapEvaluation));
         }
-    }
-
-    public Float average(Map<User,String> mapEvaluation){
-        Collection<String> grades = mapEvaluation.values();
-        Float sum = Float.valueOf(0);
-        for (String grade: grades){
-            sum += Float.valueOf(grade);
-        }
-        Float average = sum / grades.size();
-        return average;
     }
 
     public void insertComment(View view) throws Exception {
