@@ -213,6 +213,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
             case R.id.imgDelete:
                 Bitmap photoDefaultEstablishment = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
                 logoEstablishmentImageView.setImageBitmap(photoDefaultEstablishment);
+                logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(photoDefaultEstablishment, 100, 100, false));
+
                 break;
         }
     }
@@ -222,6 +224,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
             establishmentLogo = (Bitmap)data.getExtras().get("data");
             logoEstablishmentImageView.setImageBitmap(establishmentLogo);
+            logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(establishmentLogo, 100, 100, false));
+
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
             Uri imageUri = data.getData();
@@ -241,6 +245,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (establishmentLogo != null) {
                 logoEstablishmentImageView.setImageBitmap(establishmentLogo);
+                logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(establishmentLogo, 100, 100, false));
             }
         }
     }

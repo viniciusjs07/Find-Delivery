@@ -72,6 +72,8 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         byte[] photo = establishment.getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
+        establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
+
 
         user = session.getUserDetails();
         String name = user.get(UserSessionController.KEY_NAME);

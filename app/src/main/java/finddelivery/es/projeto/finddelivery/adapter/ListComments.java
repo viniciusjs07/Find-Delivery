@@ -34,7 +34,6 @@ public class ListComments extends BaseAdapter{
     UserController userController;
 
     public ListComments(Context context, List<User> users, List<String> comments) {
-  //public ListComments(Context context,  List<String> comments) {
        this.users = users;
         this.comments = comments;
         mInflater = LayoutInflater.from(context);
@@ -72,6 +71,7 @@ public class ListComments extends BaseAdapter{
 
         ((TextView) view.findViewById(R.id.textViewComment)).setText(itemComment);
         ((ImageView) view.findViewById(R.id.photoUser)).setImageBitmap(photoBitmap);
+        ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
 
         return view;
 

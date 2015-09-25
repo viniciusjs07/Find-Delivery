@@ -61,6 +61,9 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
         ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getSpeciality());
         ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(photoBitmap);
+        ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
+
+
 
         return view;
     }

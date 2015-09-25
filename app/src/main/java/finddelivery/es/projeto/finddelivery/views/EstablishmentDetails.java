@@ -89,6 +89,8 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         establishmentNameTextView.setText(establishment.getName());
         specialityTypeTextView.setText(establishment.getSpeciality());
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
+        establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
+
         businessHours.setText(establishment.getBusinessHour());
         fieldPhone.setText(establishment.getPhone1());
         fieldPhoneTwo.setText(establishment.getPhone2());

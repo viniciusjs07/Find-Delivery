@@ -1,11 +1,13 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -100,7 +102,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
 
                 } else {
                     ByteArrayOutputStream b = new ByteArrayOutputStream();
-                    photo.compress(Bitmap.CompressFormat.JPEG, 50, b);
+                    photo.compress(Bitmap.CompressFormat.JPEG, 100, b);
                     byte[] photo = b.toByteArray();
 
                     showDialog("Cadastro realizado com sucesso!");
@@ -166,16 +168,21 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             case R.id.imgDelete:
                 Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
                 cadastrePhotoImageView.setImageBitmap(avatar);
+                cadastrePhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(avatar, 100, 100, false));
                 break;
         }
     }
 
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
+
             photo = (Bitmap)data.getExtras().get("data");
             cadastrePhotoImageView.setImageBitmap(photo);
+            cadastrePhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photo, 100, 100, false));
+
 
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
@@ -196,6 +203,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (photo != null) {
                 cadastrePhotoImageView.setImageBitmap(photo);
+                cadastrePhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photo, 100, 100, false));
             }
         }
     }

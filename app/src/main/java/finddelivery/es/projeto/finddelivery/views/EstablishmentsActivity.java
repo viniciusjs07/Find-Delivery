@@ -3,22 +3,33 @@ package finddelivery.es.projeto.finddelivery.views;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
 import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
+import finddelivery.es.projeto.finddelivery.adapter.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
@@ -27,7 +38,6 @@ import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 import android.widget.AdapterView.OnItemClickListener;
 
-
 public class EstablishmentsActivity extends ActionBarActivity {
 
     private Button btnAdvancedSearch;
@@ -35,13 +45,21 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private ListMyEstablishmentAdapter adapter;
     private Context context;
     EstablishmentController establishmentController;
-    String[] menu;
-    DrawerLayout dLayout;
-    ListView dList;
-    ArrayAdapter<String> adapterArray;
+
     private AlertDialog.Builder alert;
 
     UserSessionController session;
+
+    private ImageView photoUser;
+    private TextView nameUser;
+    private TextView login;
+    ListView mDrawerList;
+    RelativeLayout mDrawerPane;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+
+    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+
 
 
     @Override
@@ -60,23 +78,25 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 "User Login Status: " + session.isUserLoggedIn(),
                 Toast.LENGTH_LONG).show();
 
-        menu = new String[]{"Minha conta","Meus restaurantes", "Novo restaurante","Sair"};
 
-        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        dList = (ListView) findViewById(R.id.left_drawer);
+        mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
+        mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
+        mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
+        mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser = (ImageView) findViewById((R.id.photoUser));
+        nameUser = (TextView) findViewById(R.id.nameUser);
+        login = (TextView) findViewById(R.id.login);
 
-        adapterArray = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,menu);
 
-        dList.setAdapter(adapterArray);
-        dList.setSelector(android.R.color.holo_blue_dark);
-        dList.setOnItemClickListener(new OnItemClickListener() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(adapter2);
 
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-
-                dLayout.closeDrawers();
-                Bundle args = new Bundle();
-                args.putString("Menu", menu[position]);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0 ){
                     Intent it = new Intent();
@@ -108,9 +128,23 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     finish();
                 }
             }
-
         });
 
+        Map<String, String> user = session.getUserDetails();
+
+        String photo = user.get(UserSessionController.KEY_PHOTO);
+        String name = user.get(UserSessionController.KEY_NAME);
+        String loginUser = user.get(UserSessionController.KEY_LOGIN);
+
+
+        byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+
+        photoUser.setImageBitmap(photoUserBitmap);
+        photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser.setText(name);
+        login.setText(loginUser);
 
         listViewEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -205,4 +239,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

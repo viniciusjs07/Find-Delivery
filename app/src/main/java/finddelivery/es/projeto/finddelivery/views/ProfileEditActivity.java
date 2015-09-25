@@ -81,18 +81,18 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
         imageViewUserProfile2.setImageBitmap(photoUserBitmap);
-        editTextNameUser2.setText(name);
+        imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
+        editTextNameUser2.setText(name);
 
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                session.logoutUser(); //Temp
+                session.logoutUser();
 
                 Intent it = new Intent();
                 it.setClass(ProfileEditActivity.this,
-                        LoginActivity.class);//Temp
-                //  UserProfileActivity.class);
+                        LoginActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -226,6 +226,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             case R.id.imgDelete:
                 Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
                 imageViewUserProfile2.setImageBitmap(avatar);
+                imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(avatar, 100, 100, false));
                 photo = avatar;
                 break;
         }
@@ -236,6 +237,8 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         if (requestCode == RESULT_CAMERA && resultCode == RESULT_OK) {
             photo = (Bitmap)data.getExtras().get("data");
             imageViewUserProfile2.setImageBitmap(photo);
+            imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photo, 100, 100, false));
+
         } else if (requestCode == RESULT_GALERIA && resultCode == RESULT_OK) {
             //Uri (local da tabela do banco de dados) do dado (no caso, da imagem)
             Uri imageUri = data.getData();
@@ -255,6 +258,8 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             //Se o arquivo nao estiver nulo (e for uma imagem e nao um video por exemplo)
             if (photo != null) {
                 imageViewUserProfile2.setImageBitmap(photo);
+                imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photo, 100, 100, false));
+
             }
         }
     }

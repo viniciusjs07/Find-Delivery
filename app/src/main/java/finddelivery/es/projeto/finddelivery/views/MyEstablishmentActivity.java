@@ -2,20 +2,35 @@ package finddelivery.es.projeto.finddelivery.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
 import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
+import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
@@ -28,6 +43,7 @@ public class MyEstablishmentActivity extends ActionBarActivity {
     private Context context;
     EstablishmentController establishmentController;
     UserSessionController session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +80,6 @@ public class MyEstablishmentActivity extends ActionBarActivity {
 
        try {
            adapter = new ListMyEstablishmentAdapter(this, establishmentController.listMyEstablishments(idUser));
-         //  adapter = new ListMyEstablishmentAdapter(this, establishmentController.findAll());
 
        } catch (Exception e) {
            e.printStackTrace();

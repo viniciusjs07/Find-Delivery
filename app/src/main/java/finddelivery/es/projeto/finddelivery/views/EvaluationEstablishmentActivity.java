@@ -70,6 +70,8 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         byte[] photo = establishment.getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
+        establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
+
 
         btnEvaluateEstablishment = (Button) findViewById(R.id.btnEvaluateEstablishment);
 
@@ -110,13 +112,6 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
             List listComments = new ArrayList(comments);
             List listUsers = new ArrayList(users);
 
-            //List<String> comments = new ArrayList();
-            // comments.add("Legal");
-            // comments.add("O erro n eh aquui");
-            // comments.add("Aeeeeeeeeee!");
-            // comments.add("Era culpa de Rayssa");
-
-            //adapter = new ListComments(this, users, comments);
             adapter = new ListComments(this,listUsers, listComments);
             listView.setAdapter(adapter);
 
