@@ -143,6 +143,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
             averageOfEstablishment.setRating(evaluationController.average(mapEvaluation));
         }
+
+        setTitle(establishment.getName());
+
     }
 
     public void insertComment(View view) throws Exception {

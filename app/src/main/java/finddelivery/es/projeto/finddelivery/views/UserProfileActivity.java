@@ -41,15 +41,6 @@ public class UserProfileActivity extends ActionBarActivity  {
 
         session = new  UserSessionController(getApplicationContext());
 
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isUserLoggedIn(),
-                Toast.LENGTH_LONG).show();
-
-        if(session.checkLogin()) {
-            finish();
-        }
-
-
         HashMap<String, String> user = session.getUserDetails();
         String name = user.get(UserSessionController.KEY_NAME);
         String login = user.get(UserSessionController.KEY_LOGIN);
@@ -65,8 +56,6 @@ public class UserProfileActivity extends ActionBarActivity  {
 
         editTextNameUser.setText(name);
         editTextLoginUser.setText(login);
-
-
 
         btnAlterarDados.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

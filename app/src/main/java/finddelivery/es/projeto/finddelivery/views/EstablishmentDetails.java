@@ -17,9 +17,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.Collection;
 import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
@@ -35,7 +32,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private ImageView establishmentPhotoImageView;
     private TextView averageOfEstablishmentTextView;
     private RatingBar evaluationEstablishmentRatingBar;
-    private TextView textView7;
     private TextView businessHours;
     private TextView fieldPhone;
     private TextView fieldPhoneTwo;
@@ -57,7 +53,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         establishmentPhotoImageView = (ImageView) findViewById(R.id.establishmentPhotoImageView);
         averageOfEstablishmentTextView = (TextView) findViewById(R.id.averageOfEstablishmentTextView);
         evaluationEstablishmentRatingBar = (RatingBar) findViewById(R.id.evaluationEstablishmentRatingBar);
-        textView7 = (TextView) findViewById(R.id.textView7);
         businessHours = (TextView) findViewById(R.id.businessHours);
         fieldPhone = (TextView) findViewById(R.id.fieldPhone);
         fieldPhoneTwo = (TextView) findViewById(R.id.fieldPhoneTwo);
@@ -69,17 +64,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         btLigar2.setOnClickListener(this);
 
         btnAvaliacoes = (Button) findViewById(R.id.btnAvaliacoes);
-
-        /*btnAvaliacoes.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent it = new Intent();
-                it.setClass(EstablishmentDetails.this,
-                        EvaluationEstablishmentActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });*/
-
 
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENT");
@@ -105,7 +89,10 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             averageOfEstablishmentTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
             evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
         }
+
+       setTitle(establishment.getName());
     }
+
 
 
     @Override
@@ -136,6 +123,9 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
     }
 
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -150,6 +140,8 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     public void onClick(View v) {

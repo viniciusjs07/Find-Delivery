@@ -17,11 +17,8 @@ import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 import java.io.ByteArrayOutputStream;
-import java.util.HashMap;
-
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
-import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.User;
 
 
@@ -32,7 +29,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private EditText cadastreLoginEditText;
     private EditText cadastrePasswordEditText;
     private EditText cadastrePasswordConfirmEditText;
-    private Button btnRegister;
     private Button btnCancel;
     private ImageButton btnCamera;
     private ImageButton btnGalery;
@@ -61,7 +57,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         btnGalery.setOnClickListener(this);
         btnDelete = (ImageButton) findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         cadastreNameEditText = (EditText) findViewById(R.id.cadastreNameEditText);
         cadastreLoginEditText = (EditText) findViewById(R.id.cadastreLoginEditText);

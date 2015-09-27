@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,8 +34,6 @@ import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
-
-import android.widget.AdapterView.OnItemClickListener;
 
 public class EstablishmentsActivity extends ActionBarActivity {
 
@@ -59,8 +56,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
 
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,6 +164,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
+
+
     }
 
     public void showDialog(String mensagem) {
@@ -236,7 +233,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

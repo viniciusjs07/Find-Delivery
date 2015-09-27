@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import finddelivery.es.projeto.finddelivery.R;
 
 
-
 public class MainActivity extends ActionBarActivity{
 
     @Override

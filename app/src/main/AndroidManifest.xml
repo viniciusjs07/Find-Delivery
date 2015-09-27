@@ -50,20 +50,8 @@
             android:label="@string/title_activity_my_establishment" >
         </activity>
         <activity
-            android:name=".views.FindEstablishmentActivity"
-            android:label="@string/title_tab_findRestaurants" >
-        </activity>
-        <activity
             android:name=".views.EstablishmentsActivity"
             android:label="@string/title_activity_establishments" >
-        </activity>
-        <activity
-            android:name=".Establishment_listActivity"
-            android:label="@string/title_activity_establishment_list" >
-        </activity>
-        <activity
-            android:name=".views.Establishment_listActivity"
-            android:label="@string/title_activity_establishment_list" >
         </activity>
         <activity
             android:name=".views.EvaluationEstablishmentActivity"

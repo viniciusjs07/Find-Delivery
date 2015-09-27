@@ -4,23 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import finddelivery.es.projeto.finddelivery.R;
-
-import java.util.ArrayList;
-
-import finddelivery.es.projeto.finddelivery.Server.ConnectionHTTPClient;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
-import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
 
@@ -46,10 +37,6 @@ public class LoginActivity extends ActionBarActivity {
         loginEditText = (EditText) findViewById(R.id.loginEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isUserLoggedIn(),
-                Toast.LENGTH_LONG).show();
-
         btnSingUp = (Button) findViewById(R.id.btnSingUp);
 
         btnSingUp.setOnClickListener(new View.OnClickListener() {
@@ -62,16 +49,8 @@ public class LoginActivity extends ActionBarActivity {
             }
         });
 
-
-
-
     }
 
-
-
-    /**
-     *
-     */
     public void showDialog(String mensagem) {
         alert = new AlertDialog.Builder(context);
         alert.setPositiveButton("OK", null);
@@ -88,10 +67,8 @@ public class LoginActivity extends ActionBarActivity {
             if (isValid) {
                 User user = userController.getUser(login);
                 session.createUserLoginSession(user);
-                // Intent it = new Intent();
 
                 Intent it = new Intent(getApplicationContext(), EstablishmentsActivity.class);
-                // it.setClass(LoginActivity.this,EstablishmentsActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(it);

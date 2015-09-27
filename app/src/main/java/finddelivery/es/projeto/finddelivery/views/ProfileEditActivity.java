@@ -66,14 +66,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         session = new  UserSessionController(getApplicationContext());
         user = session.getUserDetails();
 
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isUserLoggedIn(), Toast.LENGTH_LONG).show();
-
-        if(session.checkLogin()) {
-            finish();
-        }
-
-
         String name = user.get(UserSessionController.KEY_NAME);
         String photoUser = user.get(UserSessionController.KEY_PHOTO);
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
@@ -175,13 +167,11 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                     }
                 }
             }
-            //userController.updateData(actualName, login, actualPassword, photo);
         }
         catch (Exception e){
             showDialog("Erro validando usuário");
             e.printStackTrace();
         }
-
     }
 
     @Override

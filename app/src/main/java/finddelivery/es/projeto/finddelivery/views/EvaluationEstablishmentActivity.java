@@ -97,7 +97,11 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
             averageOfEstablishmentTextView2.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
             evaluationEstablishmentRatingBar2.setRating(evaluationController.average(mapEvaluation));
         }
+
+
+        setTitle(establishment.getName());
     }
+
 
     @Override
     protected void onStart() {

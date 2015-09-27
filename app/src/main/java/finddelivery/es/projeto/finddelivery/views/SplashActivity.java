@@ -1,7 +1,5 @@
 package finddelivery.es.projeto.finddelivery.views;
 
-import android.app.ActionBar;
-
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -10,18 +8,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import finddelivery.es.projeto.finddelivery.R;
-import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 
 public class SplashActivity extends ActionBarActivity {
 
     private static int SPLASH_TIME_OUT = 3000;
-
+    UserSessionController session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        session = new  UserSessionController(getApplicationContext());
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -32,20 +31,20 @@ public class SplashActivity extends ActionBarActivity {
              * Showing splash screen with a timer. This will be useful when you
              * want to show case your app logo / company
              */
-
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
+                if (!session.isUserLoggedIn()) {
+                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    Intent i = new Intent(SplashActivity.this, EstablishmentsActivity.class);
+                    startActivity(i);
+                    finish();
+                }
 
-                Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(i);
-
-                // close this activity
-                finish();
             }
         }, SPLASH_TIME_OUT);
-
     }
 
     @Override
