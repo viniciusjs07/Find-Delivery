@@ -64,7 +64,6 @@ public class UserProfileActivity extends ActionBarActivity  {
                 it.setClass(UserProfileActivity.this,
                         ProfileEditActivity.class);
                 startActivity(it);
-                finish();
             }
         });
 

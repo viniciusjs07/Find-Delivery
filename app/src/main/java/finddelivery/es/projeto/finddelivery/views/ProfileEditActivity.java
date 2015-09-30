@@ -24,7 +24,6 @@ import finddelivery.es.projeto.finddelivery.models.User;
 
 public class ProfileEditActivity extends ActionBarActivity implements View.OnClickListener  {
 
-    private Button btnCancelar;
     private Button btnSalvarAteracaoes;
     private ImageButton btnCamera;
     private ImageButton btnGalery;
@@ -50,7 +49,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
         context = this;
         userController = UserController.getInstance(context);
-        btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnSalvarAteracaoes = (Button) findViewById(R.id.btnSalvarAlteracoes);
         btnCamera = (ImageButton) findViewById(R.id.imgCamera);
         btnCamera.setOnClickListener(this);
@@ -76,19 +74,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
         editTextNameUser2.setText(name);
-
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                session.logoutUser();
-
-                Intent it = new Intent();
-                it.setClass(ProfileEditActivity.this,
-                        LoginActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
     }
 
     public void showDialog(String mensagem) {
@@ -142,7 +127,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
-                        finish();
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
                         userController.updateData(name, login, password, photo);
                         showDialog("Dados alterados com sucesso!");
@@ -150,7 +134,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
-                        finish();
                     }
 
                 } else if (name != null && name.equals(actualName)) {
@@ -161,14 +144,12 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
-                        finish();
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
                         userController.updateData(actualName, login, password, photo);
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
-                        finish();
                     }
                 }
             }

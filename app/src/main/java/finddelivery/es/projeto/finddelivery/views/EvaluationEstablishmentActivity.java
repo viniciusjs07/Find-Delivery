@@ -83,7 +83,6 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
                 it.putExtra("ESTABLISHMENTEVALUATION", establishment);
 
                 startActivity(it);
-                finish();
             }
         });
 

@@ -176,7 +176,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 it.setClass(EstablishmentCadastreActivity.this,
                         EstablishmentsActivity.class);
                 startActivity(it);
-                finish();
+
             } else if (!validateName) {
                 showDialog("Nome inválido!");
                 editTextEstablishmentName.setText("");

@@ -86,7 +86,6 @@ public class FindEstablishmentActivity extends ActionBarActivity {
             it.setClass(FindEstablishmentActivity.this,
                     EstablishmentsActivity.class);
             startActivity(it);
-            finish();
         }catch (Exception e) {
             showDialog("Erro de busca!");
             e.printStackTrace();
@@ -103,7 +102,6 @@ public class FindEstablishmentActivity extends ActionBarActivity {
           it.setClass(FindEstablishmentActivity.this,
                   EstablishmentsActivity.class);
           startActivity(it);
-          finish();
       }catch (Exception e) {
           showDialog("Erro de busca!");
           e.printStackTrace();
