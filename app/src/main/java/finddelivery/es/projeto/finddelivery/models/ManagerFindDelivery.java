@@ -52,7 +52,7 @@ public class ManagerFindDelivery {
     }
 
     //This method search an establishment by especiality and returns a list
-    public Set<Establishment> findEstablishmentBySpeciality(SpecialityType speciality) {
+    public Set<Establishment> findEstablishmentBySpeciality(String speciality) {
         Set<Establishment> listEstablishments = new HashSet<Establishment>();
         for (User user: getListUser()) {
             for(Establishment establishment: user.getEstablishments()) {

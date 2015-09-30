@@ -29,4 +29,5 @@
     <string name="title_activity_establishment_cadastre">Cadastre seu restaurante</string>
     <string name="title_activity_evaluate_establishment">Restaurante</string>
     <string name="title_activity_establishment_details">Restaurante</string>
+    <string name="title_tab_findRestaurants">Procurar restaurantes</string>
 </resources>

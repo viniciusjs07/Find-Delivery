@@ -162,7 +162,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
 
         try {
-            if (validateName && validateAddress && validateWorkHour && validatePhoneOne && validatePhoneTwo){
+            if (validateName && validateAddress && validateWorkHour && (validatePhoneOne && validatePhoneTwo || validatePhoneOne)){
 
                 ByteArrayOutputStream b = new ByteArrayOutputStream();
                 establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);

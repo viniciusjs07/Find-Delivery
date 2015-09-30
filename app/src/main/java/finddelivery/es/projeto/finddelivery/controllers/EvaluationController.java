@@ -47,7 +47,10 @@ public class EvaluationController {
         for (String grade: grades){
             sum += Float.valueOf(grade);
         }
-        Float average = sum / grades.size();
+        Float average = Float.valueOf(0);
+        if(grades.size() != 0){
+            average = sum / grades.size();
+        }
         return average;
     }
 }

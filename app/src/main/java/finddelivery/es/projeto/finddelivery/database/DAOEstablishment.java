@@ -1,8 +1,6 @@
 package finddelivery.es.projeto.finddelivery.database;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
-import finddelivery.es.projeto.finddelivery.models.SpecialityType;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

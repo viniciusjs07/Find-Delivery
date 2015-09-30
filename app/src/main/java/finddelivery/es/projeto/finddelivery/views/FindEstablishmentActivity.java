@@ -8,21 +8,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-
-import org.apache.http.protocol.ExecutionContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
-import finddelivery.es.projeto.finddelivery.models.Establishment;
-import finddelivery.es.projeto.finddelivery.models.SpecialityType;
 
 public class FindEstablishmentActivity extends ActionBarActivity {
 

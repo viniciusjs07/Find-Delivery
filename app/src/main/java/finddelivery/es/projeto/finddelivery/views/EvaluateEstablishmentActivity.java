@@ -97,7 +97,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                        averageTextView.setText(String.format("%.1f", evaluationController.average(evaluations)));
                         averageOfEstablishment.setRating(evaluationController.average(evaluations));
                     } else {
                         evaluationController.update(idUser, establishment.getName(), grade);
@@ -106,7 +106,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                        averageTextView.setText(String.format("%.1f", evaluationController.average(evaluations)));
                         averageOfEstablishment.setRating(evaluationController.average(evaluations));
                     }
 

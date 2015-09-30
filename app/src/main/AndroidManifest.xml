@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -68,6 +70,10 @@
         <activity
             android:name=".views.EstablishmentCadastreActivity"
             android:label="@string/title_activity_establishment_cadastre" >
+        </activity>
+        <activity
+            android:name=".views.FindEstablishmentActivity"
+            android:label="@string/title_tab_findRestaurants" >
         </activity>
     </application>
 
