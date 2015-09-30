@@ -70,6 +70,7 @@ public class ListComments extends BaseAdapter{
 
 
         ((TextView) view.findViewById(R.id.textViewComment)).setText(itemComment);
+        ((TextView) view.findViewById(R.id.textViewName)).setText(itemUser.getName());
         ((ImageView) view.findViewById(R.id.photoUser)).setImageBitmap(photoBitmap);
         ((ImageView) view.findViewById(R.id.photoUser)).setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
 

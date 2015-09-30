@@ -20,8 +20,38 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Comentario"
             android:id="@+id/textViewComment"
+            android:layout_marginLeft="42dp"
+            android:layout_marginStart="42dp"
+            android:layout_toRightOf="@+id/photoUser"
+            android:layout_below="@+id/myRatingBar"
+            android:layout_alignBottom="@+id/textViewName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Nome"
+            android:id="@+id/textViewName"
+            android:layout_toLeftOf="@+id/myRatingBar"
+            android:layout_below="@+id/photoUser"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <RatingBar
+            android:id="@+id/myRatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/textViewComment"
+            android:layout_alignStart="@+id/textViewComment" />
+
+
+
     </RelativeLayout>
 
 
