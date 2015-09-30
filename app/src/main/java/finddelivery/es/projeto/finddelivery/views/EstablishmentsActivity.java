@@ -215,6 +215,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
         }
         listViewEstablishments.setAdapter(adapter);
     }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

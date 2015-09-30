@@ -93,24 +93,24 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     }
 
     private void addTypes() {
-        specialityTypes.add("Comida Brasileira");
-        specialityTypes.add("Comida Mexicana");
-        specialityTypes.add("Comida Japonesa");
-        specialityTypes.add("Comida Chinesa");
-        specialityTypes.add("Comida Italiana");
-        specialityTypes.add("Comida Variada");
-        specialityTypes.add("Comida Saudável");
-        specialityTypes.add("Lanches");
-        specialityTypes.add("Pizza");
-        specialityTypes.add("Doces");
-        specialityTypes.add("Salgados");
-        specialityTypes.add("Frutos do Mar");
+        specialityTypes.add("Bebidas");
         specialityTypes.add("Café");
         specialityTypes.add("Carnes");
-        specialityTypes.add("Bebidas");
-        specialityTypes.add("Saladas");
+        specialityTypes.add("Comida Brasileira");
+        specialityTypes.add("Comida Chinesa");
+        specialityTypes.add("Comida Italiana");
+        specialityTypes.add("Comida Japonesa");
+        specialityTypes.add("Comida Mexicana");
+        specialityTypes.add("Comida Saudável");
+        specialityTypes.add("Comida Variada");
+        specialityTypes.add("Doces");
+        specialityTypes.add("Frutos do Mar");
+        specialityTypes.add("Lanches");
         specialityTypes.add("Marmitas");
         specialityTypes.add("Massas");
+        specialityTypes.add("Pizza");
+        specialityTypes.add("Saladas");
+        specialityTypes.add("Salgados");
     }
 
     @Override

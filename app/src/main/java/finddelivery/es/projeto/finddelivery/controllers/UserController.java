@@ -31,6 +31,10 @@ public class UserController {
         userDAO.update(user);
     }
 
+    public void delete(String login) throws Exception {
+        userDAO.delete(login);
+    }
+
     public List<User> findAll() throws Exception {
         return userDAO.findAll();
     }

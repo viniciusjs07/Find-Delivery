@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 
@@ -24,7 +25,9 @@ public class UserProfileActivity extends ActionBarActivity  {
     private ImageView imageViewUserProfile;
     private TextView editTextNameUser;
     private TextView editTextLoginUser;
-
+    private HashMap<String, String> user;
+    private UserController userController;
+    private Context context;
     UserSessionController session;
 
     @Override
@@ -39,9 +42,11 @@ public class UserProfileActivity extends ActionBarActivity  {
         btnAlterarDados = (Button) findViewById(R.id.btnAlterarDados);
         btnExcluirConta = (Button) findViewById(R.id.btnExcluirConta);
 
+        context = this;
+        userController = UserController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());
 
-        HashMap<String, String> user = session.getUserDetails();
+        user = session.getUserDetails();
         String name = user.get(UserSessionController.KEY_NAME);
         String login = user.get(UserSessionController.KEY_LOGIN);
 
@@ -75,11 +80,18 @@ public class UserProfileActivity extends ActionBarActivity  {
                 deleteAccount.setMessage(R.string.dialog_deleteAccount)
                         .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), R.string.dialog_accountDeleted, Toast.LENGTH_SHORT).show();
-                                Intent it = new Intent();
-                                it.setClass(UserProfileActivity.this, LoginActivity.class);
-                                startActivity(it);
-                                finish();
+                                try {
+                                    deteleProfile(user.get(UserSessionController.KEY_LOGIN));
+                                    session.logoutUser();
+
+                                    Toast.makeText(getApplicationContext(), R.string.dialog_accountDeleted, Toast.LENGTH_SHORT).show();
+                                    Intent it = new Intent();
+                                    it.setClass(UserProfileActivity.this, LoginActivity.class);
+                                    startActivity(it);
+                                    finish();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         })
                         .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {
@@ -96,6 +108,12 @@ public class UserProfileActivity extends ActionBarActivity  {
 
     }
 
+    public void deteleProfile(String login) throws Exception {
+        userController.delete(login);
+        Toast.makeText(getApplicationContext(),
+                "Usuário deletado!",
+                Toast.LENGTH_LONG).show();
+    }
 
 
     @Override

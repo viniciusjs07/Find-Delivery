@@ -42,6 +42,12 @@ public class DAOUser extends DatabaseHelper {
         getDatabase().update(TABLE, values, "login = ?", new String[]{user.getLogin()});
     }
 
+    public void delete(String login) throws Exception{
+        String table = "usuario";
+        String whereClause = "login" + "=?";
+        String[] whereArgs = new String[] { String.valueOf(login) };
+        getDatabase().delete(table, whereClause, whereArgs);
+    }
 
     public User findById(String login) { //Id user  = login
 
@@ -64,6 +70,7 @@ public class DAOUser extends DatabaseHelper {
         }
         return users;
     }
+
 
 
     public User mountUser(Cursor cursor) {

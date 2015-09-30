@@ -55,7 +55,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
     public List<Establishment> findAll() throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE;
+        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab ORDER BY a.avaliacao DESC";
         Cursor cursor = getDatabase().rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -83,7 +83,7 @@ public class DAOEstablishment extends DatabaseHelper {
     }
 
     public Establishment findByName(String restaurante) {
-        String sql = "SELECT * FROM " + TABLE + " WHERE restaurante = ?";
+        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE restaurante = ? ORDER BY a.avaliacao DESC";
         String[] selectionArgs = new String[] { restaurante};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
@@ -91,9 +91,10 @@ public class DAOEstablishment extends DatabaseHelper {
         return mountEstablishment(cursor);
     }
 
+
     public List<Establishment> findByUser(String idUser) throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE + " WHERE idUser = ?";
+        String sql = "SELECT * FROM " + TABLE + " WHERE idUser = ? ORDER BY restaurante";
         String[] selectionArgs = new String[] {idUser};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
