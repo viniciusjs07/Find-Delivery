@@ -116,7 +116,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                 it.putExtra("ESTABLISHMENTDETAILS", establishment);
 
                 startActivity(it);
-                finish();
             }
         });
         return true;

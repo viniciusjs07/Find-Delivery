@@ -116,17 +116,6 @@
                 android:layout_gravity="center_horizontal"
                 android:onClick="validates"/>
 
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="Cancelar"
-                android:id="@+id/btnCancelar"
-                android:background="@color/orange"
-                android:textColor="@color/white"
-                android:textSize="23dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal" />
-
         </LinearLayout>
 
     </ScrollView>

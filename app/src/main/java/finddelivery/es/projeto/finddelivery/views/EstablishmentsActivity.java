@@ -98,21 +98,18 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     it.setClass(EstablishmentsActivity.this,
                             UserProfileActivity.class);
                     startActivity(it);
-                    finish();
                 }
                 if (position == 1){
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             MyEstablishmentActivity.class);
                     startActivity(it);
-                    finish();
                 }
                 if (position == 2){
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             EstablishmentCadastreActivity.class);
                     startActivity(it);
-                    finish();
                 }
                 if (position == 3){
                     session.logoutUser();
@@ -120,7 +117,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     it.setClass(EstablishmentsActivity.this,
                             LoginActivity.class);
                     startActivity(it);
-                    finish();
                 }
             }
         });
@@ -160,7 +156,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 it.setClass(EstablishmentsActivity.this,
                         FindEstablishmentActivity.class);
                 startActivity(it);
-                finish();
             }
         });
 
@@ -192,7 +187,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
                         startActivity(it);
-                        finish();
                     }else {
                         adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
                     }
@@ -204,7 +198,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
                         startActivity(it);
-                        finish();
                     }else {
                         adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
                     }

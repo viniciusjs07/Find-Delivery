@@ -68,7 +68,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 Intent it = new Intent();
                 it.setClass(UserCadastreActivity.this, LoginActivity.class);
                 startActivity(it);
-                finish();
             }
         });
     }
@@ -109,7 +108,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                     it.setClass(UserCadastreActivity.this,
                             LoginActivity.class);
                     startActivity(it);
-                    finish();
                 }
             } else if (!loginValid) {
                 showDialog("Login inválido!");
