@@ -40,8 +40,7 @@
                 android:id="@+id/specialityTypeTextView"
                 android:layout_gravity="right"
                 android:layout_below="@+id/establishmentName"
-                android:layout_alignLeft="@+id/establishmentName"
-                android:layout_alignStart="@+id/establishmentName" />
+                android:layout_alignParentRight="true" />
 
             <ImageView
                 android:layout_width="100dp"
@@ -60,8 +59,9 @@
                 android:id="@+id/averageOfEstablishmentTextView2"
                 android:layout_gravity="right"
                 android:layout_alignBottom="@+id/evaluationEstablishmentRatingBar2"
-                android:layout_toRightOf="@+id/specialityTypeTextView"
-                android:layout_toEndOf="@+id/specialityTypeTextView" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
 
             <RatingBar
                 android:layout_width="wrap_content"
