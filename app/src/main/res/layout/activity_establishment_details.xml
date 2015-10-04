@@ -31,6 +31,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Establishment name"
+                    android:textStyle="bold"
                     android:id="@+id/establishmentNameTextView"
                     android:layout_gravity="right"
                     android:layout_alignParentTop="true"
@@ -60,7 +61,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Average"
                     android:id="@+id/averageOfEstablishmentTextView"
                     android:layout_gravity="right"
                     android:layout_alignBottom="@+id/evaluationEstablishmentRatingBar"
@@ -96,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Horários de funcionamento"
+                android:textStyle="bold"
                 android:id="@+id/textView7"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.24"
@@ -109,13 +110,13 @@
                 android:id="@+id/businessHours"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:enabled="false"
                 android:width="200dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Telefones"
+                android:textStyle="bold"
                 android:id="@+id/phones"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0.24"
@@ -130,8 +131,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="left|top">
 
-
-                <TextView
+                    <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -139,7 +139,7 @@
                         android:id="@+id/fieldPhone"
                         android:layout_marginTop="30dp"
                         android:layout_marginLeft="20dp"
-                        android:enabled="false"
+                        android:editable="false"
                         android:width="200dp" />
 
                     <ImageButton
@@ -151,7 +151,7 @@
                         android:src="@drawable/telefone"
                         android:layout_alignBottom="@+id/fieldPhone" />
 
-               </RelativeLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:orientation="vertical"
@@ -161,7 +161,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="left|top">
 
-                <TextView
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -169,7 +169,7 @@
                     android:id="@+id/fieldPhoneTwo"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="20dp"
-                    android:enabled="false"
+                    android:editable="false"
                     android:width="200dp" />
 
                 <ImageButton
