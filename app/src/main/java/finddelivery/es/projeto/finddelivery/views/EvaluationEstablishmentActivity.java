@@ -99,6 +99,8 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
 
 
         setTitle(establishment.getName());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 

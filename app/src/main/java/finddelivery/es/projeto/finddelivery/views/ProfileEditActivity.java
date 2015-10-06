@@ -74,6 +74,8 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
         editTextNameUser2.setText(name);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void showDialog(String mensagem) {

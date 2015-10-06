@@ -1,11 +1,13 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -113,10 +115,10 @@ public class EstablishmentsActivity extends ActionBarActivity {
                 }
                 if (position == 3){
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentsActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -159,8 +161,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
             }
         });
 
-
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void showDialog(String mensagem) {

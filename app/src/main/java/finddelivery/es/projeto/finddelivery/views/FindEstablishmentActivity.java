@@ -51,6 +51,7 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         sp = (Spinner) findViewById(R.id.spinnerTipoCozinha);
         sp.setAdapter(adapter);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void addTypes() {

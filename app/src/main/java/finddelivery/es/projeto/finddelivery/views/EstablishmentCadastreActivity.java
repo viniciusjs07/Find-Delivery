@@ -83,7 +83,6 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         editTextPhoneOne.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneOne));
         editTextPhoneTwo.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneTwo));
 
-
         specialityTypes = new ArrayList<String>();
         addTypes();
 
@@ -93,8 +92,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
 
-        //getActionBar().setHomeButtonEnabled(true);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void addTypes() {

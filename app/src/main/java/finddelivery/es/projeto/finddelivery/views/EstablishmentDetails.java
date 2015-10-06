@@ -90,7 +90,9 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
         }
 
-       setTitle(establishment.getName());
+        setTitle(establishment.getName());
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
