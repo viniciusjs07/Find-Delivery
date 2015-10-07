@@ -2,6 +2,7 @@ package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,11 +26,17 @@ public class LoginActivity extends ActionBarActivity {
     private AlertDialog.Builder alert;
 
     UserSessionController session;
+    private ActionBar actionBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.mipmap.ic_launcher);
+
         context = this;
         userController = UserController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());

@@ -1,159 +1,233 @@
-<ScrollView
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <!-- The main content view -->
+
+    <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="finddelivery.es.projeto.finddelivery.EstablishmentCadastreActivity"
-        android:id="@+id/EstablishmentCadastre"
-        android:background="#00ff7712">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context="finddelivery.es.projeto.finddelivery.EstablishmentCadastreActivity"
+            android:id="@+id/EstablishmentCadastre"
+            android:background="#00ff7712">
 
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="right|bottom">
-
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_gravity="right|bottom">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:id="@+id/logoEstablishmentImageView"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/logoEstablishmentImageView"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="130dp"
+                        android:src="@mipmap/photodefault"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgCamera"
+                        android:src="@drawable/camera"
+                        android:layout_marginLeft="260dp"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgGallery"
+                        android:src="@drawable/gallery"
+                        android:layout_below="@id/imgCamera"
+                        android:layout_marginLeft="260dp"/>
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imgDelete"
+                        android:src="@drawable/delete"
+                        android:layout_below="@id/imgGallery"
+                        android:layout_marginLeft="260dp"/>
+
+                </RelativeLayout>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="Restaurante"
+                    android:ems="10"
+                    android:id="@+id/editTextEstablishmentName"
+                    android:layout_gravity="center"
+                    android:textIsSelectable="false"
+                    android:layout_marginTop="20dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="Endereço"
+                    android:ems="10"
+                    android:id="@+id/editTextAddress"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Campina Grande - Paraíba"
+                    android:id="@+id/textView6"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Tipo de cozinha"
+                    android:id="@+id/textViewTipoDeCozinha"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinnerTipoDeCozinha"
                     android:layout_marginTop="20dp"
-                    android:layout_marginLeft="130dp"
-                    android:src="@mipmap/photodefault"/>
+                    android:layout_gravity="center" />
 
-                <ImageButton
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgCamera"
-                    android:src="@drawable/camera"
-                    android:layout_marginLeft="260dp"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Horário de Funcionamento"
+                    android:id="@+id/textViewHorario"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center" />
 
-                <ImageButton
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextHorario" />
+
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgGallery"
-                    android:src="@drawable/gallery"
-                    android:layout_below="@id/imgCamera"
-                    android:layout_marginLeft="260dp"/>
+                    android:inputType="phone"
+                    android:hint="(083)8888-8888"
+                    android:ems="10"
+                    android:id="@+id/editTextPhoneOne"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
 
-                <ImageButton
+                <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imgDelete"
-                    android:src="@drawable/delete"
-                    android:layout_below="@id/imgGallery"
-                    android:layout_marginLeft="260dp"/>
+                    android:inputType="phone"
+                    android:hint="Opcional"
+                    android:ems="10"
+                    android:id="@+id/editTextPhoneTwo"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp" />
 
-            </RelativeLayout>
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cadastrar"
+                    android:onClick="submitEstablishment"
+                    android:id="@+id/btnCadastrarEstabelecimento"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="Arial"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Restaurante"
-            android:ems="10"
-            android:id="@+id/editTextEstablishmentName"
-            android:layout_gravity="center"
-            android:textIsSelectable="false"
-            android:layout_marginTop="20dp" />
+            </LinearLayout>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:hint="Endereço"
-            android:ems="10"
-            android:id="@+id/editTextAddress"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+        </FrameLayout>
+    </ScrollView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Campina Grande - Paraíba"
-            android:id="@+id/textView6"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Tipo de cozinha"
-            android:id="@+id/textViewTipoDeCozinha"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
 
-        <Spinner
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinnerTipoDeCozinha"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center" />
+    <!-- The navigation drawer -->
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:id="@+id/drawerPane"
+        android:layout_gravity="start">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Horário de Funcionamento"
-            android:id="@+id/textViewHorario"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center" />
+        <!-- Profile Box -->
 
-        <EditText
+        <RelativeLayout
+            android:id="@+id/profileBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextHorario" />
+            android:layout_height="90dp"
+            android:background="@color/background_material_light"
+            android:padding="8dp" >
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="Telefone 1"
-            android:ems="10"
-            android:id="@+id/editTextPhoneOne"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            <ImageView
+                android:id="@+id/photoUser"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="Telefone 2"
-            android:ems="10"
-            android:id="@+id/editTextPhoneTwo"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/photoUser"
+                android:orientation="vertical" >
 
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Cadastrar"
-            android:onClick="submitEstablishment"
-            android:id="@+id/btnCadastrarEstabelecimento"
-            android:background="@color/orange"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:fontFamily="Arial"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp" />
+                <TextView
+                    android:id="@+id/nameUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="4dp"
+                    android:text="login"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
 
-    </FrameLayout>
-</ScrollView>
+        <!-- List of Actions (pages) -->
+        <ListView
+            android:id="@+id/navList"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/profileBox"
+            android:choiceMode="singleChoice"
+            android:background="@color/white"
+            />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
 

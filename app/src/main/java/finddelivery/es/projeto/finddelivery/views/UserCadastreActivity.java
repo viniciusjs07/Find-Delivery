@@ -9,6 +9,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,7 +20,10 @@ import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.models.User;
 
@@ -39,6 +45,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
     private Bitmap photo;
+    private ActionBar actionBar;
 
 
     @Override
@@ -47,6 +54,10 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         setContentView(R.layout.activity_user_cadastre);
         Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
         photo = avatar;
+
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.mipmap.ic_launcher);
 
         context = this;
         userController = UserController.getInstance(context);
@@ -68,6 +79,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 Intent it = new Intent();
                 it.setClass(UserCadastreActivity.this, LoginActivity.class);
                 startActivity(it);
+
             }
         });
     }

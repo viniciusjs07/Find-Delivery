@@ -5,22 +5,32 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
+import finddelivery.es.projeto.finddelivery.adapter.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
+import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
@@ -39,11 +49,25 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private Context context;
     private EvaluationController evaluationController;
     private Map<User,String> mapEvaluation = null;
+    private ActionBar actionBar;
+
+    ListView mDrawerList;
+    RelativeLayout mDrawerPane;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    UserSessionController session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishment_details);
+
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        session = new  UserSessionController(getApplicationContext());
 
         context = this;
         evaluationController = EvaluationController.getInstance(context);
@@ -67,6 +91,53 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENT");
+
+        mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
+        mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
+        mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
+        mNavItems.add(new NavItem("Sair", R.drawable.logout));
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(drawerAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(EstablishmentDetails.this,
+                            UserProfileActivity.class);
+                    startActivity(it);
+                }
+                if (position == 1) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(EstablishmentDetails.this,
+                            MyEstablishmentActivity.class);
+                    startActivity(it);
+                }
+                if (position == 2) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(EstablishmentDetails.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    session.logoutUser();
+                    Intent it = new Intent();
+                    it.setClass(EstablishmentDetails.this,
+                            LoginActivity.class);
+                    startActivity(it);
+                }
+            }
+        });
 
         byte[] photo = establishment.getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);

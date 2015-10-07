@@ -1,11 +1,16 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.ActionBar;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+
+
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.*;
@@ -14,9 +19,12 @@ import android.content.*;
 import android.app.AlertDialog;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.R;
+import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
+import finddelivery.es.projeto.finddelivery.adapter.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.User;
@@ -41,11 +49,22 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
     private static final int RESULT_GALERIA = 222;
     private Bitmap photo;
     UserSessionController session;
+    private android.support.v7.app.ActionBar actionBar;
+
+    ListView mDrawerList;
+    RelativeLayout mDrawerPane;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_edit);
+
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.mipmap.ic_launcher);
 
         context = this;
         userController = UserController.getInstance(context);
@@ -74,6 +93,54 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
         editTextNameUser2.setText(name);
+
+        mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
+        mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
+        mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
+        mNavItems.add(new NavItem("Sair", R.drawable.logout));
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+        DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(drawerAdapter);
+
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (position == 0) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(ProfileEditActivity.this,
+                            UserProfileActivity.class);
+                    startActivity(it);
+                }
+                if (position == 1) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(ProfileEditActivity.this,
+                            MyEstablishmentActivity.class);
+                    startActivity(it);
+                }
+                if (position == 2) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(ProfileEditActivity.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    session.logoutUser();
+                    Intent it = new Intent();
+                    it.setClass(ProfileEditActivity.this,
+                            LoginActivity.class);
+                    startActivity(it);
+                }
+            }
+        });
+
     }
 
     public void showDialog(String mensagem) {

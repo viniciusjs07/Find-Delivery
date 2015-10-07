@@ -3,9 +3,10 @@
     <style name="AppTheme"
         parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-
+        <item name="android:icon">@drawable/iconactionbar</item>
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyActionBar</item>
+
     </style>
 
     <!-- ActionBar styles -->
@@ -13,7 +14,11 @@
         parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/white</item>
 
+
+
         <!-- Support library compatibility -->
         <item name="background">@color/orange</item>
     </style>
+
+
 </resources>
