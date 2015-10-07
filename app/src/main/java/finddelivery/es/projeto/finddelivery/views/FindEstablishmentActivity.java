@@ -154,6 +154,7 @@ public class FindEstablishmentActivity extends ActionBarActivity {
             it.setClass(FindEstablishmentActivity.this,
                     EstablishmentsActivity.class);
             startActivity(it);
+            restaurantNameEditText.setText("");
         }catch (Exception e) {
             showDialog("Erro de busca!");
             e.printStackTrace();
