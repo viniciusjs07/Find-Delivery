@@ -97,6 +97,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENT");
 
+        mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
@@ -119,24 +120,31 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentDetails.this,
-                            UserProfileActivity.class);
+                            EstablishmentsActivity.class);
                     startActivity(it);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentDetails.this,
-                            MyEstablishmentActivity.class);
+                            UserProfileActivity.class);
                     startActivity(it);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentDetails.this,
-                            EstablishmentCadastreActivity.class);
+                            MyEstablishmentActivity.class);
                     startActivity(it);
                 }
                 if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(EstablishmentDetails.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 4) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent();
@@ -188,7 +196,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         setTitle(establishment.getName());
 
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 

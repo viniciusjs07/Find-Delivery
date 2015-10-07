@@ -72,11 +72,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluate_establishment);
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTEVALUATION");
 
@@ -100,6 +95,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
         establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
 
+        mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
@@ -122,24 +118,31 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EvaluateEstablishmentActivity.this,
-                            UserProfileActivity.class);
+                            EstablishmentsActivity.class);
                     startActivity(it);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EvaluateEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
+                            UserProfileActivity.class);
                     startActivity(it);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EvaluateEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
+                            MyEstablishmentActivity.class);
                     startActivity(it);
                 }
                 if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(EvaluateEstablishmentActivity.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 4) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent();
@@ -159,11 +162,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
         userLogged = new User(name, login, password, photoUserByte);
-
-
-
-
-
 
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
@@ -237,8 +235,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         setTitle(establishment.getName());
 
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void insertComment(View view) throws Exception {

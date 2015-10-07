@@ -3,19 +3,24 @@ package finddelivery.es.projeto.finddelivery.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
+import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
 
 /**
  * Created by Vinicius on 29/07/2015.
@@ -24,6 +29,8 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private List<Establishment> items;
     private Context myContext;
+    private EvaluationController evaluationController;
+    private Map<User,String> mapEvaluation = null;
     EstablishmentController establishmentController;
 
     public ListMyEstablishmentAdapter(Context context, List<Establishment> items) {
@@ -31,6 +38,7 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         mInflater = LayoutInflater.from(context);
         myContext = context;
         establishmentController = EstablishmentController.getInstance(context);
+        evaluationController = EvaluationController.getInstance(context);
     }
 
     @Override
@@ -57,13 +65,20 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         byte[] photo = (establishmentController.getEstablishment(item.getName())).getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
 
+        try {
+            mapEvaluation = evaluationController.searchEvaluationByEstablishment(item.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
+            ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(evaluationController.average(mapEvaluation));
+        }
 
         ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
         ((TextView) view.findViewById(R.id.textViewSpeciallity)).setText(item.getSpeciality());
         ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(photoBitmap);
         ((ImageView) view.findViewById(R.id.imageViewRestaurant)).setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
-
-
 
         return view;
     }

@@ -56,16 +56,11 @@ public class MyEstablishmentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_establishment);
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());
 
-
+        mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
@@ -88,24 +83,31 @@ public class MyEstablishmentActivity extends ActionBarActivity {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(MyEstablishmentActivity.this,
-                            UserProfileActivity.class);
+                            EstablishmentsActivity.class);
                     startActivity(it);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(MyEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
+                            UserProfileActivity.class);
                     startActivity(it);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(MyEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
+                            MyEstablishmentActivity.class);
                     startActivity(it);
                 }
                 if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(MyEstablishmentActivity.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 4) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent();
@@ -148,8 +150,6 @@ public class MyEstablishmentActivity extends ActionBarActivity {
         });
 
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
    @Override

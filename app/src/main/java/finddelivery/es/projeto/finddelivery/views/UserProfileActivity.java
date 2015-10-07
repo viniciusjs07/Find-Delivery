@@ -52,12 +52,6 @@ public class UserProfileActivity extends ActionBarActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         imageViewUserProfile = (ImageView) findViewById((R.id.imageViewUserProfile));
         editTextNameUser = (TextView) findViewById(R.id.editTextNameUser);
         editTextLoginUser = (TextView) findViewById(R.id.editTextLoginUser);
@@ -80,6 +74,7 @@ public class UserProfileActivity extends ActionBarActivity  {
         imageViewUserProfile.setImageBitmap(photoUserBitmap);
         imageViewUserProfile.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
+        mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
@@ -107,24 +102,31 @@ public class UserProfileActivity extends ActionBarActivity  {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(UserProfileActivity.this,
-                            UserProfileActivity.class);
+                            EstablishmentsActivity.class);
                     startActivity(it);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(UserProfileActivity.this,
-                            MyEstablishmentActivity.class);
+                            UserProfileActivity.class);
                     startActivity(it);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(UserProfileActivity.this,
-                            EstablishmentCadastreActivity.class);
+                            MyEstablishmentActivity.class);
                     startActivity(it);
                 }
                 if (position == 3) {
+                    mDrawerLayout.closeDrawer(mDrawerPane);
+                    Intent it = new Intent();
+                    it.setClass(UserProfileActivity.this,
+                            EstablishmentCadastreActivity.class);
+                    startActivity(it);
+                }
+                if (position == 4) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent();
@@ -180,7 +182,7 @@ public class UserProfileActivity extends ActionBarActivity  {
 
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void deteleProfile(String login) throws Exception {

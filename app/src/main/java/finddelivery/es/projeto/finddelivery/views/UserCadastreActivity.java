@@ -54,11 +54,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
         setContentView(R.layout.activity_user_cadastre);
         Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
         photo = avatar;
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         context = this;
         userController = UserController.getInstance(context);
         cadastrePhotoImageView = (ImageView) findViewById(R.id.cadastrePhotoImageView);
@@ -133,7 +128,6 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             e.printStackTrace();
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

@@ -32,11 +32,6 @@ public class LoginActivity extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         context = this;
         userController = UserController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());

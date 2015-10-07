@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="finddelivery.es.projeto.finddelivery.views.Establishment_listActivity"
+    tools:context="finddelivery.es.projeto.finddelivery.views.EstablishmentListActivity"
     android:orientation="vertical"
     android:padding="5sp">
 
