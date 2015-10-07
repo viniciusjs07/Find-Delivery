@@ -24,7 +24,7 @@
             android:id="@+id/textViewNameRestaurant"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/myRatingBar" />
+            android:layout_above="@+id/myRatingBar" />
 
         <TextView
             android:layout_width="wrap_content"
