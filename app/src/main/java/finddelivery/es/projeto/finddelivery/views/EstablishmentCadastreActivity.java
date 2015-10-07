@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
@@ -67,6 +70,10 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+
+    private ImageView photoUser;
+    private TextView nameUser;
+    private TextView login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +114,9 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser = (ImageView) findViewById((R.id.photoUser));
+        nameUser = (TextView) findViewById(R.id.nameUser);
+        login = (TextView) findViewById(R.id.login);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
@@ -150,6 +160,22 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 }
             }
         });
+
+        Map<String, String> user = session.getUserDetails();
+
+        String photo = user.get(UserSessionController.KEY_PHOTO);
+        String name = user.get(UserSessionController.KEY_NAME);
+        String loginUser = user.get(UserSessionController.KEY_LOGIN);
+
+
+        byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+
+        photoUser.setImageBitmap(photoUserBitmap);
+        photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser.setText(name);
+        login.setText(loginUser);
 
         specialityTypes = new ArrayList<String>();
         addTypes();

@@ -22,7 +22,6 @@
             android:id="@+id/EstablishmentCadastre"
             android:background="#00ff7712">
 
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -140,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:hint="Opcional"
+                    android:hint="Opc"
                     android:ems="10"
                     android:id="@+id/editTextPhoneTwo"
                     android:layout_gravity="center"

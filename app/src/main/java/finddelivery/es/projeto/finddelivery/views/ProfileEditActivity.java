@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
@@ -56,6 +57,9 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    private ImageView photoUser2;
+    private TextView nameUser2;
+    private TextView login2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,8 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         user = session.getUserDetails();
 
         String name = user.get(UserSessionController.KEY_NAME);
+        String login = user.get(UserSessionController.KEY_LOGIN);
+
         String photoUser = user.get(UserSessionController.KEY_PHOTO);
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
@@ -98,12 +104,24 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser2 = (ImageView) findViewById((R.id.photoUser));
+        nameUser2 = (TextView) findViewById(R.id.nameUser);
+        login2 = (TextView) findViewById(R.id.login);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(drawerAdapter);
+
+
+
+        String loginUser = user.get(UserSessionController.KEY_LOGIN);
+
+        photoUser2.setImageBitmap(photoUserBitmap);
+        photoUser2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser2.setText(name);
+        login2.setText(loginUser);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

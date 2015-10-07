@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +62,9 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
     UserSessionController session;
+    private ImageView photoUser;
+    private TextView nameUser;
+    private TextView login;
 
 
     @Override
@@ -94,6 +98,9 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser = (ImageView) findViewById((R.id.photoUser));
+        nameUser = (TextView) findViewById(R.id.nameUser);
+        login = (TextView) findViewById(R.id.login);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
@@ -101,6 +108,22 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(drawerAdapter);
 
+
+        Map<String, String> user = session.getUserDetails();
+
+        String photoU = user.get(UserSessionController.KEY_PHOTO);
+        String name = user.get(UserSessionController.KEY_NAME);
+        String loginUser = user.get(UserSessionController.KEY_LOGIN);
+
+
+        byte[] photoUserByte = Base64.decode(photoU, Base64.DEFAULT);
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+
+        photoUser.setImageBitmap(photoUserBitmap);
+        photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser.setText(name);
+        login.setText(loginUser);
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -57,12 +57,16 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     private User userLogged;
     private ActionBar actionBar;
 
+
     ListView mDrawerList;
     RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
+    private ImageView photoUser2;
+    private TextView nameUser;
+    private TextView login2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,19 +100,19 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
         establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
 
-
-
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser2 = (ImageView) findViewById((R.id.photoUser));
+        nameUser = (TextView) findViewById(R.id.nameUser);
+        login2 = (TextView) findViewById(R.id.login);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(drawerAdapter);
-
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -155,6 +159,20 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
         userLogged = new User(name, login, password, photoUserByte);
+
+
+
+
+
+
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+
+        photoUser2.setImageBitmap(photoUserBitmap);
+        photoUser2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser.setText(name);
+        login2.setText(login);
+
+
 
         yourEvaluationForEstablishment.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -217,6 +235,8 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         }
 
         setTitle(establishment.getName());
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

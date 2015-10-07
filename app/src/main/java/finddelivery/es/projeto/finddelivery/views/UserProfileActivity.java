@@ -42,6 +42,9 @@ public class UserProfileActivity extends ActionBarActivity  {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    private ImageView photoUser2;
+    private TextView nameUser2;
+    private TextView login2;
 
 
     @Override
@@ -81,6 +84,14 @@ public class UserProfileActivity extends ActionBarActivity  {
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+        photoUser2 = (ImageView) findViewById((R.id.photoUser));
+        nameUser2 = (TextView) findViewById(R.id.nameUser);
+        login2 = (TextView) findViewById(R.id.login);
+
+        photoUser2.setImageBitmap(photoUserBitmap);
+        photoUser2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        nameUser2.setText(name);
+        login2.setText(login);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
