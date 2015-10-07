@@ -55,6 +55,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     private ImageButton btnGalery;
     private ImageButton btnDelete;
 
+
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
 
