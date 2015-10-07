@@ -87,7 +87,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
-        
+
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);
