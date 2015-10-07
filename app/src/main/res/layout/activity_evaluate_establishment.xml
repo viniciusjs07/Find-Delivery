@@ -1,241 +1,242 @@
 <android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawerLayout"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/drawerLayout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<!-- The main content view -->
+
+<FrameLayout
+    android:id="@+id/mainContent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <!-- The main content view -->
-
-    <FrameLayout
-        android:id="@+id/mainContent"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        android:layout_height="match_parent">
 
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="top|center">
+    </ScrollView>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="top|center">
 
-                <RelativeLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="164dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="left|top">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Establishment name"
-                        android:id="@+id/establishmentNameTextView"
-                        android:layout_gravity="right"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_above="@+id/averageOfEstablishment" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Speciality type"
-                        android:id="@+id/specialityTypeTextView"
-                        android:layout_gravity="right"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/establishmentNameTextView" />
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/establishmentPhotoImageView"
-                        android:layout_gravity="center_vertical"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Average"
-                        android:id="@+id/averageTextView"
-                        android:layout_gravity="right"
-                        android:layout_alignBottom="@+id/averageOfEstablishment"
-                        android:layout_alignParentRight="true" />
-
-
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/averageOfEstablishment"
-                        android:layout_below="@+id/establishmentPhotoImageView"
-                        android:isIndicator="true"
-                        android:stepSize="0.5"
-                        android:numStars="5"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
-
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="left|center"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Sua avaliação"
-                        android:id="@+id/yourEvaluationTextView"
-                        android:layout_gravity="left" />
-
-                    <RatingBar
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/yourEvaluationForEstablishment"
-                        android:numStars="5"
-                        android:stepSize="0.5"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Seu comentário"
-                        android:id="@+id/yourCommentTextView"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Você não deixou nenhum comentário."
-                        android:id="@+id/yourComment"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="10dp"/>
-
-                    <RelativeLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="164dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="left|top">
-
-                        <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/insertComment"
-                            android:layout_marginTop="30dp"
-                            android:ems="12"
-                            android:hint="Deixe seu comentário aqui"/>
-
-                        <Button
-                            android:layout_width="70dp"
-                            android:layout_height="35dp"
-                            android:text="Enviar"
-                            android:onClick="insertComment"
-                            android:id="@+id/btnSendComment"
-                            android:background="@color/orange"
-                            android:textColor="@color/white"
-                            android:textSize="15dp"
-                            android:fontFamily="Arial"
-                            android:textStyle="bold"
-                            android:layout_alignBottom="@+id/insertComment"
-                            android:layout_marginLeft="260dp"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </ScrollView>
-    </FrameLayout>
-
-
-    <!-- The navigation drawer -->
-    <RelativeLayout
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
-        android:id="@+id/drawerPane"
-        android:layout_gravity="start">
-
-        <!-- Profile Box -->
 
         <RelativeLayout
-            android:id="@+id/profileBox"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@color/background_material_light"
-            android:padding="8dp" >
+            android:layout_height="164dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left|top">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Establishment name"
+                android:textStyle="bold"
+                android:id="@+id/establishmentNameTextView"
+                android:layout_gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/averageOfEstablishment" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Speciality type"
+                android:id="@+id/specialityTypeTextView"
+                android:layout_gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/establishmentNameTextView" />
 
             <ImageView
-                android:id="@+id/photoUser"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="15dp" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/establishmentPhotoImageView"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@+id/photoUser"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/averageTextView"
+                android:layout_gravity="right"
+                android:layout_alignBottom="@+id/averageOfEstablishment"
+                android:layout_alignParentRight="true" />
 
-                <TextView
-                    android:id="@+id/nameUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginTop="4dp"
-                    android:text="login"
-                    android:textSize="12sp" />
-            </LinearLayout>
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/averageOfEstablishment"
+                android:layout_below="@+id/establishmentPhotoImageView"
+                android:isIndicator="true"
+                android:stepSize="0.5"
+                android:numStars="5"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+
         </RelativeLayout>
 
-        <!-- List of Actions (pages) -->
-        <ListView
-            android:id="@+id/navList"
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/profileBox"
-            android:choiceMode="singleChoice"
-            android:background="@color/white"
-            />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="left|center"
+            android:layout_marginTop="20dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Sua avaliação"
+                android:textStyle="bold"
+                android:id="@+id/yourEvaluationTextView"
+                android:layout_gravity="left" />
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yourEvaluationForEstablishment"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Seu comentário"
+                android:textStyle="bold"
+                android:id="@+id/yourCommentTextView"
+                android:layout_gravity="left"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Você não deixou nenhum comentário."
+                android:id="@+id/yourComment"
+                android:layout_gravity="left"
+                android:layout_marginTop="10dp"/>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="left|top">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/insertComment"
+                    android:layout_marginTop="30dp"
+                    android:ems="12"
+                    android:hint="Deixe seu comentário aqui"/>
+
+                <Button
+                    android:layout_width="70dp"
+                    android:layout_height="35dp"
+                    android:text="Enviar"
+                    android:onClick="insertComment"
+                    android:id="@+id/btnSendComment"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:fontFamily="Arial"
+                    android:textStyle="bold"
+                    android:layout_alignBottom="@+id/insertComment"
+                    android:layout_marginLeft="260dp"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
+
+
+<!-- The navigation drawer -->
+<RelativeLayout
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerPane"
+    android:layout_gravity="start">
+
+    <!-- Profile Box -->
+
+    <RelativeLayout
+        android:id="@+id/profileBox"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/background_material_light"
+        android:padding="8dp" >
+
+        <ImageView
+            android:id="@+id/photoUser"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/photoUser"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/nameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="4dp"
+                android:text="login"
+                android:textSize="12sp" />
+        </LinearLayout>
     </RelativeLayout>
 
+    <!-- List of Actions (pages) -->
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profileBox"
+        android:choiceMode="singleChoice"
+        android:background="@color/white"
+        />
+
+</RelativeLayout>
+
 </android.support.v4.widget.DrawerLayout>
-
-
 
 
 

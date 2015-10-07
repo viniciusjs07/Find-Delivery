@@ -218,6 +218,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
         setTitle(establishment.getName());
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void insertComment(View view) throws Exception {

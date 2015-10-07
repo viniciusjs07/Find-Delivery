@@ -119,7 +119,7 @@ public class MyEstablishmentActivity extends ActionBarActivity {
             }
         });
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
    @Override

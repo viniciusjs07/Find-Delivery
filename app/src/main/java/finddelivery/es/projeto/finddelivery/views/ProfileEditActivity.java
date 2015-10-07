@@ -141,6 +141,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             }
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void showDialog(String mensagem) {

@@ -169,7 +169,7 @@ public class UserProfileActivity extends ActionBarActivity  {
 
             }
         });
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public void deteleProfile(String login) throws Exception {

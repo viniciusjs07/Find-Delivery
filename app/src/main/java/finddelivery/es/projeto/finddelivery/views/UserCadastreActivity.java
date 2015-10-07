@@ -133,6 +133,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
             e.printStackTrace();
         }
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

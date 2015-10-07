@@ -99,6 +99,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         editTextEstablishmentName = (EditText) findViewById(R.id.editTextEstablishmentName);
         editTextPhoneOne = (EditText) findViewById(R.id.editTextPhoneOne);
         editTextPhoneTwo = (EditText) findViewById(R.id.editTextPhoneTwo);
+        editTextPhoneOne.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneOne));
+        editTextPhoneTwo.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneTwo));
 
 
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
@@ -158,6 +160,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void addTypes() {
@@ -240,10 +243,11 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 establishmentController.insert(establishment, idUser);
                 showDialog("Estabelecimento cadastrado com sucesso!");
 
-            Intent it = new Intent();
+                Intent it = new Intent();
                 it.setClass(EstablishmentCadastreActivity.this,
                         EstablishmentsActivity.class);
                 startActivity(it);
+                finish();
 
             } else if (!validateName) {
                 showDialog("Nome inválido!");
@@ -257,7 +261,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
             } else if (!validatePhoneOne) {
                 showDialog("Telefone 1 inválido!");
                 editTextPhoneOne.setText("");
-            } 
+            }
         }
         catch (Exception e){
             showDialog("Erro ao cadastrar estabelecimento!");
