@@ -66,7 +66,9 @@ public class EstablishmentController {
         return establishmentsBySpeciality;
     }
 
+    public void getOwner(){
 
+    }
 
     public void insertByName(String name) throws Exception {
         establishmentsByName = new ArrayList<>();

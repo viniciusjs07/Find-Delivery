@@ -23,6 +23,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -34,6 +36,9 @@ import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
+
+import static finddelivery.es.projeto.finddelivery.R.id.action_delete;
+import static finddelivery.es.projeto.finddelivery.R.id.action_edit;
 
 public class EstablishmentDetails extends ActionBarActivity implements View.OnClickListener {
 
@@ -71,7 +76,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         actionBar =  getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
         session = new  UserSessionController(getApplicationContext());
 
         context = this;
@@ -165,6 +169,10 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         byte[] photoUserByte = Base64.decode(photoU, Base64.DEFAULT);
 
+
+
+
+
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
         photoUser.setImageBitmap(photoUserBitmap);
@@ -206,6 +214,13 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_establishment_details, menu);
 
+        String name = "Dani";
+        if (name.equals("Daniela")) {
+            MenuItem item1 = menu.findItem(action_delete);
+            MenuItem item2 = menu.findItem(action_edit);
+            item1.setVisible(false);
+            item2.setVisible(false);
+        }
         final ImageButton btLigar = (ImageButton) findViewById(R.id.phone);
         btLigar.setOnClickListener(this);
 
@@ -229,8 +244,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     }
 
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -239,7 +252,12 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete) {
+            Intent it = new Intent();
+            it.setClass(EstablishmentDetails.this,
+                    LoginActivity.class);
+            startActivity(it);
+
             return true;
         }
 

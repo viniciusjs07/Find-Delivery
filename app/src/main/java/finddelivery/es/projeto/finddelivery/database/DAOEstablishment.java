@@ -1,6 +1,8 @@
 package finddelivery.es.projeto.finddelivery.database;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -81,6 +83,9 @@ public class DAOEstablishment extends DatabaseHelper {
         return new Establishment(restaurante, endereco,horarioDeFuncionamento, especialidade,fone1,fone2,photo);
 
     }
+
+
+
 
     public Establishment findByName(String restaurante) {
         String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE restaurante = ? ORDER BY a.avaliacao DESC";

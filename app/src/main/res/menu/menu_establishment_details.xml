@@ -2,10 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="finddelivery.es.projeto.finddelivery.views.EstablishmentDetails">
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_home"
-        android:orderInCategory="100"
-       
 
-       />
+    <item android:id="@+id/action_delete"
+        android:title="@string/action_home"
+        android:icon="@drawable/ic_menu_delete"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_edit"
+        android:title="@string/action_home"
+        android:icon="@drawable/ic_menu_edit"
+        app:showAsAction="ifRoom"/>
+
 </menu>
