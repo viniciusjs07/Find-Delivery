@@ -72,10 +72,6 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evaluation_establishment);
 
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.mipmap.ic_launcher);
-
         session = new  UserSessionController(getApplicationContext());
 
         Intent it = getIntent();

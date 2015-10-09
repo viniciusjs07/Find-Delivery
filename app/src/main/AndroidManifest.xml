@@ -75,6 +75,10 @@
             android:name=".views.FindEstablishmentActivity"
             android:label="@string/title_tab_findRestaurants" >
         </activity>
+        <activity
+            android:name=".views.EstablishmentEditActivity"
+            android:label="@string/title_activity_establishment_edit" >
+        </activity>
     </application>
 
 </manifest>

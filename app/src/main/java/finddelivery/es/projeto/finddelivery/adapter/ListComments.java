@@ -82,7 +82,8 @@ public class ListComments extends BaseAdapter{
         }
 
         if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(evaluationController.average(mapEvaluation));
+            Float gradeOfUser = Float.valueOf(mapEvaluation.get(itemUser));
+            ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(gradeOfUser);
         }
 
         ((TextView) view.findViewById(R.id.textViewComment)).setText(itemComment);

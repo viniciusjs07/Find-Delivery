@@ -139,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
-                    android:hint="Opc"
+                    android:hint="Opcional"
                     android:ems="10"
                     android:id="@+id/editTextPhoneTwo"
                     android:layout_gravity="center"

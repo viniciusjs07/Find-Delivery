@@ -1,6 +1,5 @@
 package finddelivery.es.projeto.finddelivery.views;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,7 +9,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -27,9 +25,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +36,7 @@ import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
-public class EstablishmentCadastreActivity extends ActionBarActivity implements View.OnClickListener {
+public class EstablishmentEditActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Spinner sp;
     private List<String> specialityTypes;
@@ -54,21 +50,16 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     private ImageButton btnCamera;
     private ImageButton btnGalery;
     private ImageButton btnDelete;
-
-
+    private Bitmap establishmentLogo;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
 
+    UserSessionController session;
     private EstablishmentController establishmentController;
     private Context context;
-    private AlertDialog.Builder alert;
-    private Bitmap establishmentLogo;
-    UserSessionController session;
-    private ActionBar actionBar;
 
     ListView mDrawerList;
     RelativeLayout mDrawerPane;
-    private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
@@ -79,7 +70,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_establishment_cadastre);
+        setContentView(R.layout.activity_establishment_edit);
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
@@ -127,28 +118,28 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
+                    it.setClass(EstablishmentEditActivity.this,
                             EstablishmentsActivity.class);
                     startActivity(it);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
+                    it.setClass(EstablishmentEditActivity.this,
                             UserProfileActivity.class);
                     startActivity(it);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
+                    it.setClass(EstablishmentEditActivity.this,
                             MyEstablishmentActivity.class);
                     startActivity(it);
                 }
                 if (position == 3) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
+                    it.setClass(EstablishmentEditActivity.this,
                             EstablishmentCadastreActivity.class);
                     startActivity(it);
                 }
@@ -156,7 +147,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
+                    it.setClass(EstablishmentEditActivity.this,
                             LoginActivity.class);
                     startActivity(it);
                 }
@@ -169,12 +160,12 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         String name = user.get(UserSessionController.KEY_NAME);
         String loginUser = user.get(UserSessionController.KEY_LOGIN);
 
-        byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
+        //byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
 
-        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+        //Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
-        photoUser.setImageBitmap(photoUserBitmap);
-        photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        //photoUser.setImageBitmap(photoUserBitmap);
+        //photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
         nameUser.setText(name);
         login.setText(loginUser);
 
@@ -186,8 +177,6 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
-
-
     }
 
     private void addTypes() {
@@ -214,7 +203,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_establishment_cadastre, menu);
+        getMenuInflater().inflate(R.menu.menu_establishment_edit, menu);
         return true;
     }
 
@@ -223,77 +212,14 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-/*        int id = item.getItemId();
+        int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showDialog(String mensagem) {
-        alert = new AlertDialog.Builder(context);
-        alert.setPositiveButton(null, null);
-        alert.setMessage(mensagem);
-        alert.create().show();
-    }
-
-    public void submitEstablishment(View view) throws Exception{
-
-        String name = editTextEstablishmentName.getText().toString();
-        String address = editTextAddress.getText().toString();
-        String specialityType = sp.getSelectedItem().toString();
-        String workHour = editTextHorario.getText().toString();
-        String phone1 = editTextPhoneOne.getText().toString();
-        String phone2 = editTextPhoneTwo.getText().toString();
-
-        boolean validateName = establishmentController.validatesEstablishmentName(name);
-        boolean validateAddress = establishmentController.validatesEstablishmentAddress(address);
-        boolean validateWorkHour = establishmentController.validatesEstablishmentBusinesseHour(workHour);
-        boolean validatePhoneOne = establishmentController.validateEstablishmentPhone(phone1);
-        boolean validatePhoneTwo = establishmentController.validateEstablishmentPhone(phone2);
-
-        HashMap<String, String> user = session.getUserDetails();
-        String idUser = user.get(UserSessionController.KEY_LOGIN);
-
-
-        try {
-            if (validateName && validateAddress && validateWorkHour && (validatePhoneOne && validatePhoneTwo || validatePhoneOne)){
-
-                ByteArrayOutputStream b = new ByteArrayOutputStream();
-                establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);
-                byte[] establishmentLogo = b.toByteArray();
-
-                Establishment establishment = new Establishment(name, address, workHour, specialityType, phone1, phone2, establishmentLogo);
-                establishmentController.insert(establishment, idUser);
-                showDialog("Estabelecimento cadastrado com sucesso!");
-
-                Intent it = new Intent();
-                it.setClass(EstablishmentCadastreActivity.this,
-                        EstablishmentsActivity.class);
-                startActivity(it);
-                finish();
-
-            } else if (!validateName) {
-                showDialog("Nome inválido!");
-                editTextEstablishmentName.setText("");
-            } else if (!validateAddress) {
-                showDialog("Endereço inválido!");
-                editTextAddress.setText("");
-            } else if (!validateWorkHour){
-                showDialog("Horário inválido!");
-                editTextHorario.setText("");
-            } else if (!validatePhoneOne) {
-                showDialog("Telefone 1 inválido!");
-                editTextPhoneOne.setText("");
-            }
-        }
-        catch (Exception e){
-            showDialog("Erro ao cadastrar estabelecimento!");
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -348,4 +274,5 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
             }
         }
     }
+
 }
