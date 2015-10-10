@@ -37,7 +37,8 @@
                         android:layout_height="100dp"
                         android:id="@+id/logoEstablishmentImageView"
                         android:layout_marginTop="20dp"
-                        android:layout_marginLeft="130dp" />
+                        android:layout_marginLeft="130dp"
+                        android:src="@mipmap/photodefault"/>
 
                     <ImageButton
                         android:layout_width="wrap_content"
@@ -64,13 +65,13 @@
 
                 </RelativeLayout>
 
-                <EditText
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:hint="Restaurante"
                     android:ems="10"
-                    android:id="@+id/editTextEstablishmentName"
+                    android:id="@+id/textViewtEstablishmentName"
                     android:layout_gravity="center"
                     android:textIsSelectable="false"
                     android:layout_marginTop="20dp" />

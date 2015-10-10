@@ -37,6 +37,7 @@ import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
+import static finddelivery.es.projeto.finddelivery.R.id.EstablishmentEdit;
 import static finddelivery.es.projeto.finddelivery.R.id.action_delete;
 import static finddelivery.es.projeto.finddelivery.R.id.action_edit;
 
@@ -252,14 +253,17 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_delete) {
+        if (id == R.id.action_edit) {
             Intent it = new Intent();
             it.setClass(EstablishmentDetails.this,
-                    LoginActivity.class);
+                    EstablishmentEditActivity.class);
+            it.putExtra("ESTABLISHMENTDETAILS", establishment);
+
             startActivity(it);
 
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

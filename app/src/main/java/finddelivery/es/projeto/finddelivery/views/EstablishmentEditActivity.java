@@ -42,9 +42,10 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     private List<String> specialityTypes;
     private EditText editTextHorario;
     private EditText editTextAddress;
-    private EditText editTextEstablishmentName;
+    private TextView textViewtEstablishmentName;
     private EditText editTextPhoneOne;
     private EditText editTextPhoneTwo;
+    private Establishment establishment;
 
     private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
@@ -79,6 +80,14 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         establishmentLogo = photoDefault;
         session = new  UserSessionController(getApplicationContext());
 
+        textViewtEstablishmentName = (TextView) findViewById(R.id.textViewtEstablishmentName);
+        editTextHorario = (EditText) findViewById(R.id.editTextHorario);
+        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
+        editTextPhoneOne = (EditText) findViewById(R.id.editTextPhoneOne);
+        editTextPhoneTwo = (EditText) findViewById(R.id.editTextPhoneTwo);
+        editTextPhoneOne.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneOne));
+        editTextPhoneTwo.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneTwo));
+
         logoEstablishmentImageView = (ImageView)findViewById(R.id.logoEstablishmentImageView);
         btnCamera = (ImageButton)findViewById(R.id.imgCamera);
         btnCamera.setOnClickListener(this);
@@ -87,13 +96,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
 
-        editTextHorario = (EditText) findViewById(R.id.editTextHorario);
-        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-        editTextEstablishmentName = (EditText) findViewById(R.id.editTextEstablishmentName);
-        editTextPhoneOne = (EditText) findViewById(R.id.editTextPhoneOne);
-        editTextPhoneTwo = (EditText) findViewById(R.id.editTextPhoneTwo);
-        editTextPhoneOne.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneOne));
-        editTextPhoneTwo.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneTwo));
+
 
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
@@ -160,12 +163,12 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         String name = user.get(UserSessionController.KEY_NAME);
         String loginUser = user.get(UserSessionController.KEY_LOGIN);
 
-        //byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
+        byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
 
-        //Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
+        Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
-        //photoUser.setImageBitmap(photoUserBitmap);
-        //photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
+        photoUser.setImageBitmap(photoUserBitmap);
+        photoUser.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
         nameUser.setText(name);
         login.setText(loginUser);
 
@@ -177,6 +180,23 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
+
+
+        Intent it = getIntent();
+        establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTDETAILS");
+
+
+        byte[] logoEstablishment = establishment.getPhoto();
+
+        Bitmap logoBitmap = BitmapFactory.decodeByteArray(logoEstablishment, 0, logoEstablishment.length);
+
+        textViewtEstablishmentName.setText(establishment.getName());
+        logoEstablishmentImageView.setImageBitmap(logoBitmap);
+        logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(logoBitmap, 100, 100, false));
+        editTextAddress.setText(establishment.getAdress());
+        editTextHorario.setText(establishment.getBusinessHour());
+        editTextPhoneOne.setText(establishment.getPhone1());
+        editTextPhoneTwo.setText(establishment.getPhone2());
     }
 
     private void addTypes() {
@@ -212,12 +232,12 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+       /* int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
