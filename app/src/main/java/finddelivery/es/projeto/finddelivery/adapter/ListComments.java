@@ -70,7 +70,7 @@ public class ListComments extends BaseAdapter{
         User itemUser = users.get(position);
         String itemComment = comments.get(position);
 
-        view = mInflater.inflate(R.layout.activity_comments_list, null);
+        view = mInflater.inflate(R.layout.comment_item, null);
 
         byte[] photoUser = (userController.getUser(itemUser.getLogin())).getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photoUser, 0, photoUser.length);

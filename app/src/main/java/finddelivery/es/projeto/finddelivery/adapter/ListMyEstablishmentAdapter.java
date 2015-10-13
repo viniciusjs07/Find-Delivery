@@ -3,12 +3,10 @@ package finddelivery.es.projeto.finddelivery.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -60,7 +58,7 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
     public View getView(int position, View view, ViewGroup parent) {
 
         Establishment item = items.get(position);
-        view = mInflater.inflate(R.layout.activity_establishment_list, null);
+        view = mInflater.inflate(R.layout.establishment_item, null);
 
         byte[] photo = (establishmentController.getEstablishment(item.getName())).getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);

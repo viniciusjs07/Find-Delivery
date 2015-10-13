@@ -184,7 +184,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
         super.onStart();
         try {
             if (!establishmentController.isSearchAdvanced) {
-                List<Establishment> establishmentsList = establishmentController.findAll();
+                List<Establishment> establishmentsList = establishmentController.findAllEstablishments();
                 adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
             }else {
                 if (establishmentController.isIsSearchAdvancedByName) {

@@ -1,11 +1,9 @@
 package finddelivery.es.projeto.finddelivery.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -18,14 +16,9 @@ public class Establishment implements Serializable {
     private String speciality;
     private String phone1;
     private String phone2;
-    Map<User, Integer> evaluations;
-    Map<User, List<String>> comments;
+    private Map<User, Float> evaluations;
+    private Map<User, String> comments;
 
-
-
-    public Establishment(String name){
-        this.name = name;
-    }
 
     public Establishment(String name, String address, String businessHour, String speciality, String phone1, String phone2, byte[] photo) {
 
@@ -36,32 +29,52 @@ public class Establishment implements Serializable {
         this.phone1 = phone1;
         this.phone2 = phone2;
         this.photo = photo;
-        this.evaluations = new HashMap<User, Integer>();
-        this.comments = new HashMap<User, List<String>>();
+        this.evaluations = new HashMap<>();
+        this.comments = new HashMap<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAdress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAdress(String adress) {
-        this.address = adress;
+    public String getBusinessHour() {
+        return businessHour;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public String getPhone1() {
+        return phone1;
     }
 
     public String getPhone2() {
         return phone2;
     }
 
-    public String getPhone1() {
-        return phone1;
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setBusinessHour(String businessHour) {
+        this.businessHour = businessHour;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     public void setPhone1(String phone1) {
@@ -72,47 +85,27 @@ public class Establishment implements Serializable {
         this.phone2 = phone2;
     }
 
-    public String getBusinessHour() {
-        return businessHour;
-    }
-
-    public void setBusinessHour(String businessHour) {
-        this.businessHour = businessHour;
-    }
-
-    public byte[] getPhoto() {
-        return photo;
-    }
-
     public void setPhoto(byte[] photoURL) {
         this.photo = photoURL;
     }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
-
-    public Map<User, Integer> getEvaluations() {
+    
+    public Map<User, Float> getEvaluations() {
         return evaluations;
     }
 
-    public void setEvaluations(Map<User, Integer> evaluations) {
-        this.evaluations = evaluations;
-    }
-
-    public Map<User, List<String>> getComments() {
+    public Map<User, String> getComments() {
         return comments;
     }
 
-    public void setComments(Map<User, List<String>> comments) {
+    public void setEvaluations(Map<User, Float> evaluations) {
+        this.evaluations = evaluations;
+    }
+
+    public void setComments(Map<User, String> comments) {
         this.comments = comments;
     }
 
-    public void addEvaluation(User user, Integer value) {
+    public void addEvaluation(User user, Float value) {
         if (user != null && value != null && value >= 0) {
             this.evaluations.put(user, value);
         }
@@ -120,35 +113,27 @@ public class Establishment implements Serializable {
 
     public void addComment(User user, String comment) {
         if(user != null && comment != null) {
-            if(comments.containsKey(user)) {
-                this.comments.get(user).add(comment);
-            } else {
-                List<String> newComment = new ArrayList<String>();
-                newComment.add(comment);
-                this.comments.put(user, newComment);
+                comments.put(user, comment);
             }
-        }
     }
 
     public void removeComment(User user, String comment) {
         if(user != null) {
-            this.comments.get(user).remove(comment);
+            comments.remove(user);
         }
     }
 
-    public float averageEvaluations() {
-        if(getEvaluations().size() > 0) {
-            return  getSumEvaluations()/getEvaluations().size();
+    public Float calculatesAverage(Map<User,String> mapEvaluation){
+        Collection<String> grades = mapEvaluation.values();
+        Float sum = Float.valueOf(0);
+        for (String grade: grades){
+            sum += Float.valueOf(grade);
         }
-        return 0;
-    }
-
-    private int getSumEvaluations() {
-        int sum = 0;
-        for (int valor : getEvaluations().values()) {
-            sum += valor;
+        Float average = Float.valueOf(0);
+        if(grades.size() != 0){
+            average = sum / grades.size();
         }
-        return sum;
+        return average;
     }
 
 }

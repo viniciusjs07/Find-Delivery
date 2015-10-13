@@ -4,10 +4,11 @@ import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import finddelivery.es.projeto.finddelivery.database.DAOEstablishment;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
+import finddelivery.es.projeto.finddelivery.models.User;
+
 
 /**
  * Created by Computação on 12/08/2015.
@@ -23,17 +24,27 @@ public class EstablishmentController {
     public static boolean isSearchAdvanced = false;
     public static boolean isIsSearchAdvancedByName = true;
 
+    public static UserController userController;
+
     // Construtor
     public static EstablishmentController getInstance(Context context) {
         if (instance == null) {
             instance = new EstablishmentController();
             establishmentDAO = new DAOEstablishment(context);
-
+            userController = UserController.getInstance(context);
         }
         return instance;
     }
 
-    // insert
+    //Adiciona um novo estabelecimento
+    public void addEstablishment(String name, String address, String workHour, String specialityType, String phone1, String phone2, byte[] photo, String login) throws Exception {
+        User user = userController.getUser(login);
+        Establishment establishment = new Establishment(name, address, workHour, specialityType, phone1, phone2, photo);
+        user.createEstablishment(establishment);
+        establishmentDAO.insert(establishment, login);
+    }
+
+    //insert
     public void insert(Establishment establishment, String idUser) throws Exception {
         establishmentDAO.insert(establishment, idUser);
     }
@@ -44,7 +55,7 @@ public class EstablishmentController {
     }
 
     // listar estabelecimentos
-    public List<Establishment> findAll() throws Exception {
+    public List<Establishment> findAllEstablishments() throws Exception {
         return establishmentDAO.findAll();
     }
 
@@ -66,13 +77,9 @@ public class EstablishmentController {
         return establishmentsBySpeciality;
     }
 
-    public void getOwner(){
-
-    }
-
     public void insertByName(String name) throws Exception {
         establishmentsByName = new ArrayList<>();
-        for (Establishment est: findAll()) {
+        for (Establishment est: findAllEstablishments()) {
             if (est.getName().equals(name)) {
                 establishmentsByName.add(est);
             }
@@ -81,7 +88,7 @@ public class EstablishmentController {
 
     public void insertBySpeciality(String speciality) throws Exception {
         establishmentsBySpeciality = new ArrayList<>();
-        for (Establishment est: findAll()) {
+        for (Establishment est: findAllEstablishments()) {
             if (est.getSpeciality().equals(speciality)) {
                 establishmentsBySpeciality.add(est);
             }
@@ -93,7 +100,7 @@ public class EstablishmentController {
         if(name == null || name.trim().equals("")){
             return false;
         }
-        for (Establishment establishment : findAll()){
+        for (Establishment establishment : findAllEstablishments()){
             if (establishment.getName().equals(name)) {
                 return false;
             }
@@ -119,7 +126,4 @@ public class EstablishmentController {
     public  boolean validateEstablishmentPhone (String phone) throws Exception{
         return phone.matches(".([0][1-9][1-9].)[6-9][0-9]{3}-[0-9]{4}") || phone.matches(".([0][1-9][1-9].)[2-5][0-9]{3}-[0-9]{4}");
     }
-
-
-
 }

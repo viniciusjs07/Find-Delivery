@@ -1,9 +1,8 @@
 package finddelivery.es.projeto.finddelivery.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vinicius on 08/06/2015.
@@ -14,24 +13,15 @@ public class User implements Serializable{
     private String login;
     private byte[] photo;
     private String password;
-    private Set<Establishment> establishments;
+    private List<Establishment> establishments;
     private ManagerFindDelivery manager;
-
-    public User(String name,String login,String password){
-
-       // public User(String name,String login,String password)throws EmptyFieldException, ExceededCharacterException{
-        this.name = name;
-        this.login = login;
-        this.password = password;
-        this.establishments = new HashSet<Establishment>();
-        this.manager = new ManagerFindDelivery();
-    }
 
     public User(String name,String login,String password, byte[] photo){
         this.name = name;
         this.login = login;
         this.password = password;
         this.photo = photo;
+        establishments = new ArrayList<>();
     }
 
     public String getName(){
@@ -59,23 +49,56 @@ public class User implements Serializable{
         return photo;
     }
 
-    public void setPhoto(byte[] photo) throws EmptyFieldException{
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
-    //This method register a new establishment
-    public void createEstablishment(String name, String address, String businessHour, String speciality, String phone1, String phone2, byte[] photoURL) {
-        Establishment establishment = new Establishment(name, address, businessHour, speciality, phone1, phone2, photoURL);
+    /*--------------------------------------------------------------------------------------------------*/
 
+    //This method register a new establishment
+    public void createEstablishment(Establishment establishment) {
         if(!establishments.contains(establishment)){
             establishments.add(establishment);
         }
     }
 
+    //This method remove an establishment
+    public void removeEstablishment(Establishment establishment) {
+        if(establishments.contains(establishment)) {
+            establishments.remove(establishment);
+        }
+    }
+
+    public void updateDataEstablishment(String name, String address, String businessHour, String speciality, String phone1, String phone2, byte[] photo){
+        for (Establishment est: establishments){
+            if(est.getName().equals(name)){
+                est.setAddress(address);
+                est.setBusinessHour(businessHour);
+                est.setSpeciality(speciality);
+                est.setPhone1(phone1);
+                est.setPhone2(phone2);
+                est.setPhoto(photo);
+            }
+        }
+    }
+
+    public List<Establishment> getEstablishments() {
+        return establishments;
+    }
+
+
     //This method evaluate an establishment
-    public void evaluateEstablishment(Establishment establishment, int value) {
+    public void evaluateEstablishment(Establishment establishment, float value) {
         if(establishment != null) {
             establishment.addEvaluation(this, value);
+        }
+    }
+
+    public void editEvaluationEstablishment(Establishment establishment, float value){
+        for (Establishment est : establishments){
+            if (est.getName().equals(establishment.getName())){
+                establishment.addEvaluation(this, value);
+            }
         }
     }
 
@@ -92,21 +115,12 @@ public class User implements Serializable{
     }
 
     //This method allows change an establishment
-    public void setEstablishments(Set<Establishment> newEstablishments) {
+    public void setEstablishments(List<Establishment> newEstablishments) {
         this.establishments = newEstablishments;
     }
 
-    public Set<Establishment> getEstablishments() {
 
-        return establishments;
-    }
 
-    //This method remove an establishment
-    public void removeEstablishment(Establishment establishment) {
-        if(establishments.contains(establishment)) {
-            establishments.remove(establishment);
-        }
-    }
 
     @Override
     public String toString() {

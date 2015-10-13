@@ -10,47 +10,55 @@ import java.util.Set;
  */
 public class ManagerFindDelivery {
 
-    private User user;
-    private List<User> listUser;
-
+    public List<User> listUser;
 
     public ManagerFindDelivery(){
         listUser = new ArrayList<User>();
     }
 
+    //This method returns a list users
     public List<User> getListUser(){
         return listUser;
     }
 
     //This method register a new user
-    public void registerUser(String name,String login, String password) throws ExceededCharacterException, EmptyFieldException {
-        User user = new User(name,login,password);
+    public void registerUser(User user)  {
         if(!listUser.contains(user)){
             listUser.add(user);
         }
     }
 
+    //This method remove an user
+    public void removeUser(User user){
+        for(User u: listUser) {
+            if(u.equals(user)) {
+                listUser.remove(u);
+            }
+        }
+    }
+
+    public void updateDataUser(String name, String login, String password, byte[] photo){
+        for (User u: listUser){
+            if(u.getLogin().equals(login)){
+                u.setName(name);
+                u.setPassword(password);
+                u.setPhoto(photo);
+            }
+        }
+    }
+
     //This method valid a login
-    public boolean isLoginValid(String login,String password) {
-        for(User user:getListUser()){
+    public boolean isLoginValid(String login, String password) {
+        for(User user : getListUser()){
             if(user.getLogin().equals(login)&& user.getPassword().equals(password)){
                 return true;
             }
-
         }
         return false;
       }
 
-    //This method remove an user
-     public void removeAccount(User user){
-        for(User newUser: listUser) {
-            if(newUser.equals(user)) {
-                listUser.remove(user);
-                }
-        }
 
-    }
-
+    /*------------------------------------------------------------------------------------------------*/
     //This method search an establishment by especiality and returns a list
     public Set<Establishment> findEstablishmentBySpeciality(String speciality) {
         Set<Establishment> listEstablishments = new HashSet<Establishment>();
@@ -76,20 +84,21 @@ public class ManagerFindDelivery {
         return null;
     }
 
-    //is method not implemented//
+    //This method not implemented//
     public void listEstablishment(){
-        List<Establishment> estab = new ArrayList<Establishment>();
+        List<Establishment> estab = new ArrayList<>();
         for (User user: listUser){
             for(Establishment estabelecimento: user.getEstablishments()){
                 estab.add(estabelecimento);
             }
         }
     }
-
-
+/*
 
     //this method user updates
     public void setUser(List<User> newUser){
         this.listUser = newUser;
     }
+*/
+
 }

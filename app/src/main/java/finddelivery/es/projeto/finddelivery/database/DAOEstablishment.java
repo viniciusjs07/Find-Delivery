@@ -1,14 +1,13 @@
 package finddelivery.es.projeto.finddelivery.database;
 
-import finddelivery.es.projeto.finddelivery.models.Establishment;
-import finddelivery.es.projeto.finddelivery.models.User;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 /**
  * Created by Acacio on 06/08/2015.
@@ -27,7 +26,7 @@ public class DAOEstablishment extends DatabaseHelper {
         ContentValues valuesInsert = new ContentValues();
 
         valuesInsert.put("restaurante", establishment.getName());
-        valuesInsert.put("endereco", establishment.getAdress());
+        valuesInsert.put("endereco", establishment.getAddress());
         valuesInsert.put("horario_de_funcionamento", establishment.getBusinessHour());
         valuesInsert.put("especialidade", establishment.getSpeciality());
         valuesInsert.put("phone1", establishment.getPhone1());
@@ -43,7 +42,7 @@ public class DAOEstablishment extends DatabaseHelper {
         ContentValues valuesUpdate = new ContentValues();
 
         valuesUpdate.put("restaurante", establishment.getName());
-        valuesUpdate.put("endereco", establishment.getAdress());
+        valuesUpdate.put("endereco", establishment.getAddress());
         valuesUpdate.put("horario_de_funcionamento", establishment.getBusinessHour());
         valuesUpdate.put("especialidade", establishment.getSpeciality());
         valuesUpdate.put("phone1", establishment.getPhone1());
