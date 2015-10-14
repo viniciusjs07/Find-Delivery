@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ public class ListComments extends BaseAdapter{
     private LayoutInflater mInflater;
     private List<User> users;
     private Context myContext;
+    private Float gradeOfUser;
     List<String> comments;
     private Establishment establishment;
     private EvaluationController evaluationController;
@@ -77,13 +79,17 @@ public class ListComments extends BaseAdapter{
 
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+            if(mapEvaluation != null && !mapEvaluation.isEmpty() && mapEvaluation.get(itemUser) != null) {
+                gradeOfUser = Float.valueOf(mapEvaluation.get(itemUser));
+                if(gradeOfUser > 0){
+                    ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(gradeOfUser);
+                }
+            }
         } catch (Exception e) {
+            Toast.makeText(myContext,
+                    "ERRO!",
+                    Toast.LENGTH_LONG).show();
             e.printStackTrace();
-        }
-
-        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            Float gradeOfUser = Float.valueOf(mapEvaluation.get(itemUser));
-            ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(gradeOfUser);
         }
 
         ((TextView) view.findViewById(R.id.textViewComment)).setText(itemComment);

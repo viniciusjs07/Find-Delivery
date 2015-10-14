@@ -126,4 +126,13 @@ public class EstablishmentController {
     public  boolean validateEstablishmentPhone (String phone) throws Exception{
         return phone.matches(".([0][1-9][1-9].)[6-9][0-9]{3}-[0-9]{4}") || phone.matches(".([0][1-9][1-9].)[2-5][0-9]{3}-[0-9]{4}");
     }
+
+    public boolean isOwnerEstablishment(String idEstab, String loginUser) {
+        return establishmentDAO.isOwnerEstablishment(idEstab, loginUser);
+    }
+
+    public void delete(String idEstab) {
+        establishmentDAO.delete(idEstab);
+
+    }
 }

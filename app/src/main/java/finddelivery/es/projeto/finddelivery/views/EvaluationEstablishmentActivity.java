@@ -188,14 +188,15 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
 
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+            if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
+                averageOfEstablishmentTextView2.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                evaluationEstablishmentRatingBar2.setRating(evaluationController.average(mapEvaluation));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            averageOfEstablishmentTextView2.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
-            evaluationEstablishmentRatingBar2.setRating(evaluationController.average(mapEvaluation));
-        }
+
 
 
         setTitle(establishment.getName());

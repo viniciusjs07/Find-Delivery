@@ -56,7 +56,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
     public List<Establishment> findAll() throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab ORDER BY a.avaliacao DESC";
+        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab AND a.idUser = e.idUser ORDER BY a.avaliacao DESC";
         Cursor cursor = getDatabase().rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -65,6 +65,20 @@ public class DAOEstablishment extends DatabaseHelper {
         }
         return establishments;
     }
+
+    /*
+    public List<Establishment> findAll() throws Exception {
+        List<Establishment> establishments = new ArrayList<Establishment>();
+        String sql = "SELECT * FROM " + TABLE;
+        Cursor cursor = getDatabase().rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            establishments.add(mountEstablishment(cursor));
+            cursor.moveToNext();
+        }
+        return establishments;
+    }
+*/
 
     public Establishment mountEstablishment(Cursor cursor) {
         if (cursor.getCount() == 0) {
@@ -108,5 +122,19 @@ public class DAOEstablishment extends DatabaseHelper {
         }
         return establishments;
 
+    }
+
+    public boolean isOwnerEstablishment(String idEstab, String loginUser) {
+        String sql = "SELECT * FROM " + TABLE + " WHERE restaurante = ? AND idUser = ?";
+        String[] selectionArgs = new String[] {idEstab, loginUser};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
+        return cursor.getCount() > 0;
+    }
+
+    public void delete(String idEstab) {
+        String table = "estabelecimento";
+        String whereClause = "restaurante = ?";
+        String[] whereArgs = new String[] {idEstab};
+        getDatabase().delete(table, whereClause, whereArgs);
     }
 }

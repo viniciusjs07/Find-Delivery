@@ -14,7 +14,9 @@
     <string name="passwordConfirm">Confirmar senha</string>
     <string name="newPasswordConfirm">Confirmar nova senha</string>
     <string name="dialog_deleteAccount">Tem certeza que deseja excluir sua conta no Find Delivery?</string>
+    <string name="dialog_deleteEstablishment">Tem certeza que deseja excluir seu estabelecimento?</string>
     <string name="dialog_accountDeleted">Sua conta foi excluída!</string>
+    <string name="dialog_establishmentDeleted">Seu estabelecimento foi excluído!</string>
     <string name="dialog_changesSaved">Seus dados foram alterados!</string>
     <string name="dialog_registerOK">Seu cadastro foi realizado com sucesso!</string>
     <string name="dialog_positiveAwswer">Sim</string>

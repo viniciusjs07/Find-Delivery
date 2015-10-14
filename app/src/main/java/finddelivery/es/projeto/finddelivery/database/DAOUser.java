@@ -44,8 +44,8 @@ public class DAOUser extends DatabaseHelper {
 
     public void delete(String login) throws Exception{
         String table = "usuario";
-        String whereClause = "login" + "=?";
-        String[] whereArgs = new String[] { String.valueOf(login) };
+        String whereClause = "login = ?";
+        String[] whereArgs = new String[] {login};
         getDatabase().delete(table, whereClause, whereArgs);
     }
 

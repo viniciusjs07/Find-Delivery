@@ -1,6 +1,8 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -32,6 +35,7 @@ import java.util.Map;
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
 import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
@@ -43,6 +47,7 @@ import static finddelivery.es.projeto.finddelivery.R.id.action_edit;
 
 public class EstablishmentDetails extends ActionBarActivity implements View.OnClickListener {
 
+    private AlertDialog alertDeleteEstablishment;
     private Button btnAvaliacoes;
     private TextView establishmentNameTextView;
     private TextView specialityTypeTextView;
@@ -55,6 +60,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private Establishment establishment;
     private Context context;
     private EvaluationController evaluationController;
+    private EstablishmentController establishmentController;
     private Map<User,String> mapEvaluation = null;
     private ActionBar actionBar;
 
@@ -194,14 +200,15 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
+            if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
+                averageOfEstablishmentTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
+                evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            averageOfEstablishmentTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
-            evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
-        }
 
         setTitle(establishment.getName());
 
@@ -215,8 +222,14 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_establishment_details, menu);
 
-        String name = "Dani";
-        if (name.equals("Daniela")) {
+        Map<String, String> user = session.getUserDetails();
+        String loginUser = user.get(UserSessionController.KEY_LOGIN);
+
+        context = this;
+        establishmentController = EstablishmentController.getInstance(context);
+
+
+        if (!establishmentController.isOwnerEstablishment(establishment.getName(), loginUser)) {
             MenuItem item1 = menu.findItem(action_delete);
             MenuItem item2 = menu.findItem(action_edit);
             item1.setVisible(false);
@@ -262,12 +275,42 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             startActivity(it);
 
             return true;
+        } else if (id == R.id.action_delete) {
+            AlertDialog.Builder deleteEstablishment = new AlertDialog.Builder(EstablishmentDetails.this);
+            deleteEstablishment.setMessage(R.string.dialog_deleteEstablishment)
+                    .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                deleteEstablishment(establishment.getName());
+
+                                Toast.makeText(getApplicationContext(), R.string.dialog_establishmentDeleted, Toast.LENGTH_SHORT).show();
+                                Intent it = new Intent();
+                                it.setClass(EstablishmentDetails.this, EstablishmentsActivity.class);
+                                startActivity(it);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    })
+                    .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+
+            alertDeleteEstablishment = deleteEstablishment.create();
+            alertDeleteEstablishment.show();
+
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
+    public void deleteEstablishment(String  idEstab) throws  Exception {
+        establishmentController.delete(idEstab);
+    }
 
 
     @Override

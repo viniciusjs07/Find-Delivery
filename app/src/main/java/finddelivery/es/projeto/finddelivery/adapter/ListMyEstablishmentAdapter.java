@@ -63,14 +63,13 @@ public class ListMyEstablishmentAdapter extends BaseAdapter{
         byte[] photo = (establishmentController.getEstablishment(item.getName())).getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
 
-        try {
+       try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(item.getName());
+            if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
+                ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(evaluationController.average(mapEvaluation));
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-            ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(evaluationController.average(mapEvaluation));
         }
 
         ((TextView) view.findViewById(R.id.textViewNameRestaurant)).setText(item.getName());
