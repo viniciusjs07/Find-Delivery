@@ -1,5 +1,6 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,8 +24,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +49,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     private EditText editTextPhoneOne;
     private EditText editTextPhoneTwo;
     private Establishment establishment;
+    private AlertDialog.Builder alert;
 
     private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
@@ -57,6 +62,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     UserSessionController session;
     private EstablishmentController establishmentController;
     private Context context;
+    private HashMap<String, String> user;
 
     ListView mDrawerList;
     RelativeLayout mDrawerPane;
@@ -67,6 +73,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     private TextView nameUser;
     private TextView login;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +81,11 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
-
+/*
         Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
-        establishmentLogo = photoDefault;
+        establishmentLogo = photoDefault;*/
         session = new  UserSessionController(getApplicationContext());
+        user = session.getUserDetails();
 
         textViewtEstablishmentName = (TextView) findViewById(R.id.textViewtEstablishmentName);
         editTextHorario = (EditText) findViewById(R.id.editTextHorario);
@@ -94,8 +102,6 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         btnGalery.setOnClickListener(this);
         btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
-
-
 
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
@@ -258,7 +264,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
                 Bitmap photoDefaultEstablishment = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
                 logoEstablishmentImageView.setImageBitmap(photoDefaultEstablishment);
                 logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(photoDefaultEstablishment, 100, 100, false));
-
+                establishmentLogo = photoDefaultEstablishment;
                 break;
         }
     }
@@ -294,4 +300,63 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         }
     }
 
+    public void confirmEditions(View view) throws Exception {
+        String address = editTextAddress.getText().toString();
+        String businessHour = editTextHorario.getText().toString();
+        String specialityType = sp.getSelectedItem().toString();
+        String phone1 = editTextPhoneOne.getText().toString();
+        String phone2 = editTextPhoneTwo.getText().toString();
+
+        boolean validateAddress = establishmentController.validatesEstablishmentAddress(address);
+        boolean validateWorkHour = establishmentController.validatesEstablishmentBusinesseHour(businessHour);
+        boolean validatePhoneOne = establishmentController.validateEstablishmentPhone(phone1);
+
+        try {
+            ByteArrayOutputStream b = new ByteArrayOutputStream();
+            if (establishmentLogo == null) {
+                Toast.makeText(getApplicationContext(), "Entrou aqui",
+                        Toast.LENGTH_LONG).show();
+
+                byte[] photo = (establishmentController.getEstablishment(establishment.getName())).getPhoto();
+                establishmentLogo = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            }
+            establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 100, b);
+            byte[] establishmentLogo = b.toByteArray();
+
+
+            if (!validateAddress) {
+                showDialog("Endereço inválido!");
+                editTextAddress.setText("");
+
+            } else if (!validateWorkHour) {
+                showDialog("Horário inválido!");
+                editTextHorario.setText("");
+
+            } else if (!validatePhoneOne) {
+                showDialog("Telefone 1 inválido!");
+                editTextPhoneOne.setText("");
+
+            } else {
+                Establishment establishment = new Establishment(textViewtEstablishmentName.getText().toString(), address, businessHour, specialityType, phone1, phone2, establishmentLogo);
+                String login = user.get(UserSessionController.KEY_LOGIN);
+                establishmentController.update(establishment, login);
+                showDialog("Estabelecimento atualizado com sucesso!");
+
+                Intent it = new Intent();
+                it.setClass(EstablishmentEditActivity.this,
+                        EstablishmentDetails.class);
+                startActivity(it);
+            }
+        }catch (Exception e){
+            showDialog("Erro validando estabelecimento");
+            e.printStackTrace();
+        }
+    }
+
+    public void showDialog(String mensagem) {
+        alert = new AlertDialog.Builder(context);
+        alert.setPositiveButton("OK", null);
+        alert.setMessage(mensagem);
+        alert.create().show();
+    }
 }

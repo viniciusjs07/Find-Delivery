@@ -156,7 +156,8 @@
                     android:fontFamily="Arial"
                     android:textStyle="bold"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:onClick="confirmEditions"/>
 
             </LinearLayout>
 
