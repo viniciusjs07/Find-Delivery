@@ -345,7 +345,9 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
                 Intent it = new Intent();
                 it.setClass(EstablishmentEditActivity.this,
                         EstablishmentDetails.class);
+                it.putExtra("ESTABLISHMENT", establishment);
                 startActivity(it);
+
             }
         }catch (Exception e){
             showDialog("Erro validando estabelecimento");

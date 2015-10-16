@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +25,6 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,7 +39,6 @@ import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
-import static finddelivery.es.projeto.finddelivery.R.id.EstablishmentEdit;
 import static finddelivery.es.projeto.finddelivery.R.id.action_delete;
 import static finddelivery.es.projeto.finddelivery.R.id.action_edit;
 
@@ -251,6 +248,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                 it.putExtra("ESTABLISHMENTDETAILS", establishment);
 
                 startActivity(it);
+
             }
         });
         return true;
@@ -271,7 +269,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             it.setClass(EstablishmentDetails.this,
                     EstablishmentEditActivity.class);
             it.putExtra("ESTABLISHMENTDETAILS", establishment);
-
             startActivity(it);
 
             return true;
@@ -292,7 +289,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                                 e.printStackTrace();
                             }
                         }
-
 
                     })
                     .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {

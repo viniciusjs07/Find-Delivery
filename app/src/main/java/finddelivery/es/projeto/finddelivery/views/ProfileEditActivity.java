@@ -1,34 +1,39 @@
 package finddelivery.es.projeto.finddelivery.views;
 
-import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-
-
-import android.os.Bundle;
 import android.util.Base64;
-import android.view.*;
-import android.widget.*;
-import android.content.*;
-import android.app.AlertDialog;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
 import finddelivery.es.projeto.finddelivery.adapter.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
-import finddelivery.es.projeto.finddelivery.models.User;
 
 
 public class ProfileEditActivity extends ActionBarActivity implements View.OnClickListener  {
@@ -261,7 +266,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         /*        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;

@@ -147,6 +147,7 @@ public class UserProfileActivity extends ActionBarActivity  {
                 it.setClass(UserProfileActivity.this,
                         ProfileEditActivity.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -206,7 +207,6 @@ public class UserProfileActivity extends ActionBarActivity  {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         /*        int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
