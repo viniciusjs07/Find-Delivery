@@ -33,16 +33,11 @@ public class SplashActivity extends ActionBarActivity {
              */
             @Override
             public void run() {
-                if (!session.isUserLoggedIn()) {
+                if (!session.checkLogin()) {
                     Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();
-                } else {
-                    Intent i = new Intent(SplashActivity.this, EstablishmentsActivity.class);
-                    startActivity(i);
-                    finish();
                 }
-
             }
         }, SPLASH_TIME_OUT);
     }

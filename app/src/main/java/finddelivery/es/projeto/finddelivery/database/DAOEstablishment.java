@@ -54,6 +54,13 @@ public class DAOEstablishment extends DatabaseHelper {
         getDatabase().update(TABLE, valuesUpdate, "restaurante = ?", new String[]{establishment.getName()});
     }
 
+    public void delete(String idEstab) {
+        String table = "estabelecimento";
+        String whereClause = "restaurante = ?";
+        String[] whereArgs = new String[] {idEstab};
+        getDatabase().delete(table, whereClause, whereArgs);
+    }
+
     public List<Establishment> findAll() throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
         String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab AND a.idUser = e.idUser ORDER BY a.avaliacao DESC";
@@ -66,19 +73,43 @@ public class DAOEstablishment extends DatabaseHelper {
         return establishments;
     }
 
-    /*
-    public List<Establishment> findAll() throws Exception {
+    public Establishment findByName(String restaurante) {
+        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE restaurante = ? ORDER BY a.avaliacao DESC";
+        String[] selectionArgs = new String[] { restaurante};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
+        cursor.moveToFirst();
+
+        return mountEstablishment(cursor);
+    }
+
+
+    public List<Establishment> findBySpeciality(String especialidade) {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE;
-        Cursor cursor = getDatabase().rawQuery(sql, null);
+        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE especialidade = ? ORDER BY a.avaliacao DESC";
+        String[] selectionArgs = new String[] { especialidade};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            establishments.add(mountEstablishment(cursor));
+            cursor.moveToNext();
+        }
+
+        return establishments;
+    }
+
+    public List<Establishment> findByUser(String idUser) throws Exception {
+        List<Establishment> establishments = new ArrayList<Establishment>();
+        String sql = "SELECT * FROM " + TABLE + " WHERE idUser = ? ORDER BY restaurante";
+        String[] selectionArgs = new String[] {idUser};
+        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             establishments.add(mountEstablishment(cursor));
             cursor.moveToNext();
         }
         return establishments;
+
     }
-*/
 
     public Establishment mountEstablishment(Cursor cursor) {
         if (cursor.getCount() == 0) {
@@ -98,32 +129,6 @@ public class DAOEstablishment extends DatabaseHelper {
     }
 
 
-
-
-    public Establishment findByName(String restaurante) {
-        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE restaurante = ? ORDER BY a.avaliacao DESC";
-        String[] selectionArgs = new String[] { restaurante};
-        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
-        cursor.moveToFirst();
-
-        return mountEstablishment(cursor);
-    }
-
-
-    public List<Establishment> findByUser(String idUser) throws Exception {
-        List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE + " WHERE idUser = ? ORDER BY restaurante";
-        String[] selectionArgs = new String[] {idUser};
-        Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            establishments.add(mountEstablishment(cursor));
-            cursor.moveToNext();
-        }
-        return establishments;
-
-    }
-
     public boolean isOwnerEstablishment(String idEstab, String loginUser) {
         String sql = "SELECT * FROM " + TABLE + " WHERE restaurante = ? AND idUser = ?";
         String[] selectionArgs = new String[] {idEstab, loginUser};
@@ -131,10 +136,5 @@ public class DAOEstablishment extends DatabaseHelper {
         return cursor.getCount() > 0;
     }
 
-    public void delete(String idEstab) {
-        String table = "estabelecimento";
-        String whereClause = "restaurante = ?";
-        String[] whereArgs = new String[] {idEstab};
-        getDatabase().delete(table, whereClause, whereArgs);
-    }
+
 }

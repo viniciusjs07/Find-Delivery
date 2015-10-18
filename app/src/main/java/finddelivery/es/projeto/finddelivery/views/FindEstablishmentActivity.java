@@ -30,7 +30,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
@@ -177,9 +177,9 @@ public class FindEstablishmentActivity extends ActionBarActivity {
     public void searchByName(View view) throws Exception{
         try {
             String name = restaurantNameEditText.getText().toString();
-            establishmentController.insertByName(name);
+            establishmentController.listByName(name);
             establishmentController.isSearchAdvanced = true;
-            establishmentController.isIsSearchAdvancedByName = true;
+            establishmentController.isSearchAdvancedByName = true;
             Intent it = new Intent();
             it.setClass(FindEstablishmentActivity.this,
                     EstablishmentsActivity.class);
@@ -194,13 +194,14 @@ public class FindEstablishmentActivity extends ActionBarActivity {
     public void searchBySpeciality(View view) throws Exception{
       try {
           String speciality = sp.getSelectedItem().toString();
-          establishmentController.insertBySpeciality(speciality);
+          establishmentController.listBySpeciality(speciality);
           establishmentController.isSearchAdvanced = true;
-          establishmentController.isIsSearchAdvancedByName = false;
+          establishmentController.isSearchAdvancedByName = false;
           Intent it = new Intent();
           it.setClass(FindEstablishmentActivity.this,
                   EstablishmentsActivity.class);
           startActivity(it);
+
       }catch (Exception e) {
           showDialog("Erro de busca!");
           e.printStackTrace();

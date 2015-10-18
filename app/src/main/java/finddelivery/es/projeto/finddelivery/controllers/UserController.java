@@ -5,46 +5,32 @@ import android.content.Context;
 import java.util.List;
 
 import finddelivery.es.projeto.finddelivery.database.DAOUser;
-import finddelivery.es.projeto.finddelivery.models.ManagerFindDelivery;
 import finddelivery.es.projeto.finddelivery.models.User;
 
-/**
- * Created by Daniela on 05/08/2015.
- */
+
 public class UserController {
 
     private static DAOUser userDAO;
     private static UserController instance;
 
-    private static ManagerFindDelivery managerFD;
-
     public static UserController getInstance(Context context) {
         if (instance == null) {
             instance = new UserController();
             userDAO = new DAOUser(context);
-            managerFD = new ManagerFindDelivery();
         }
         return instance;
     }
 
-    //PARA ADICIONAR NOVO USUÁRIO 12/10/2015
-    public void addUser(String name, String login, String password, byte[] photo) throws Exception{
+    public void insertUser(String name, String login, String password, byte[] photo) throws Exception{
         User user = new User(name, login, password, photo);
-        managerFD.registerUser(user);
         userDAO.insert(user);
     }
 
-    //PARA REMOVER NOVO USUÁRIO 12/10/2015
-    public void removeUser(String login) throws Exception {
-        User user = getUser(login);
-        managerFD.removeUser(user);
+    public void deleteUser(String login) throws Exception {
         userDAO.delete(login);
     }
 
-    //PARA EDITAR OS DADOS DO USUÁRIO 12/10/2015
-    public void updateData(String name, String login, String newPassword, byte[] photo) throws Exception{
-        managerFD.updateDataUser(name,login, newPassword, photo);
-
+    public void updateUser(String name, String login, String newPassword, byte[] photo) throws Exception{
         User user = getUser(login);
         user.setName(name);
         user.setPassword(newPassword);
@@ -52,39 +38,7 @@ public class UserController {
         userDAO.update(user);
     }
 
-    //PARA VALIDAR O LOGIN (username, senha) 12/10/2015
-    public boolean validatesUserLogin(String login, String password) throws Exception {
-        managerFD.isLoginValid(login, password);
-        User user = userDAO.findByLogin(login, password);
-        if (user == null || user.getLogin() == null || user.getPassword() == null) {
-            return false;
-        }
-        String input = login + password;
-        String expected = user.getLogin() + user.getPassword();
-        if (input.equals(expected)) {
-            return true;
-        }
-        return false;
-
-    }
-
-    public void insert(User user) throws Exception {
-        userDAO.insert(user);
-    }
-
-    public void update(User user) throws Exception {
-        userDAO.update(user);
-    }
-
-    public void delete(String login) throws Exception {
-        userDAO.delete(login);
-    }
-
-    public List<User> findAllUsers() throws Exception {
-        return userDAO.findAll();
-    }
-
-    public boolean validatesLogin(String login, String password) throws Exception {
+    public boolean validatesLoginUser(String login, String password) throws Exception {
         User user = userDAO.findByLogin(login, password);
         if (user == null || user.getLogin() == null || user.getPassword() == null) {
             return false;
@@ -118,7 +72,7 @@ public class UserController {
         if(login == null || login.equals("")){
             return false;
         }
-        for (User user : findAllUsers()){
+        for (User user : listAllUsers()){
             if (user.getLogin().equals(login)) {
                 return false;
             }
@@ -127,10 +81,13 @@ public class UserController {
 
     }
 
+    public List<User> listAllUsers() throws Exception {
+        return userDAO.findAll();
+    }
+
     public User getUser(String login){
         return userDAO.findById(login);
     }
-
 
 
 }

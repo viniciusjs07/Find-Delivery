@@ -34,7 +34,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
@@ -301,6 +301,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     }
 
     public void confirmEditions(View view) throws Exception {
+        String name = textViewtEstablishmentName.getText().toString();
         String address = editTextAddress.getText().toString();
         String businessHour = editTextHorario.getText().toString();
         String specialityType = sp.getSelectedItem().toString();
@@ -337,9 +338,8 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
                 editTextPhoneOne.setText("");
 
             } else {
-                Establishment establishment = new Establishment(textViewtEstablishmentName.getText().toString(), address, businessHour, specialityType, phone1, phone2, establishmentLogo);
                 String login = user.get(UserSessionController.KEY_LOGIN);
-                establishmentController.update(establishment, login);
+                establishmentController.updateEstablishment(name, address, businessHour, specialityType, phone1, phone2, establishmentLogo, login);
                 showDialog("Estabelecimento atualizado com sucesso!");
 
                 Intent it = new Intent();

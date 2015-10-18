@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
@@ -187,7 +187,7 @@ public class UserProfileActivity extends ActionBarActivity  {
     }
 
     public void deteleProfile(String login) throws Exception {
-        userController.delete(login);
+        userController.deleteUser(login);
         Toast.makeText(getApplicationContext(),
                 "Usuário deletado!",
                 Toast.LENGTH_LONG).show();

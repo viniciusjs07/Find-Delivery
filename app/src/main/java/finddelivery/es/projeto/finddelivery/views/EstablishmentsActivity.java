@@ -29,8 +29,8 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.adapter.EstablishmentsListAdapter;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
@@ -41,7 +41,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
     private Button btnAdvancedSearch;
     private ListView listViewEstablishments;
-    private ListMyEstablishmentAdapter adapter;
+    private EstablishmentsListAdapter adapter;
     private Context context;
     EstablishmentController establishmentController;
 
@@ -57,12 +57,14 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
+
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishments);
+
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
@@ -97,28 +99,36 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             EstablishmentsActivity.class);
-                    startActivity(it);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
                 if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             UserProfileActivity.class);
-                    startActivity(it);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
                 if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             MyEstablishmentActivity.class);
-                    startActivity(it);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
                 if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     Intent it = new Intent();
                     it.setClass(EstablishmentsActivity.this,
                             EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
                 if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
@@ -154,8 +164,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
                 Intent intent = new Intent(EstablishmentsActivity.this, EstablishmentDetails.class);
                 intent.putExtra("ESTABLISHMENT", item);
-
                 startActivity(intent);
+
             }
         });
 
@@ -184,11 +194,13 @@ public class EstablishmentsActivity extends ActionBarActivity {
         super.onStart();
         try {
             if (!establishmentController.isSearchAdvanced) {
-                List<Establishment> establishmentsList = establishmentController.findAllEstablishments();
-                adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+                List<Establishment> establishmentsList = establishmentController.listAllEstablishments();
+                adapter = new EstablishmentsListAdapter(this, establishmentsList);
+                establishmentController.isSearchAdvanced = false;
+                establishmentController.isSearchAdvancedByName = true;
             }else {
-                if (establishmentController.isIsSearchAdvancedByName) {
-                    List<Establishment> establishmentsList = establishmentController.listByName();
+                if (establishmentController.isSearchAdvancedByName) {
+                    List<Establishment> establishmentsList = establishmentController.establishmentsByName;
                     if(establishmentsList.size() == 0){
                         Toast.makeText(getApplicationContext(),
                                 "Restaurante não encontrado!",
@@ -197,21 +209,30 @@ public class EstablishmentsActivity extends ActionBarActivity {
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
                         startActivity(it);
+                        finish();
+                        establishmentController.isSearchAdvanced = false;
+                        establishmentController.isSearchAdvancedByName = true;
                     }else {
-                        adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+                        adapter = new EstablishmentsListAdapter(this, establishmentsList);
+                        establishmentController.isSearchAdvanced = false;
+                        establishmentController.isSearchAdvancedByName = true;
                     }
                 }else{
-                    List<Establishment> establishmentsList = establishmentController.listBySpeciality();
+                    List<Establishment> establishmentsList = establishmentController.establishmentsBySpeciality;
                     if(establishmentsList.size() == 0){
                         Toast.makeText(getApplicationContext(),
-                                "Restaurante não encontrado!",
+                                "Nenhum restaurante não encontrado!",
                                 Toast.LENGTH_LONG).show();
                         Intent it = new Intent();
                         it.setClass(EstablishmentsActivity.this,
                                 FindEstablishmentActivity.class);
                         startActivity(it);
+                        establishmentController.isSearchAdvanced = false;
+                        establishmentController.isSearchAdvancedByName = true;
                     }else {
-                        adapter = new ListMyEstablishmentAdapter(this, establishmentsList);
+                        adapter = new EstablishmentsListAdapter(this, establishmentsList);
+                        establishmentController.isSearchAdvanced = false;
+                        establishmentController.isSearchAdvancedByName = true;
                     }
                 }
             }

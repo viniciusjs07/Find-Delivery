@@ -65,7 +65,7 @@ public class LoginActivity extends ActionBarActivity {
         String password = passwordEditText.getText().toString();
 
         try {
-            boolean isValid = userController.validatesLogin(login, password);
+            boolean isValid = userController.validatesLoginUser(login, password);
             if (isValid) {
                 User user = userController.getUser(login);
                 session.createUserLoginSession(user);

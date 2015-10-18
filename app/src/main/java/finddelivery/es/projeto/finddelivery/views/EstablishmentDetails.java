@@ -32,7 +32,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
@@ -284,7 +284,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
                                 Intent it = new Intent();
                                 it.setClass(EstablishmentDetails.this, EstablishmentsActivity.class);
                                 startActivity(it);
-                                finish();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -305,7 +304,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     }
 
     public void deleteEstablishment(String  idEstab) throws  Exception {
-        establishmentController.delete(idEstab);
+        establishmentController.deleteEstablishment(idEstab);
     }
 
 

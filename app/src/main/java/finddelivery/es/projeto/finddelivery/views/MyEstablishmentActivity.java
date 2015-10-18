@@ -1,16 +1,13 @@
 package finddelivery.es.projeto.finddelivery.views;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,8 +24,8 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.ListMyEstablishmentAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.adapter.EstablishmentsListAdapter;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
@@ -37,7 +34,7 @@ import finddelivery.es.projeto.finddelivery.models.Establishment;
 public class MyEstablishmentActivity extends ActionBarActivity {
 
     private ListView listViewMyEstablishments;
-    private ListMyEstablishmentAdapter adapter;
+    private EstablishmentsListAdapter adapter;
     private Context context;
     EstablishmentController establishmentController;
     private android.support.v7.app.ActionBar actionBar;
@@ -159,7 +156,7 @@ public class MyEstablishmentActivity extends ActionBarActivity {
         String idUser = user.get(UserSessionController.KEY_LOGIN);
 
        try {
-           adapter = new ListMyEstablishmentAdapter(this, establishmentController.listMyEstablishments(idUser));
+           adapter = new EstablishmentsListAdapter(this, establishmentController.listMyEstablishments(idUser));
 
        } catch (Exception e) {
            e.printStackTrace();

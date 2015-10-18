@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.models.User;
+import finddelivery.es.projeto.finddelivery.views.EstablishmentsActivity;
 import finddelivery.es.projeto.finddelivery.views.LoginActivity;
 
-/**
- * Created by Daniela on 11/08/2015.
- */
 public class UserSessionController {
 
     SharedPreferences pref;
@@ -48,8 +45,8 @@ public class UserSessionController {
     }
 
     public boolean checkLogin(){
-        if(!this.isUserLoggedIn()){
-            Intent i = new Intent(_context, LoginActivity.class);
+        if(this.isUserLoggedIn()){
+            Intent i = new Intent(_context, EstablishmentsActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(i);

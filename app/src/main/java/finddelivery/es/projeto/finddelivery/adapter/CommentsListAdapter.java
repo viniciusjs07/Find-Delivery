@@ -22,12 +22,7 @@ import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
-/**
- * Created by Admin on 23/09/2015.
- */
-
-
-public class ListComments extends BaseAdapter{
+public class CommentsListAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;
     private List<User> users;
@@ -40,7 +35,7 @@ public class ListComments extends BaseAdapter{
     EstablishmentController establishmentController;
     UserController userController;
 
-    public ListComments(Context context, List<User> users, List<String> comments, Establishment establishment) {
+    public CommentsListAdapter(Context context, List<User> users, List<String> comments, Establishment establishment) {
         this.users = users;
         this.comments = comments;
         this.establishment = establishment;

@@ -7,12 +7,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,10 +35,9 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
-import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class EstablishmentCadastreActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -266,8 +265,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 50, b);
                 byte[] establishmentLogo = b.toByteArray();
 
-                Establishment establishment = new Establishment(name, address, workHour, specialityType, phone1, phone2, establishmentLogo);
-                establishmentController.insert(establishment, idUser);
+                establishmentController.insertEstablishment(name, address, workHour, specialityType, phone1, phone2, establishmentLogo, idUser);
+
                 showDialog("Estabelecimento cadastrado com sucesso!");
 
                 Intent it = new Intent();

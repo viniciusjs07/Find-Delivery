@@ -28,7 +28,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.CommentController;
 import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
@@ -179,7 +179,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                 String idUser = user.get(UserSessionController.KEY_LOGIN);
                 try{
                     if(!mapEvaluation.containsKey(userLogged)){
-                        evaluationController.insert(idUser, establishment.getName(), grade);
+                        evaluationController.insertEvaluation(idUser, establishment.getName(), grade);
                         Toast.makeText(getApplicationContext(),
                                 "Avaliação realizada com sucesso!",
                                 Toast.LENGTH_LONG).show();
@@ -188,7 +188,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                         averageTextView.setText(String.format("%.1f", evaluationController.average(evaluations)));
                         averageOfEstablishment.setRating(evaluationController.average(evaluations));
                     } else {
-                        evaluationController.update(idUser, establishment.getName(), grade);
+                        evaluationController.updateEvaluation(idUser, establishment.getName(), grade);
                         Toast.makeText(getApplicationContext(),
                                 "Avaliação atualizada com sucesso!",
                                 Toast.LENGTH_LONG).show();
@@ -242,12 +242,12 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             insertComment.setText("");
             String idUser = user.get(UserSessionController.KEY_LOGIN);
             if(!mapComment.containsKey(userLogged)){
-                commentController.insert(idUser, establishment.getName(), comment);
+                commentController.insertComment(idUser, establishment.getName(), comment);
                 Toast.makeText(getApplicationContext(),
                         "Comentário enviado com sucesso!",
                         Toast.LENGTH_LONG).show();
             } else{
-                commentController.update(idUser, establishment.getName(), comment);
+                commentController.updateComment(idUser, establishment.getName(), comment);
                 Toast.makeText(getApplicationContext(),
                         "Comentário atualizado com sucesso!",
                         Toast.LENGTH_LONG).show();

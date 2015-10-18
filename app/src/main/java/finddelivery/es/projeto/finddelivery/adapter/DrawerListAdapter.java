@@ -11,12 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import finddelivery.es.projeto.finddelivery.R;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 
 
-/**
- * Created by Daniela on 25/09/2015.
- */
 public class DrawerListAdapter extends BaseAdapter {
 
     Context mContext;

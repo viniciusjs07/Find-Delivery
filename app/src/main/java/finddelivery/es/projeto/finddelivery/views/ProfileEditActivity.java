@@ -31,7 +31,7 @@ import java.util.HashMap;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
@@ -214,14 +214,14 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
             } else {
                 if (name != null && !name.trim().equals("") && !name.equals(actualName)) {
                     if (actualPassword != null && actualPassword.equals(password) && passwordsValid) {
-                        userController.updateData(name, login, newPassword, photo);
+                        userController.updateUser(name, login, newPassword, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
-                        userController.updateData(name, login, password, photo);
+                        userController.updateUser(name, login, password, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
@@ -231,14 +231,14 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
 
                 } else if (name != null && name.equals(actualName)) {
                     if (actualPassword != null && !actualPassword.trim().equals("") && actualPassword.equals(password) && passwordsValid) {
-                        userController.updateData(actualName, login, newPassword, photo);
+                        userController.updateUser(actualName, login, newPassword, photo);
                         showDialog("Dados alterados com sucesso!");
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                         startActivity(it);
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
-                        userController.updateData(actualName, login, password, photo);
+                        userController.updateUser(actualName, login, password, photo);
                         Intent it = new Intent();
                         it.setClass(ProfileEditActivity.this,
                                 UserProfileActivity.class);

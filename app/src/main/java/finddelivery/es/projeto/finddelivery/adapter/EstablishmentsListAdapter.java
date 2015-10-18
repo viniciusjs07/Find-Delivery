@@ -20,21 +20,16 @@ import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 import finddelivery.es.projeto.finddelivery.models.User;
 
-/**
- * Created by Vinicius on 29/07/2015.
- */
-public class ListMyEstablishmentAdapter extends BaseAdapter{
+public class EstablishmentsListAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private List<Establishment> items;
-    private Context myContext;
     private EvaluationController evaluationController;
     private Map<User,String> mapEvaluation = null;
     EstablishmentController establishmentController;
 
-    public ListMyEstablishmentAdapter(Context context, List<Establishment> items) {
+    public EstablishmentsListAdapter(Context context, List<Establishment> items) {
         this.items = items;
         mInflater = LayoutInflater.from(context);
-        myContext = context;
         establishmentController = EstablishmentController.getInstance(context);
         evaluationController = EvaluationController.getInstance(context);
     }

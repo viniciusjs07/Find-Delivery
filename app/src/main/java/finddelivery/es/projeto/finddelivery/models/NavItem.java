@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery.adapter;
+package finddelivery.es.projeto.finddelivery.models;
 
 /**
  * Created by Daniela on 25/09/2015.

@@ -28,8 +28,8 @@ import java.util.Set;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
-import finddelivery.es.projeto.finddelivery.adapter.ListComments;
-import finddelivery.es.projeto.finddelivery.adapter.NavItem;
+import finddelivery.es.projeto.finddelivery.adapter.CommentsListAdapter;
+import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.CommentController;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.EvaluationController;
@@ -50,7 +50,7 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
     private Map<User,String> mapComment = null;
     private Context context;
     private EstablishmentController establishmentController;
-    private ListComments adapter;
+    private CommentsListAdapter adapter;
     private CommentController commentController;
     private EvaluationController evaluationController;
     private Map<User,String> mapEvaluation = null;
@@ -216,7 +216,7 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
             List listComments = new ArrayList(comments);
             List listUsers = new ArrayList(users);
 
-            adapter = new ListComments(this,listUsers, listComments, establishment);
+            adapter = new CommentsListAdapter(this,listUsers, listComments, establishment);
             listView.setAdapter(adapter);
 
         } catch (Exception e) {
