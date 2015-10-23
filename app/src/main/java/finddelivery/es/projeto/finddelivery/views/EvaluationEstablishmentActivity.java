@@ -1,10 +1,12 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -55,13 +57,12 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
     private EvaluationController evaluationController;
     private Map<User,String> mapEvaluation = null;
     private ActionBar actionBar;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-    UserSessionController session;
+    private ArrayList<NavItem> mNavItems;
+    private UserSessionController session;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
@@ -90,6 +91,11 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         averageOfEstablishmentTextView2 = (TextView) findViewById(R.id.averageOfEstablishmentTextView2);
         evaluationEstablishmentRatingBar2 = (RatingBar) findViewById(R.id.evaluationEstablishmentRatingBar2);
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -128,50 +134,35 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluationEstablishmentActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(EvaluationEstablishmentActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluationEstablishmentActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(EvaluationEstablishmentActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluationEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(EvaluationEstablishmentActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluationEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(EvaluationEstablishmentActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EvaluationEstablishmentActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
-
-
 
         byte[] photo = establishment.getPhoto();
         Bitmap photoBitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
         establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
-
 
         btnEvaluateEstablishment = (Button) findViewById(R.id.btnEvaluateEstablishment);
 
@@ -181,7 +172,6 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
                 it.setClass(EvaluationEstablishmentActivity.this,
                         EvaluateEstablishmentActivity.class);
                 it.putExtra("ESTABLISHMENTEVALUATION", establishment);
-
                 startActivity(it);
             }
         });
@@ -196,12 +186,8 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-
-
-
         setTitle(establishment.getName());
     }
-
 
     @Override
     protected void onStart() {
@@ -222,6 +208,12 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 
     @Override

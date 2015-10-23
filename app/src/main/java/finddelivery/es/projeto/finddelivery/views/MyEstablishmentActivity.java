@@ -1,11 +1,13 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
@@ -36,15 +38,14 @@ public class MyEstablishmentActivity extends ActionBarActivity {
     private ListView listViewMyEstablishments;
     private EstablishmentsListAdapter adapter;
     private Context context;
-    EstablishmentController establishmentController;
+    private EstablishmentController establishmentController;
     private android.support.v7.app.ActionBar actionBar;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-    UserSessionController session;
+    private ArrayList<NavItem> mNavItems;
+    private UserSessionController session;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
@@ -57,6 +58,11 @@ public class MyEstablishmentActivity extends ActionBarActivity {
         establishmentController = EstablishmentController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -78,39 +84,27 @@ public class MyEstablishmentActivity extends ActionBarActivity {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(MyEstablishmentActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(MyEstablishmentActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(MyEstablishmentActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(MyEstablishmentActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(MyEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(MyEstablishmentActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(MyEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(MyEstablishmentActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(MyEstablishmentActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -120,7 +114,6 @@ public class MyEstablishmentActivity extends ActionBarActivity {
         String photo = user.get(UserSessionController.KEY_PHOTO);
         String name = user.get(UserSessionController.KEY_NAME);
         String loginUser = user.get(UserSessionController.KEY_LOGIN);
-
 
         byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
 
@@ -133,20 +126,24 @@ public class MyEstablishmentActivity extends ActionBarActivity {
 
         listViewMyEstablishments = (ListView) findViewById(R.id.listViewMyEstablishments);
 
-
         listViewMyEstablishments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Establishment item = adapter.getItem(position);
 
-                Intent intent = new Intent(MyEstablishmentActivity.this, EstablishmentDetails.class);
+                Intent intent = new Intent(MyEstablishmentActivity.this, EstablishmentDetailsActivity.class);
                 intent.putExtra("ESTABLISHMENT", item);
 
                 startActivity(intent);
             }
         });
 
+    }
 
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 
    @Override

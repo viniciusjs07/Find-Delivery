@@ -13,8 +13,8 @@ public class EstablishmentController {
 
     private static DAOEstablishment establishmentDAO;
     private static EstablishmentController instance;
-    public List<Establishment> establishmentsByName = new ArrayList<>();
-    public List<Establishment> establishmentsBySpeciality = new ArrayList<>();
+    public List<Establishment> establishmentsByName;
+    public List<Establishment> establishmentsBySpeciality;
 
     public static boolean isSearchAdvanced = false;
     public static boolean isSearchAdvancedByName = true;
@@ -93,14 +93,17 @@ public class EstablishmentController {
     }
 
     public void listBySpeciality(String speciality) throws Exception {
+        establishmentsBySpeciality = new ArrayList<>();
         establishmentsBySpeciality = establishmentDAO.findBySpeciality(speciality);;
     }
 
     public void listByName(String name) throws Exception {
         if (establishmentDAO.findByName(name) != null) {
             Establishment establishment = establishmentDAO.findByName(name);
-            establishmentsByName.add(establishment);
+            establishmentsByName = new ArrayList<>();
+            if(!establishmentsByName.contains(establishment)){
+                establishmentsByName.add(establishment);
+            }
         }
     }
-
 }

@@ -90,10 +90,11 @@ public class DAOEstablishment extends DatabaseHelper {
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            establishments.add(mountEstablishment(cursor));
-            cursor.moveToNext();
+            if(!establishments.contains(mountEstablishment(cursor))){
+                establishments.add(mountEstablishment(cursor));
+                cursor.moveToNext();
+            }
         }
-
         return establishments;
     }
 
@@ -104,11 +105,12 @@ public class DAOEstablishment extends DatabaseHelper {
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            establishments.add(mountEstablishment(cursor));
-            cursor.moveToNext();
+            if(!establishments.contains(mountEstablishment(cursor))){
+                establishments.add(mountEstablishment(cursor));
+                cursor.moveToNext();
+            }
         }
         return establishments;
-
     }
 
     public Establishment mountEstablishment(Cursor cursor) {

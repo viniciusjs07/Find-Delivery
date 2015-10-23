@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -43,28 +44,23 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private ListView listViewEstablishments;
     private EstablishmentsListAdapter adapter;
     private Context context;
-    EstablishmentController establishmentController;
-
+    private EstablishmentController establishmentController;
     private AlertDialog.Builder alert;
-
-    UserSessionController session;
-
+    private UserSessionController session;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-
-
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    private ActionBar actionBar;
+    private ArrayList<NavItem> mNavItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishments);
-
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
@@ -73,6 +69,11 @@ public class EstablishmentsActivity extends ActionBarActivity {
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -81,11 +82,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
         photoUser = (ImageView) findViewById((R.id.photoUser));
         nameUser = (TextView) findViewById(R.id.nameUser);
         login = (TextView) findViewById(R.id.login);
-
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
-
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter2 = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter2);
@@ -96,39 +94,19 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentsActivity.this,
-                            EstablishmentsActivity.class);
-                    ComponentName cn = it.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
-                    startActivity(mainIntent);
+                    setView(EstablishmentsActivity.this, EstablishmentsActivity.class);
                 }
                 if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentsActivity.this,
-                            UserProfileActivity.class);
-                    ComponentName cn = it.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
-                    startActivity(mainIntent);
+                    setView(EstablishmentsActivity.this, UserProfileActivity.class);
                 }
                 if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentsActivity.this,
-                            MyEstablishmentActivity.class);
-                    ComponentName cn = it.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
-                    startActivity(mainIntent);
+                    setView(EstablishmentsActivity.this, MyEstablishmentActivity.class);
                 }
                 if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentsActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    ComponentName cn = it.getComponent();
-                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
-                    startActivity(mainIntent);
+                    setView(EstablishmentsActivity.this, EstablishmentCadastreActivity.class);
                 }
                 if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
@@ -147,7 +125,6 @@ public class EstablishmentsActivity extends ActionBarActivity {
         String name = user.get(UserSessionController.KEY_NAME);
         String loginUser = user.get(UserSessionController.KEY_LOGIN);
 
-
         byte[] photoUserByte = Base64.decode(photo, Base64.DEFAULT);
 
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
@@ -161,21 +138,16 @@ public class EstablishmentsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Establishment item = adapter.getItem(position);
-
-                Intent intent = new Intent(EstablishmentsActivity.this, EstablishmentDetails.class);
+                Intent intent = new Intent(EstablishmentsActivity.this, EstablishmentDetailsActivity.class);
                 intent.putExtra("ESTABLISHMENT", item);
                 startActivity(intent);
 
             }
         });
 
-
         btnAdvancedSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent it = new Intent();
-                it.setClass(EstablishmentsActivity.this,
-                        FindEstablishmentActivity.class);
-                startActivity(it);
+                setView(EstablishmentsActivity.this, FindEstablishmentActivity.class);
             }
         });
 
@@ -205,10 +177,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(),
                                 "Restaurante não encontrado!",
                                 Toast.LENGTH_LONG).show();
-                        Intent it = new Intent();
-                        it.setClass(EstablishmentsActivity.this,
-                                FindEstablishmentActivity.class);
-                        startActivity(it);
+                        setView(EstablishmentsActivity.this, FindEstablishmentActivity.class);
                         finish();
                         establishmentController.isSearchAdvanced = false;
                         establishmentController.isSearchAdvancedByName = true;
@@ -221,12 +190,10 @@ public class EstablishmentsActivity extends ActionBarActivity {
                     List<Establishment> establishmentsList = establishmentController.establishmentsBySpeciality;
                     if(establishmentsList.size() == 0){
                         Toast.makeText(getApplicationContext(),
-                                "Nenhum restaurante não encontrado!",
+                                "Nenhum restaurante encontrado!",
                                 Toast.LENGTH_LONG).show();
-                        Intent it = new Intent();
-                        it.setClass(EstablishmentsActivity.this,
-                                FindEstablishmentActivity.class);
-                        startActivity(it);
+                        setView(EstablishmentsActivity.this, FindEstablishmentActivity.class);
+                        finish();
                         establishmentController.isSearchAdvanced = false;
                         establishmentController.isSearchAdvancedByName = true;
                     }else {
@@ -242,6 +209,11 @@ public class EstablishmentsActivity extends ActionBarActivity {
         listViewEstablishments.setAdapter(adapter);
     }
 
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -263,6 +235,4 @@ public class EstablishmentsActivity extends ActionBarActivity {
         }*/
         return super.onOptionsItemSelected(item);
     }
-
-
 }

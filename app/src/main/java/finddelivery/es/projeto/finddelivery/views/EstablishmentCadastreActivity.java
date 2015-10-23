@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -35,6 +37,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
+import finddelivery.es.projeto.finddelivery.models.Mask;
 import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
@@ -48,29 +51,23 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
     private EditText editTextEstablishmentName;
     private EditText editTextPhoneOne;
     private EditText editTextPhoneTwo;
-
     private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
     private ImageButton btnGalery;
     private ImageButton btnDelete;
-
-
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
-
     private EstablishmentController establishmentController;
     private Context context;
     private AlertDialog.Builder alert;
     private Bitmap establishmentLogo;
-    UserSessionController session;
+    private UserSessionController session;
     private ActionBar actionBar;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-
+    private ArrayList<NavItem> mNavItems;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
@@ -103,6 +100,11 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         editTextPhoneOne.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneOne));
         editTextPhoneTwo.addTextChangedListener(Mask.insert("(###)####-####", editTextPhoneTwo));
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -125,39 +127,27 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentCadastreActivity.this, EstablishmentsActivity.class);
                 }
                 if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentCadastreActivity.this, UserProfileActivity.class);
                 }
                 if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentCadastreActivity.this, MyEstablishmentActivity.class);
                 }
                 if (position == 3) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentCadastreActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentCadastreActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -208,6 +198,12 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
         specialityTypes.add("Pizza");
         specialityTypes.add("Saladas");
         specialityTypes.add("Salgados");
+    }
+
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 
     @Override
@@ -269,10 +265,8 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
 
                 showDialog("Estabelecimento cadastrado com sucesso!");
 
-                Intent it = new Intent();
-                it.setClass(EstablishmentCadastreActivity.this,
+                setView(EstablishmentCadastreActivity.this,
                         EstablishmentsActivity.class);
-                startActivity(it);
                 finish();
 
             } else if (!validateName) {

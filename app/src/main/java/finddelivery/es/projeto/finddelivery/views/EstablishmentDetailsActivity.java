@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -26,10 +28,8 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Map;
-
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
 import finddelivery.es.projeto.finddelivery.models.NavItem;
@@ -42,7 +42,7 @@ import finddelivery.es.projeto.finddelivery.models.User;
 import static finddelivery.es.projeto.finddelivery.R.id.action_delete;
 import static finddelivery.es.projeto.finddelivery.R.id.action_edit;
 
-public class EstablishmentDetails extends ActionBarActivity implements View.OnClickListener {
+public class EstablishmentDetailsActivity extends ActionBarActivity implements View.OnClickListener {
 
     private AlertDialog alertDeleteEstablishment;
     private Button btnAvaliacoes;
@@ -52,6 +52,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private TextView averageOfEstablishmentTextView;
     private RatingBar evaluationEstablishmentRatingBar;
     private TextView businessHours;
+    private TextView address;
     private TextView fieldPhone;
     private TextView fieldPhoneTwo;
     private Establishment establishment;
@@ -60,26 +61,20 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
     private EstablishmentController establishmentController;
     private Map<User,String> mapEvaluation = null;
     private ActionBar actionBar;
-
-
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-    UserSessionController session;
-
+    private ArrayList<NavItem> mNavItems;
+    private UserSessionController session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_establishment_details);
-
-        actionBar =  getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(true);
         session = new  UserSessionController(getApplicationContext());
 
         context = this;
@@ -90,6 +85,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         establishmentPhotoImageView = (ImageView) findViewById(R.id.establishmentPhotoImageView);
         averageOfEstablishmentTextView = (TextView) findViewById(R.id.averageOfEstablishmentTextView);
         evaluationEstablishmentRatingBar = (RatingBar) findViewById(R.id.evaluationEstablishmentRatingBar);
+        address = (TextView) findViewById(R.id.address);
         businessHours = (TextView) findViewById(R.id.businessHours);
         fieldPhone = (TextView) findViewById(R.id.fieldPhone);
         fieldPhoneTwo = (TextView) findViewById(R.id.fieldPhoneTwo);
@@ -105,11 +101,17 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENT");
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
         mNavItems.add(new NavItem("Novo restaurante", R.drawable.addrestaurant));
         mNavItems.add(new NavItem("Sair", R.drawable.logout));
+
         photoUser = (ImageView) findViewById((R.id.photoUser));
         nameUser = (TextView) findViewById(R.id.nameUser);
         login = (TextView) findViewById(R.id.login);
@@ -126,39 +128,27 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentDetails.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentDetailsActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentDetails.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentDetailsActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentDetails.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentDetailsActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentDetails.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentDetailsActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentDetails.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -170,13 +160,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         String name = user.get(UserSessionController.KEY_NAME);
         String loginUser = user.get(UserSessionController.KEY_LOGIN);
 
-
         byte[] photoUserByte = Base64.decode(photoU, Base64.DEFAULT);
-
-
-
-
-
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
         photoUser.setImageBitmap(photoUserBitmap);
@@ -190,7 +174,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         specialityTypeTextView.setText(establishment.getSpeciality());
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
         establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
-
+        address.setText(establishment.getAddress());
         businessHours.setText(establishment.getBusinessHour());
         fieldPhone.setText(establishment.getPhone1());
         fieldPhoneTwo.setText(establishment.getPhone2());
@@ -206,13 +190,8 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             e.printStackTrace();
         }
 
-
         setTitle(establishment.getName());
-
-
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -224,7 +203,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
-
 
         if (!establishmentController.isOwnerEstablishment(establishment.getName(), loginUser)) {
             MenuItem item1 = menu.findItem(action_delete);
@@ -243,7 +221,7 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         btnAvaliacoes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent it = new Intent();
-                it.setClass(EstablishmentDetails.this,
+                it.setClass(EstablishmentDetailsActivity.this,
                         EvaluationEstablishmentActivity.class);
                 it.putExtra("ESTABLISHMENTDETAILS", establishment);
 
@@ -252,7 +230,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
             }
         });
         return true;
-
     }
 
 
@@ -266,24 +243,21 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_edit) {
             Intent it = new Intent();
-            it.setClass(EstablishmentDetails.this,
+            it.setClass(EstablishmentDetailsActivity.this,
                     EstablishmentEditActivity.class);
             it.putExtra("ESTABLISHMENTDETAILS", establishment);
             startActivity(it);
 
             return true;
         } else if (id == R.id.action_delete) {
-            AlertDialog.Builder deleteEstablishment = new AlertDialog.Builder(EstablishmentDetails.this);
+            AlertDialog.Builder deleteEstablishment = new AlertDialog.Builder(EstablishmentDetailsActivity.this);
             deleteEstablishment.setMessage(R.string.dialog_deleteEstablishment)
                     .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             try {
                                 deleteEstablishment(establishment.getName());
-
                                 Toast.makeText(getApplicationContext(), R.string.dialog_establishmentDeleted, Toast.LENGTH_SHORT).show();
-                                Intent it = new Intent();
-                                it.setClass(EstablishmentDetails.this, EstablishmentsActivity.class);
-                                startActivity(it);
+                                setView(EstablishmentDetailsActivity.this, MyEstablishmentActivity.class);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -307,7 +281,6 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         establishmentController.deleteEstablishment(idEstab);
     }
 
-
     @Override
     public void onClick(View v) {
         String telefone = null;
@@ -326,5 +299,11 @@ public class EstablishmentDetails extends ActionBarActivity implements View.OnCl
         Intent intent = new Intent(Intent.ACTION_DIAL,uri);
         startActivity(intent);
 
+    }
+
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 }

@@ -1,4 +1,4 @@
-package finddelivery.es.projeto.finddelivery.views;
+package finddelivery.es.projeto.finddelivery.models;
 
 import android.text.TextWatcher;
 import android.widget.EditText;

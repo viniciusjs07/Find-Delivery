@@ -54,17 +54,19 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="15dp"/>
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:text="Ir"
                     android:id="@+id/searchByName"
+                    android:onClick="searchByName"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:layout_marginTop="45dp"
                     android:layout_marginLeft="250dp"
                     android:layout_gravity="right"
-                    android:layout_alignBottom="@id/restaurantNameEditText"
-                    android:gravity="top"
-                    android:src="@drawable/button_search"
-                    android:onClick="searchByName"/>
-
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,16 +96,19 @@
 
                 </LinearLayout>
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:text="Ir"
                     android:id="@+id/searchBySpeciality"
-                    android:layout_marginTop="170dp"
+                    android:onClick="searchBySpeciality"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:layout_marginTop="175dp"
                     android:layout_marginLeft="250dp"
                     android:layout_gravity="right"
-                    android:gravity="top"
-                    android:src="@drawable/button_search"
-                    android:onClick="searchBySpeciality"/>
+                    android:textStyle="bold"/>
 
             </RelativeLayout>
 

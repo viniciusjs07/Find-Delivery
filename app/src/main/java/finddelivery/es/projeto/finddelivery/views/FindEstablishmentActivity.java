@@ -1,11 +1,13 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,19 +42,18 @@ public class FindEstablishmentActivity extends ActionBarActivity {
     private Spinner sp;
     private List<String> specialityTypes;
     private EditText restaurantNameEditText;
-    private ImageButton searchByName;
-    private ImageButton searchBySpeciality;
+    private Button searchByName;
+    private Button searchBySpeciality;
     private EstablishmentController establishmentController;
     private Context context;
     private AlertDialog.Builder alert;
     private ActionBar actionBar;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-    UserSessionController session;
+    private ArrayList<NavItem> mNavItems;
+    private UserSessionController session;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
@@ -62,6 +64,11 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         setContentView(R.layout.activity_find_establishment);
         session = new  UserSessionController(getApplicationContext());
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -83,39 +90,27 @@ public class FindEstablishmentActivity extends ActionBarActivity {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(FindEstablishmentActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(FindEstablishmentActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(FindEstablishmentActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(FindEstablishmentActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(FindEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(FindEstablishmentActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(FindEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(FindEstablishmentActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(FindEstablishmentActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -143,8 +138,8 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         addTypes();
 
         restaurantNameEditText = (EditText)findViewById(R.id.restaurantNameEditText);
-        searchByName = (ImageButton)findViewById(R.id.searchByName);
-        searchBySpeciality = (ImageButton)findViewById(R.id.searchBySpeciality);
+        searchByName = (Button)findViewById(R.id.searchByName);
+        searchBySpeciality = (Button)findViewById(R.id.searchBySpeciality);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, specialityTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -215,7 +210,11 @@ public class FindEstablishmentActivity extends ActionBarActivity {
         alert.create().show();
     }
 
-
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

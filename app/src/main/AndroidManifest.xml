@@ -64,7 +64,7 @@
             android:label="@string/title_activity_evaluate_establishment" >
         </activity>
         <activity
-            android:name=".views.EstablishmentDetails"
+            android:name=".views.EstablishmentDetailsActivity"
             android:label="@string/title_activity_establishment_details" >
         </activity>
         <activity

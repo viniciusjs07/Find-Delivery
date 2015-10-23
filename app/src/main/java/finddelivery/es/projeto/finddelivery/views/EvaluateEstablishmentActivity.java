@@ -1,10 +1,12 @@
 package finddelivery.es.projeto.finddelivery.views;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -49,21 +51,17 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
     private TextView establishmentNameTextView;
     private TextView specialityTypeTextView;
     private ImageView establishmentPhotoImageView;
-
-    UserSessionController session;
+    private UserSessionController session;
     private HashMap<String, String> user;
     private Map<User,String> mapComment = null;
     private Map<User,String> mapEvaluation = null;
     private User userLogged;
     private ActionBar actionBar;
-
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-
+    private ArrayList<NavItem> mNavItems;
     private ImageView photoUser2;
     private TextView nameUser;
     private TextView login2;
@@ -95,6 +93,11 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         establishmentPhotoImageView.setImageBitmap(photoBitmap);
         establishmentPhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(photoBitmap, 100, 100, false));
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -116,43 +119,30 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluateEstablishmentActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(EvaluateEstablishmentActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluateEstablishmentActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(EvaluateEstablishmentActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluateEstablishmentActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(EvaluateEstablishmentActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EvaluateEstablishmentActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(EvaluateEstablishmentActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EvaluateEstablishmentActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
-
 
         user = session.getUserDetails();
         String name = user.get(UserSessionController.KEY_NAME);
@@ -162,15 +152,12 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
         userLogged = new User(name, login, password, photoUserByte);
-
         Bitmap photoUserBitmap = BitmapFactory.decodeByteArray(photoUserByte, 0, photoUserByte.length);
 
         photoUser2.setImageBitmap(photoUserBitmap);
         photoUser2.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 50, 50, false));
         nameUser.setText(name);
         login2.setText(login);
-
-
 
         yourEvaluationForEstablishment.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -231,7 +218,6 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
         }
 
         setTitle(establishment.getName());
-
     }
 
     public void insertComment(View view) throws Exception {
@@ -253,7 +239,12 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                         Toast.LENGTH_LONG).show();
             }
         }
+    }
 
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 
     @Override

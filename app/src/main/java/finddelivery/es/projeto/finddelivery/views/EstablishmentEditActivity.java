@@ -1,6 +1,7 @@
 package finddelivery.es.projeto.finddelivery.views;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
@@ -24,7 +26,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.R;
 import finddelivery.es.projeto.finddelivery.adapter.DrawerListAdapter;
+import finddelivery.es.projeto.finddelivery.models.Mask;
 import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.EstablishmentController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
@@ -50,7 +52,6 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     private EditText editTextPhoneTwo;
     private Establishment establishment;
     private AlertDialog.Builder alert;
-
     private ImageView logoEstablishmentImageView;
     private ImageButton btnCamera;
     private ImageButton btnGalery;
@@ -58,20 +59,18 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
     private Bitmap establishmentLogo;
     private static final int RESULT_CAMERA = 111;
     private static final int RESULT_GALERIA = 222;
-
-    UserSessionController session;
+    private UserSessionController session;
     private EstablishmentController establishmentController;
     private Context context;
     private HashMap<String, String> user;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-
+    private ArrayList<NavItem> mNavItems;
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
+    private android.support.v7.app.ActionBar actionBar;
 
 
     @Override
@@ -81,9 +80,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
-/*
-        Bitmap photoDefault = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
-        establishmentLogo = photoDefault;*/
+
         session = new  UserSessionController(getApplicationContext());
         user = session.getUserDetails();
 
@@ -103,6 +100,11 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         btnDelete = (ImageButton)findViewById(R.id.imgDelete);
         btnDelete.setOnClickListener(this);
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -118,46 +120,33 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         DrawerListAdapter drawerAdapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(drawerAdapter);
 
-
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentEditActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentEditActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentEditActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentEditActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentEditActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentEditActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentEditActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(EstablishmentEditActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(EstablishmentEditActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -186,13 +175,10 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         sp = (Spinner) findViewById(R.id.spinnerTipoDeCozinha);
         sp.setAdapter(adapter);
 
-
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTDETAILS");
 
-
         byte[] logoEstablishment = establishment.getPhoto();
-
         Bitmap logoBitmap = BitmapFactory.decodeByteArray(logoEstablishment, 0, logoEstablishment.length);
 
         textViewtEstablishmentName.setText(establishment.getName());
@@ -315,15 +301,11 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         try {
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             if (establishmentLogo == null) {
-                Toast.makeText(getApplicationContext(), "Entrou aqui",
-                        Toast.LENGTH_LONG).show();
-
                 byte[] photo = (establishmentController.getEstablishment(establishment.getName())).getPhoto();
                 establishmentLogo = BitmapFactory.decodeByteArray(photo, 0, photo.length);
             }
             establishmentLogo.compress(Bitmap.CompressFormat.JPEG, 100, b);
             byte[] establishmentLogo = b.toByteArray();
-
 
             if (!validateAddress) {
                 showDialog("Endereço inválido!");
@@ -344,7 +326,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
                 Intent it = new Intent();
                 it.setClass(EstablishmentEditActivity.this,
-                        EstablishmentDetails.class);
+                        EstablishmentDetailsActivity.class);
                 it.putExtra("ESTABLISHMENT", establishment);
                 startActivity(it);
 
@@ -360,5 +342,11 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         alert.setPositiveButton("OK", null);
         alert.setMessage(mensagem);
         alert.create().show();
+    }
+
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
     }
 }

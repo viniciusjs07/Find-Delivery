@@ -4,6 +4,7 @@ import android.content.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.content.IntentCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -22,26 +23,22 @@ import finddelivery.es.projeto.finddelivery.models.NavItem;
 import finddelivery.es.projeto.finddelivery.controllers.UserController;
 import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
-
 public class UserProfileActivity extends ActionBarActivity  {
 
     private AlertDialog alertDeleteAccount;
-    private Button btnAlterarDados;
-    private Button btnExcluirConta;
     private ImageView imageViewUserProfile;
     private TextView editTextNameUser;
     private TextView editTextLoginUser;
     private HashMap<String, String> user;
     private UserController userController;
     private Context context;
-    UserSessionController session;
+    private UserSessionController session;
     private ActionBar actionBar;
-
-    ListView mDrawerList;
-    RelativeLayout mDrawerPane;
+    private ListView mDrawerList;
+    private RelativeLayout mDrawerPane;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
-    ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
+    private ArrayList<NavItem> mNavItems;
     private ImageView photoUser2;
     private TextView nameUser2;
     private TextView login2;
@@ -55,8 +52,6 @@ public class UserProfileActivity extends ActionBarActivity  {
         imageViewUserProfile = (ImageView) findViewById((R.id.imageViewUserProfile));
         editTextNameUser = (TextView) findViewById(R.id.editTextNameUser);
         editTextLoginUser = (TextView) findViewById(R.id.editTextLoginUser);
-        btnAlterarDados = (Button) findViewById(R.id.btnAlterarDados);
-        btnExcluirConta = (Button) findViewById(R.id.btnExcluirConta);
 
         context = this;
         userController = UserController.getInstance(context);
@@ -74,6 +69,11 @@ public class UserProfileActivity extends ActionBarActivity  {
         imageViewUserProfile.setImageBitmap(photoUserBitmap);
         imageViewUserProfile.setImageBitmap(Bitmap.createScaledBitmap(photoUserBitmap, 100, 100, false));
 
+        actionBar =  getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.icon_menu);
+
+        mNavItems = new ArrayList<NavItem>();
         mNavItems.add(new NavItem("Início", R.drawable.home));
         mNavItems.add(new NavItem("Meu perfil", R.drawable.profileuser));
         mNavItems.add(new NavItem("Meus restaurantes", R.drawable.myrestaurants));
@@ -100,39 +100,27 @@ public class UserProfileActivity extends ActionBarActivity  {
 
                 if (position == 0) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(UserProfileActivity.this,
-                            EstablishmentsActivity.class);
-                    startActivity(it);
+                    setView(UserProfileActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1) {
+                if (position == 1){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(UserProfileActivity.this,
-                            UserProfileActivity.class);
-                    startActivity(it);
+                    setView(UserProfileActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2) {
+                if (position == 2){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(UserProfileActivity.this,
-                            MyEstablishmentActivity.class);
-                    startActivity(it);
+                    setView(UserProfileActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3) {
+                if (position == 3){
                     mDrawerLayout.closeDrawer(mDrawerPane);
-                    Intent it = new Intent();
-                    it.setClass(UserProfileActivity.this,
-                            EstablishmentCadastreActivity.class);
-                    startActivity(it);
+                    setView(UserProfileActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4) {
+                if (position == 4){
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
-                    Intent it = new Intent();
-                    it.setClass(UserProfileActivity.this,
-                            LoginActivity.class);
-                    startActivity(it);
+                    Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+                    ComponentName cn = it.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
                 }
             }
         });
@@ -140,59 +128,17 @@ public class UserProfileActivity extends ActionBarActivity  {
         editTextNameUser.setText(name);
         editTextLoginUser.setText(login);
 
-        btnAlterarDados.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent it = new Intent();
-                it.setClass(UserProfileActivity.this,
-                        ProfileEditActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
-
-
-        btnExcluirConta.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                AlertDialog.Builder deleteAccount = new AlertDialog.Builder(UserProfileActivity.this);
-                deleteAccount.setMessage(R.string.dialog_deleteAccount)
-                        .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                try {
-                                    deteleProfile(user.get(UserSessionController.KEY_LOGIN));
-                                    session.logoutUser();
-
-                                    Toast.makeText(getApplicationContext(), R.string.dialog_accountDeleted, Toast.LENGTH_SHORT).show();
-                                    Intent it = new Intent();
-                                    it.setClass(UserProfileActivity.this, LoginActivity.class);
-                                    startActivity(it);
-                                    finish();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        })
-                        .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                            }
-                        });
-
-                alertDeleteAccount = deleteAccount.create();
-                alertDeleteAccount.show();
-
-            }
-        });
-
     }
 
     public void deteleProfile(String login) throws Exception {
         userController.deleteUser(login);
-        Toast.makeText(getApplicationContext(),
-                "Usuário deletado!",
-                Toast.LENGTH_LONG).show();
     }
 
+    public void setView(Context context, Class classe){
+        Intent it = new Intent();
+        it.setClass(context, classe);
+        startActivity(it);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -206,11 +152,41 @@ public class UserProfileActivity extends ActionBarActivity  {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        /*        int id = item.getItemId();
+
+        int id = item.getItemId();
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_edit) {
+            setView(UserProfileActivity.this,
+                    ProfileEditActivity.class);
             return true;
-        }*/
+        } else if (id == R.id.action_delete) {
+            AlertDialog.Builder deleteAccount = new AlertDialog.Builder(UserProfileActivity.this);
+            deleteAccount.setMessage(R.string.dialog_deleteAccount)
+                    .setPositiveButton(R.string.dialog_positiveAwswer, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                deteleProfile(user.get(UserSessionController.KEY_LOGIN));
+                                session.logoutUser();
+
+                                Toast.makeText(getApplicationContext(), R.string.dialog_accountDeleted, Toast.LENGTH_SHORT).show();
+                                setView(UserProfileActivity.this, LoginActivity.class);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_negativeAwswer, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+
+            alertDeleteAccount = deleteAccount.create();
+            alertDeleteAccount.show();
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
