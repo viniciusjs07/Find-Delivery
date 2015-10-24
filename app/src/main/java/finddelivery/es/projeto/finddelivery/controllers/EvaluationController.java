@@ -2,7 +2,6 @@ package finddelivery.es.projeto.finddelivery.controllers;
 
 import android.content.Context;
 
-import java.util.Collection;
 import java.util.Map;
 
 import finddelivery.es.projeto.finddelivery.database.DAOEvaluation;
@@ -34,40 +33,14 @@ public class EvaluationController {
         evaluationDAO.update(idUser, idEstablishment, grade);
     }
 
-
-
-
-    //PARA RETORNAR A MÉDIA 12/10/2015
     public Float average(Map<User, String> mapEvaluation, String idEstablisment){
         Establishment establishment = establishmentController.getEstablishment(idEstablisment);
-        Float average = establishment.calculatesAverage(mapEvaluation);
-        return average;
-    }
-
-    //PARA RETORNAR O MAPA (User, avaliação)
-    public Map<User, Float> getEvaluations(String idEstablishment){
-        Establishment establisment = establishmentController.getEstablishment(idEstablishment);
-        Map<User, Float> evaluations = establisment.getEvaluations();
-        return evaluations;
+        return establishment.calculatesAverage(mapEvaluation);
     }
 
 
     public Map<User, String> searchEvaluationByEstablishment(String idEstab) throws Exception {
         return evaluationDAO.searchEvaluationByEstablishment(idEstab);
-    }
-
-
-    public Float average(Map<User,String> mapEvaluation){
-        Collection<String> grades = mapEvaluation.values();
-        Float sum = Float.valueOf(0);
-        for (String grade: grades){
-            sum += Float.valueOf(grade);
-        }
-        Float average = Float.valueOf(0);
-        if(grades.size() != 0){
-            average = sum / grades.size();
-        }
-        return average;
     }
 
 }

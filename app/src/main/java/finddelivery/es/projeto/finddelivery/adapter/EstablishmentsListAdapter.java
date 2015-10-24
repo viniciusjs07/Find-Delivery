@@ -61,7 +61,9 @@ public class EstablishmentsListAdapter extends BaseAdapter{
        try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(item.getName());
             if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-                ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(evaluationController.average(mapEvaluation));
+                Float average = evaluationController.average(mapEvaluation, item.getName());
+
+                ((RatingBar) view.findViewById(R.id.myRatingBar)).setRating(average);
             }
         } catch (Exception e) {
             e.printStackTrace();

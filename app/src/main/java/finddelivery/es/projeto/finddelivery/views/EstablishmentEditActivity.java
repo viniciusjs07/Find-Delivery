@@ -166,8 +166,8 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         nameUser.setText(name);
         login.setText(loginUser);
 
-        specialityTypes = new ArrayList<String>();
-        addTypes();
+        specialityTypes = new ArrayList<>();
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, specialityTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -177,6 +177,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTDETAILS");
+        addTypes();
 
         byte[] logoEstablishment = establishment.getPhoto();
         Bitmap logoBitmap = BitmapFactory.decodeByteArray(logoEstablishment, 0, logoEstablishment.length);
@@ -190,7 +191,10 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         editTextPhoneTwo.setText(establishment.getPhone2());
     }
 
+
     private void addTypes() {
+        //specialityTypes.add(establishment.getSpeciality().toString());
+        specialityTypes.add(" ");
         specialityTypes.add("Bebidas");
         specialityTypes.add("Café");
         specialityTypes.add("Carnes");

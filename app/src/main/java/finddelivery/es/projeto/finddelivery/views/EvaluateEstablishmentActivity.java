@@ -121,19 +121,19 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     setView(EvaluateEstablishmentActivity.this, EstablishmentsActivity.class);
                 }
-                if (position == 1){
+                if (position == 1) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     setView(EvaluateEstablishmentActivity.this, UserProfileActivity.class);
                 }
-                if (position == 2){
+                if (position == 2) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     setView(EvaluateEstablishmentActivity.this, MyEstablishmentActivity.class);
                 }
-                if (position == 3){
+                if (position == 3) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     setView(EvaluateEstablishmentActivity.this, EstablishmentCadastreActivity.class);
                 }
-                if (position == 4){
+                if (position == 4) {
                     mDrawerLayout.closeDrawer(mDrawerPane);
                     session.logoutUser();
                     Intent it = new Intent(getApplicationContext(), LoginActivity.class);
@@ -143,6 +143,7 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                 }
             }
         });
+
 
         user = session.getUserDetails();
         String name = user.get(UserSessionController.KEY_NAME);
@@ -171,9 +172,12 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 "Avaliação realizada com sucesso!",
                                 Toast.LENGTH_LONG).show();
 
+
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.format("%.1f", evaluationController.average(evaluations)));
-                        averageOfEstablishment.setRating(evaluationController.average(evaluations));
+                        Float average = evaluationController.average(evaluations, establishment.getName());
+                        averageTextView.setText(String.format("%.1f", average));
+                        averageOfEstablishment.setRating(average);
+
                     } else {
                         evaluationController.updateEvaluation(idUser, establishment.getName(), grade);
                         Toast.makeText(getApplicationContext(),
@@ -181,8 +185,9 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                         Map<User,String> evaluations = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-                        averageTextView.setText(String.format("%.1f", evaluationController.average(evaluations)));
-                        averageOfEstablishment.setRating(evaluationController.average(evaluations));
+                        Float average = evaluationController.average(evaluations, establishment.getName());
+                        averageTextView.setText(String.format("%.1f", average));
+                        averageOfEstablishment.setRating(average);
                     }
 
                 } catch (Exception e){
@@ -207,12 +212,15 @@ public class EvaluateEstablishmentActivity extends ActionBarActivity {
             }
         }
 
+
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
-            if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-                averageTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
-                averageOfEstablishment.setRating(evaluationController.average(mapEvaluation));
+            if(mapEvaluation != null && !mapEvaluation.isEmpty() ) {
+                Float average = evaluationController.average(mapEvaluation, establishment.getName());
+                averageTextView.setText(String.format("%.1f", average));
+                averageOfEstablishment.setRating(average);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

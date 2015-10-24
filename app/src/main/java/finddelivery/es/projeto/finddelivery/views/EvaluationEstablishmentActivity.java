@@ -179,8 +179,9 @@ public class EvaluationEstablishmentActivity extends ActionBarActivity {
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
             if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-                averageOfEstablishmentTextView2.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
-                evaluationEstablishmentRatingBar2.setRating(evaluationController.average(mapEvaluation));
+                Float average = evaluationController.average(mapEvaluation, establishment.getName());
+                averageOfEstablishmentTextView2.setText(String.format("%.1f", average));
+                evaluationEstablishmentRatingBar2.setRating(average);
             }
         } catch (Exception e) {
             e.printStackTrace();

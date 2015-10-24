@@ -5,10 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * Created by Vinicius on 10/06/2015.
- */
 public class Establishment implements Serializable {
 
     private String name, address, businessHour;
@@ -88,7 +84,7 @@ public class Establishment implements Serializable {
     public void setPhoto(byte[] photoURL) {
         this.photo = photoURL;
     }
-    
+
     public Map<User, Float> getEvaluations() {
         return evaluations;
     }
@@ -97,13 +93,6 @@ public class Establishment implements Serializable {
         return comments;
     }
 
-    public void setEvaluations(Map<User, Float> evaluations) {
-        this.evaluations = evaluations;
-    }
-
-    public void setComments(Map<User, String> comments) {
-        this.comments = comments;
-    }
 
     public void addEvaluation(User user, Float value) {
         if (user != null && value != null && value >= 0) {
@@ -113,24 +102,19 @@ public class Establishment implements Serializable {
 
     public void addComment(User user, String comment) {
         if(user != null && comment != null) {
-                comments.put(user, comment);
-            }
-    }
-
-    public void removeComment(User user, String comment) {
-        if(user != null) {
-            comments.remove(user);
+            comments.put(user, comment);
         }
     }
 
-    public Float calculatesAverage(Map<User,String> mapEvaluation){
+
+    public Float calculatesAverage(Map<User,String> mapEvaluation) {
         Collection<String> grades = mapEvaluation.values();
         Float sum = Float.valueOf(0);
-        for (String grade: grades){
+        for (String grade : grades) {
             sum += Float.valueOf(grade);
         }
         Float average = Float.valueOf(0);
-        if(grades.size() != 0){
+        if (grades.size() != 0) {
             average = sum / grades.size();
         }
         return average;

@@ -182,8 +182,9 @@ public class EstablishmentDetailsActivity extends ActionBarActivity implements V
         try {
             mapEvaluation = evaluationController.searchEvaluationByEstablishment(establishment.getName());
             if(mapEvaluation != null && !mapEvaluation.isEmpty()) {
-                averageOfEstablishmentTextView.setText(String.format("%.1f", evaluationController.average(mapEvaluation)));
-                evaluationEstablishmentRatingBar.setRating(evaluationController.average(mapEvaluation));
+                Float average = evaluationController.average(mapEvaluation, establishment.getName());
+                averageOfEstablishmentTextView.setText(String.format("%.1f", average));
+                evaluationEstablishmentRatingBar.setRating(average);
             }
 
         } catch (Exception e) {
