@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -207,20 +208,34 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                 if (name != null && !name.trim().equals("") && !name.equals(actualName)) {
                     if (actualPassword != null && actualPassword.equals(password) && passwordsValid) {
                         userController.updateUser(name, login, newPassword, photo);
-                        showDialog("Dados alterados com sucesso!");
+                        Toast.makeText(getApplicationContext(),
+                                "Dados alterados com sucesso!",
+                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Para ver seus dados atualizados faça login novamente!",
+                                Toast.LENGTH_LONG).show();
                         setView(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {
                         userController.updateUser(name, login, password, photo);
-                        showDialog("Dados alterados com sucesso!");
+                        Toast.makeText(getApplicationContext(),
+                                "Dados alterados com sucesso!",
+                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Para ver seus dados atualizados faça login novamente!",
+                                Toast.LENGTH_LONG).show();
                         setView(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                     }
-
                 } else if (name != null && name.equals(actualName)) {
                     if (actualPassword != null && !actualPassword.trim().equals("") && actualPassword.equals(password) && passwordsValid) {
                         userController.updateUser(actualName, login, newPassword, photo);
-                        showDialog("Dados alterados com sucesso!");
+                        Toast.makeText(getApplicationContext(),
+                                "Dados alterados com sucesso!",
+                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "Para ver seus dados atualizados faça login novamente!",
+                                Toast.LENGTH_LONG).show();
                         setView(ProfileEditActivity.this,
                                 UserProfileActivity.class);
                     } else if (actualPassword != null && actualPassword.trim().equals("")) {

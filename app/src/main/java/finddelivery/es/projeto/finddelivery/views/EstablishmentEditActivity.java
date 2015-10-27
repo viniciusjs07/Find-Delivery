@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -166,8 +167,8 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
         nameUser.setText(name);
         login.setText(loginUser);
 
-        specialityTypes = new ArrayList<>();
-
+        specialityTypes = new ArrayList<String>();
+        addTypes();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, specialityTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -177,7 +178,6 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
         Intent it = getIntent();
         establishment = (Establishment) it.getSerializableExtra("ESTABLISHMENTDETAILS");
-        addTypes();
 
         byte[] logoEstablishment = establishment.getPhoto();
         Bitmap logoBitmap = BitmapFactory.decodeByteArray(logoEstablishment, 0, logoEstablishment.length);
@@ -193,8 +193,6 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
 
 
     private void addTypes() {
-        //specialityTypes.add(establishment.getSpeciality().toString());
-        specialityTypes.add(" ");
         specialityTypes.add("Bebidas");
         specialityTypes.add("Café");
         specialityTypes.add("Carnes");
@@ -326,8 +324,7 @@ public class EstablishmentEditActivity extends ActionBarActivity implements View
             } else {
                 String login = user.get(UserSessionController.KEY_LOGIN);
                 establishmentController.updateEstablishment(name, address, businessHour, specialityType, phone1, phone2, establishmentLogo, login);
-                showDialog("Estabelecimento atualizado com sucesso!");
-
+                Toast.makeText(context, "Estabelecimento atualizado com sucesso!", Toast.LENGTH_LONG).show();
                 Intent it = new Intent();
                 it.setClass(EstablishmentEditActivity.this,
                         EstablishmentDetailsActivity.class);

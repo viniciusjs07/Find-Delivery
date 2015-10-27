@@ -37,7 +37,6 @@ import finddelivery.es.projeto.finddelivery.controllers.UserSessionController;
 
 import finddelivery.es.projeto.finddelivery.models.Establishment;
 
-
 public class EstablishmentsActivity extends ActionBarActivity {
 
     private Button btnAdvancedSearch;
@@ -56,6 +55,7 @@ public class EstablishmentsActivity extends ActionBarActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBar actionBar;
     private ArrayList<NavItem> mNavItems;
+    private TextView whitoutEstablishment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,8 @@ public class EstablishmentsActivity extends ActionBarActivity {
 
         btnAdvancedSearch = (Button) findViewById(R.id.btnAdvancedSearch);
         listViewEstablishments = (ListView) findViewById(R.id.listViewEstablishments);
+
+        whitoutEstablishment = (TextView) findViewById(R.id.whitoutEstablishment);
 
         actionBar =  getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);

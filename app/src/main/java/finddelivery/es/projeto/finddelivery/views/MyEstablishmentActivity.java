@@ -49,6 +49,7 @@ public class MyEstablishmentActivity extends ActionBarActivity {
     private ImageView photoUser;
     private TextView nameUser;
     private TextView login;
+    private TextView whitoutEstablishment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,8 @@ public class MyEstablishmentActivity extends ActionBarActivity {
         context = this;
         establishmentController = EstablishmentController.getInstance(context);
         session = new  UserSessionController(getApplicationContext());
+
+        whitoutEstablishment = (TextView) findViewById(R.id.whitoutEstablishment);
 
         actionBar =  getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
@@ -154,7 +157,9 @@ public class MyEstablishmentActivity extends ActionBarActivity {
 
        try {
            adapter = new EstablishmentsListAdapter(this, establishmentController.listMyEstablishments(idUser));
-
+           if(!adapter.isEmpty()){
+               whitoutEstablishment.setText("");
+           }
        } catch (Exception e) {
            e.printStackTrace();
        }
