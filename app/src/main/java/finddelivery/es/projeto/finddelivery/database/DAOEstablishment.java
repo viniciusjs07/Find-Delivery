@@ -63,7 +63,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
     public List<Establishment> findAll() throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab AND a.idUser = e.idUser ORDER BY a.avaliacao DESC";
+        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idUser, idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab AND a.idUser = e.idUser ORDER BY a.media";
         Cursor cursor = getDatabase().rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -74,7 +74,7 @@ public class DAOEstablishment extends DatabaseHelper {
     }
 
     public Establishment findByName(String restaurante) {
-        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE restaurante = ? ORDER BY a.avaliacao DESC";
+        String sql = "SELECT * FROM estabelecimento WHERE restaurante = ?";
         String[] selectionArgs = new String[] { restaurante};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
@@ -85,7 +85,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
     public List<Establishment> findBySpeciality(String especialidade) {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT * FROM " + TABLE + " AS e LEFT JOIN avaliacao AS a ON e.restaurante = a.idEstab WHERE especialidade = ? ORDER BY a.avaliacao DESC";
+        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idUser, idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab AND a.idUser = e.idUser WHERE e.especialidade = ? ORDER BY a.media";
         String[] selectionArgs = new String[] { especialidade};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
