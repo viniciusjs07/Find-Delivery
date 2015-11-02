@@ -14,7 +14,7 @@ import finddelivery.es.projeto.finddelivery.models.User;
  */
 public class DAOUser extends DatabaseHelper {
 
-    private final String TABLE = "usuario";
+    private static final String TABLE = "usuario";
 
     public DAOUser(Context context) {
         super(context);

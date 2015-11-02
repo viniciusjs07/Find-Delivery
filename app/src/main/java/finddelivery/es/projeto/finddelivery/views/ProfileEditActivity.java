@@ -90,8 +90,6 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
         user = session.getUserDetails();
 
         String name = user.get(UserSessionController.KEY_NAME);
-        String login = user.get(UserSessionController.KEY_LOGIN);
-
         String photoUser = user.get(UserSessionController.KEY_PHOTO);
         byte[] photoUserByte = Base64.decode(photoUser, Base64.DEFAULT);
 
@@ -296,7 +294,7 @@ public class ProfileEditActivity extends ActionBarActivity implements View.OnCli
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
-            case R.id.imgDelete:
+            default:
                 Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
                 imageViewUserProfile2.setImageBitmap(avatar);
                 imageViewUserProfile2.setImageBitmap(Bitmap.createScaledBitmap(avatar, 100, 100, false));

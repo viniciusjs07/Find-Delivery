@@ -15,7 +15,7 @@ import finddelivery.es.projeto.finddelivery.models.Establishment;
 
 public class DAOEstablishment extends DatabaseHelper {
 
-    private final String TABLE = "estabelecimento";
+    private static final String TABLE = "estabelecimento";
 
     public  DAOEstablishment (Context context) {
         super(context);

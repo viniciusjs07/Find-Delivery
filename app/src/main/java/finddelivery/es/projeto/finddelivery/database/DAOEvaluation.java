@@ -14,7 +14,7 @@ import finddelivery.es.projeto.finddelivery.models.User;
  */
 public class DAOEvaluation extends DatabaseHelper {
 
-    private final String TABLE = "avaliacao";
+    private static final String TABLE = "avaliacao";
 
     public DAOEvaluation(Context context) {
         super(context);

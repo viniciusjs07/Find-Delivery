@@ -32,7 +32,6 @@ public class CommentsListAdapter extends BaseAdapter{
     private Establishment establishment;
     private EvaluationController evaluationController;
     private Map<User,String> mapEvaluation = null;
-    EstablishmentController establishmentController;
     UserController userController;
 
     public CommentsListAdapter(Context context, List<User> users, List<String> comments, Establishment establishment) {
@@ -41,7 +40,6 @@ public class CommentsListAdapter extends BaseAdapter{
         this.establishment = establishment;
         mInflater = LayoutInflater.from(context);
         myContext = context;
-        establishmentController = EstablishmentController.getInstance(context);
         evaluationController = EvaluationController.getInstance(context);
         userController = UserController.getInstance(context);
     }

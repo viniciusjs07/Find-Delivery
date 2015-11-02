@@ -291,7 +291,7 @@ public class EstablishmentDetailsActivity extends ActionBarActivity implements V
                 EditText campoTelefone = (EditText) findViewById(R.id.fieldPhone);
                 telefone = campoTelefone.getText().toString();
                 break;
-            case R.id.phoneTwo:
+            default:
                 EditText campoTelefone2 = (EditText) findViewById(R.id.fieldPhoneTwo);
                 telefone = campoTelefone2.getText().toString();
                 break;

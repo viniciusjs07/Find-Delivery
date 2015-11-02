@@ -163,7 +163,7 @@ public class UserCadastreActivity extends ActionBarActivity implements View.OnCl
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
-            case R.id.imgDelete:
+            default:
                 Bitmap avatar = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
                 cadastrePhotoImageView.setImageBitmap(avatar);
                 cadastrePhotoImageView.setImageBitmap(Bitmap.createScaledBitmap(avatar, 100, 100, false));

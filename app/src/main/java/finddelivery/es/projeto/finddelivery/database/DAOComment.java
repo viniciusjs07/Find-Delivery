@@ -14,7 +14,7 @@ import finddelivery.es.projeto.finddelivery.models.User;
  */
 public class DAOComment extends DatabaseHelper {
 
-    private final String TABLE = "comentario";
+    private static final String TABLE = "comentario";
 
     public DAOComment(Context context) {
         super(context);

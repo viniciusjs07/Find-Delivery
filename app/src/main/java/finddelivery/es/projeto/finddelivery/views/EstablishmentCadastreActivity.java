@@ -144,7 +144,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         setView(EstablishmentCadastreActivity.this, EstablishmentCadastreActivity.class);
                         break;
-                    case 4:
+                    default:
                         mDrawerLayout.closeDrawer(mDrawerPane);
                         session.logoutUser();
                         Intent it = new Intent(getApplicationContext(), LoginActivity.class);
@@ -299,7 +299,7 @@ public class EstablishmentCadastreActivity extends ActionBarActivity implements 
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_GALERIA);
                 break;
-            case R.id.imgDelete:
+            default:
                 Bitmap photoDefaultEstablishment = BitmapFactory.decodeResource(getResources(), R.mipmap.photodefault);
                 logoEstablishmentImageView.setImageBitmap(photoDefaultEstablishment);
                 logoEstablishmentImageView.setImageBitmap(Bitmap.createScaledBitmap(photoDefaultEstablishment, 100, 100, false));

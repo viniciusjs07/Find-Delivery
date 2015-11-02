@@ -16,8 +16,8 @@ public class EstablishmentController {
     public List<Establishment> establishmentsByName;
     public List<Establishment> establishmentsBySpeciality;
 
-    public static boolean isSearchAdvanced = false;
-    public static boolean isSearchAdvancedByName = true;
+    public boolean isSearchAdvanced = false;
+    public boolean isSearchAdvancedByName = true;
 
     public static UserController userController;
 
