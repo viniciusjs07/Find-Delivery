@@ -98,12 +98,10 @@ public class EstablishmentController {
     }
 
     public void listByName(String name) throws Exception {
+        establishmentsByName = new ArrayList<>();
         if (establishmentDAO.findByName(name) != null) {
             Establishment establishment = establishmentDAO.findByName(name);
-            establishmentsByName = new ArrayList<>();
-            if(!establishmentsByName.contains(establishment)){
-                establishmentsByName.add(establishment);
-            }
+            establishmentsByName.add(establishment);
         }
     }
 }

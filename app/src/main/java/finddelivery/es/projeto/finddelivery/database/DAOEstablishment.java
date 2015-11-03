@@ -63,7 +63,7 @@ public class DAOEstablishment extends DatabaseHelper {
 
     public List<Establishment> findAll() throws Exception {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idUser, idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab AND a.idUser = e.idUser ORDER BY a.media";
+        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab ORDER BY a.media DESC";
         Cursor cursor = getDatabase().rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -78,14 +78,13 @@ public class DAOEstablishment extends DatabaseHelper {
         String[] selectionArgs = new String[] { restaurante};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
-
         return mountEstablishment(cursor);
     }
 
 
     public List<Establishment> findBySpeciality(String especialidade) {
         List<Establishment> establishments = new ArrayList<Establishment>();
-        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idUser, idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab AND a.idUser = e.idUser WHERE e.especialidade = ? ORDER BY a.media";
+        String sql = "SELECT e.* FROM estabelecimento AS e LEFT JOIN (SELECT idEstab, AVG(avaliacao) AS media FROM avaliacao GROUP BY idEstab) a ON e.restaurante = a.idEstab WHERE e.especialidade = ? ORDER BY a.media DESC";
         String[] selectionArgs = new String[] { especialidade};
         Cursor cursor = getDatabase().rawQuery(sql, selectionArgs);
         cursor.moveToFirst();
